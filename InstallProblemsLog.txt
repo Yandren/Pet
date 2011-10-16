@@ -1,0 +1,1 @@
+1) Linker wasn't linking to libraries on system - tell linker to link (VC2010: Project Properties->Linker->Input->additional dependencies) opengl32.lib, SDL.lib, SDLmain.lib

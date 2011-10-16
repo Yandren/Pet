@@ -1,0 +1,14 @@
+Endorphin/Euphoria (Animation)
+Kynapse (basic AI)
+Havok? (physics/animation)
+Granny (Model exporters, animation) <-- look at the SDK docs for examples of good design
+PhysX (physics)
+Open Dynamics Engine (physics, open source)
+Ogre3D (rendering, open source)
+
+
+Meshes:
+3ds max
+maya
+SoftImage
+Zbrush
