@@ -7,9 +7,9 @@ class SceneGraph{
 	
   public:
 	//methods
-	bool addObject(object *obj ); 
-	virtual display() = 0;
-	bool removeObject(object *obj);
+	bool addObject(Object *obj ); 
+	void virtual display() = 0;
+	bool removeObject(Object *obj);
 
 
 

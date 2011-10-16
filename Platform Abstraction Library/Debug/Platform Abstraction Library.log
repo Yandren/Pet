@@ -1,14 +1,12 @@
-﻿Build started 8/27/2011 2:33:17 PM.
-     1>Project "C:\Users\DragonerDriftr\Documents\PetProject\Platform Abstraction Library\Platform Abstraction Library.vcxproj" on node 3 (build target(s)).
-     1>PrepareForBuild:
-         Creating directory "C:\Users\DragonerDriftr\Documents\PetProject\Pet1\Debug\".
-       InitializeBuildStatus:
+﻿Build started 10/16/2011 5:26:26 PM.
+     1>Project "C:\Users\dragonerdriftr\Documents\PetProject\Platform Abstraction Library\Platform Abstraction Library.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
          Creating "Debug\Platform Abstraction Library.unsuccessfulbuild" because "AlwaysCreate" was specified.
        FinalizeBuildStatus:
          Deleting file "Debug\Platform Abstraction Library.unsuccessfulbuild".
          Touching "Debug\Platform Abstraction Library.lastbuildstate".
-     1>Done Building Project "C:\Users\DragonerDriftr\Documents\PetProject\Platform Abstraction Library\Platform Abstraction Library.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\dragonerdriftr\Documents\PetProject\Platform Abstraction Library\Platform Abstraction Library.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.66
+Time Elapsed 00:00:00.14
