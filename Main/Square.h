@@ -1,21 +1,17 @@
-
 #ifndef SQUARE_H
 #define	SQUARE_H
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
+#include "Object.h"
 #include "WinConstants.h"
 
 const int SQUARE_SPEED = 5;
 
-class Square
+class Square : Object
 {
-    private:
-    int x, y;
-    int xVel, yVel;
 
     public:
     Square();
+	virtual ~Square(){};
 
     void handle_input(SDL_Event *event);
     void move();
@@ -24,4 +20,3 @@ class Square
 
 
 #endif	/* SQUARE_H */
-

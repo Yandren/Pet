@@ -37,15 +37,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\Bin\$(Configuration)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Configuration)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(ProjectName)</IntDir>
+    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)\OtherLibs;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,11 +67,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="SceneGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="SceneGraph.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OtherLibs\Build\vs2010\Box2D.vcxproj">
+      <Project>{98400d17-43a5-1a40-95be-c53ac78e7694}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

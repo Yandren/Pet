@@ -1,6 +1,9 @@
 #include "Square.h"
 
-Square::Square() : x(10), y(10), xVel(0), yVel(0) {
+Square::Square() 
+  : Object(10, 10, 0, 0) 
+{
+
 }
 
 void Square::handle_input(SDL_Event *event) {
@@ -36,24 +39,24 @@ void Square::handle_input(SDL_Event *event) {
 
 void Square::move() {
 
-    x += xVel;
+    x_pos += xVel;
 
     //If the square went too far
-    if ((x < 0) || (x > SCREEN_WIDTH)) {
-        x -= xVel;
+    if ((x_pos < 0) || (x_pos > SCREEN_WIDTH)) {
+        x_pos -= xVel;
     }
 
-    y += yVel;
+    y_pos += yVel;
 
     //If the square went too far
-    if ((y < 0) || (y > SCREEN_HEIGHT)) {
-        y -= yVel;
+    if ((y_pos < 0) || (y_pos > SCREEN_HEIGHT)) {
+        y_pos -= yVel;
     }
 }
 
 void Square::show() {
     //Move to offset
-    glTranslatef(x, y, 0);
+    glTranslatef(x_pos, y_pos, 0);
     glBegin(GL_QUADS);
 		// Front Face
 		glNormal3f( 0.0f, 0.0f, 1.0f);

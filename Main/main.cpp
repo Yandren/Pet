@@ -1,26 +1,36 @@
 #include "WinConstants.h"
 #include "Video.h"
 #include "Timer.h"
-#include "Square.h"
 #include "Log.h"
+#include "Object.h"
+#include "Physics.h"
+//Take out eventually
+#include "Square.h"
 
 
-bool init()
+bool 
+init()
 {
 	Log::Get().Init();
+	PhysicsManager::Get().Init();
 	VideoManager::Get().Init();
 
     return true;
 }
 
-void clean_up()
+void 
+clean_up()
 {
+
     VideoManager::Get().Shutdown();
+	PhysicsManager::Get().Shutdown();
 	Log::Get().Shutdown();
+	
 }
 
 
-int main( int argc, char *argv[] )
+int 
+main( int argc, char *argv[] )
 {
 	SDL_Event event;
     bool quit = false;

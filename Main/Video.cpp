@@ -1,7 +1,7 @@
 #include "Video.h"
 
-
-bool VideoManager::Init(){
+bool 
+VideoManager::Init(){
 
 	 if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) return false;
     if( SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL ) == NULL ) return false;     //Create Window
@@ -34,17 +34,3 @@ bool VideoManager::Init(){
 
 	return true;
 }
-
-VideoManager &VideoManager::Get(){
-
-	static VideoManager video;
-	return video;
-}
-
-void VideoManager::Shutdown(){
-	SDL_Quit();
-}
-
-VideoManager::VideoManager(){}
-
-VideoManager::~VideoManager(){}

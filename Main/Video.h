@@ -8,11 +8,12 @@
 class VideoManager{
 
 public:
-	VideoManager();
-	~VideoManager();
-	static VideoManager &Get();
+	VideoManager(){}
+	~VideoManager(){}
+	static VideoManager &Get(){	
+      static VideoManager video; return video;}
 	bool Init();
-	void Shutdown();
+	void Shutdown(){ SDL_Quit(); }
 
 private:
 
