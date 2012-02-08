@@ -4,3 +4,4 @@ Bin
 Build
 Bin/*
 Build/*
+*.suo
