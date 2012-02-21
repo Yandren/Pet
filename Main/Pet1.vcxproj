@@ -98,6 +98,11 @@
   <ItemGroup>
     <None Include="InstallProblemsLog.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Renderer\Renderer.vcxproj">
+      <Project>{7727742d-283e-487a-9172-c676743b68c3}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

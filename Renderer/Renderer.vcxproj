@@ -76,13 +76,8 @@
     <ClInclude Include="SceneGraph.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OtherLibs\Build\vs2010\Box2D.vcxproj">
+    <ProjectReference Include="..\OtherLibs\Projects\vs2010\Box2D.vcxproj">
       <Project>{98400d17-43a5-1a40-95be-c53ac78e7694}</Project>
-      <Private>true</Private>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,3 +5,7 @@ Build
 Bin/*
 Build/*
 *.suo
+bin/*
+bin
+obj
+obj/*
