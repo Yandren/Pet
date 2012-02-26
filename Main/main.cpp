@@ -6,6 +6,7 @@
 #include "Physics.h"
 //Take out eventually
 #include "Square.h"
+#include "SceneGraph.h"
 
 
 bool 
@@ -38,7 +39,10 @@ main( int argc, char *argv[] )
     if( init() == false ) return 1;
 
 	Log::Get().Write(GEN_LOG, "TESTING");
+	SceneGraph scenegraph;
     Square square;
+
+	scenegraph.addObject((Object*) &square);
 
     //frame rate regulator
     Timer fps;
@@ -50,16 +54,16 @@ main( int argc, char *argv[] )
 		//Event Handling
 		while( SDL_PollEvent( &event ) )
 		{
-            square.handle_input(&event);
+            scenegraph.handle_input(&event);
 			if( event.type == SDL_QUIT ) quit = true;
 		}
 		
-			//Render
-	    square.move();
+	    //Render
+	    scenegraph.update();
 
 		//Display
 	    glClear( GL_COLOR_BUFFER_BIT );
-	    square.show();
+	    scenegraph.display();
 
 	
 	    //Update screen
