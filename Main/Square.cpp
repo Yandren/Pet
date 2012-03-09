@@ -3,7 +3,7 @@
 Square::Square() 
   : Object(10, 10, 0, 0) 
 {
-
+		texture = SDL_LoadBMP("Untitled.bmp");
 }
 
 void Square::handle_input(SDL_Event *event) {
@@ -11,8 +11,8 @@ void Square::handle_input(SDL_Event *event) {
     if (event->type == SDL_KEYDOWN) {
         //Adjust the velocity
         switch (event->key.keysym.sym) {
-            case SDLK_UP: yVel -= SQUARE_SPEED;
-                break;
+            //case SDLK_UP: yVel -= SQUARE_SPEED;
+              //  break;
             case SDLK_DOWN: yVel += SQUARE_SPEED;
                 break;
             case SDLK_LEFT: xVel -= SQUARE_SPEED;
@@ -21,11 +21,11 @@ void Square::handle_input(SDL_Event *event) {
                 break;
             default: break;
         }
-    } else if (event->type == SDL_KEYUP) {
+    } /*else if (event->type == SDL_KEYUP) {
         //Adjust the velocity
         switch (event->key.keysym.sym) {
-            case SDLK_UP: yVel += SQUARE_SPEED;
-                break;
+            //case SDLK_UP: yVel += SQUARE_SPEED;
+                //break;
             case SDLK_DOWN: yVel -= SQUARE_SPEED;
                 break;
             case SDLK_LEFT: xVel += SQUARE_SPEED;
@@ -34,10 +34,16 @@ void Square::handle_input(SDL_Event *event) {
                 break;
             default: break;
         }
-    }
+		
+    }*/
 }
 
 void Square::move() {
+	
+	if(tick++==TICK_TRIGGER){
+	  yVel += SQUARE_SPEED;
+	  tick = 0;
+	  }
 
     x_pos += xVel;
 
@@ -52,11 +58,13 @@ void Square::move() {
     if ((y_pos < 0) || (y_pos > SCREEN_HEIGHT)) {
         y_pos -= yVel;
     }
+
+	yVel = xVel = 0;
 }
 
 void Square::show() {
     //Move to offset
-    glTranslatef(x_pos, y_pos, 0);
+    /*glTranslatef(x_pos, y_pos, 0);
     glBegin(GL_QUADS);
 		// Front Face
 		glNormal3f( 0.0f, 0.0f, 1.0f);
@@ -122,4 +130,7 @@ void Square::show() {
 
 
     glLoadIdentity();
+	*/
+
+
 }

@@ -22,7 +22,7 @@ SceneGraph::removeObject(Object *obj){
 void 
 SceneGraph::handle_input(SDL_Event *event){
 
-	for(int i=0; i<=vec.size(); i++)
+	for(uint32_t i=0; i<vec.size(); i++)
 		vec.at(i)->handle_input(event);
 	
 };
@@ -30,7 +30,7 @@ SceneGraph::handle_input(SDL_Event *event){
 void
 SceneGraph::display(){
 
-	for(int i=0; i<=vec.size(); i++)
+	for(uint32_t i=0; i<vec.size(); i++)
 		vec.at(i)->show();
 
 };
@@ -38,7 +38,7 @@ SceneGraph::display(){
 void
 SceneGraph::update(){
 
-	for(int i=0; i<=vec.size(); i++)
+	for(uint32_t i=0; i<vec.size(); i++)
 		vec.at(i)->move();
 
 };

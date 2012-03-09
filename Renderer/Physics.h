@@ -3,6 +3,8 @@
 
 #include "../OtherLibs/Box2D/Box2D.h"
 
+class b2World;
+
 class PhysicsManager{
 
 public:

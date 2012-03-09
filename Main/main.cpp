@@ -45,11 +45,11 @@ main( int argc, char *argv[] )
 	scenegraph.addObject((Object*) &square);
 
     //frame rate regulator
-    Timer fps;
+    Timer fps_reg;
 
 	while( quit == false )
 	{
-        fps.start();
+        fps_reg.start();
  
 		//Event Handling
 		while( SDL_PollEvent( &event ) )
@@ -57,10 +57,10 @@ main( int argc, char *argv[] )
             scenegraph.handle_input(&event);
 			if( event.type == SDL_QUIT ) quit = true;
 		}
-		
+
 	    //Render
 	    scenegraph.update();
-
+		  
 		//Display
 	    glClear( GL_COLOR_BUFFER_BIT );
 	    scenegraph.display();
@@ -70,8 +70,7 @@ main( int argc, char *argv[] )
 	    SDL_GL_SwapBuffers();
 	
         //Cap the frame rate
-        if( fps.get_ticks() < 1000 / FRAMES_PER_SECOND ) SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
-     
+        if( fps_reg.get_ticks() < 1000 / FRAMES_PER_SECOND ) SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps_reg.get_ticks() );
 	}
 
 	clean_up();

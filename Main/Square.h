@@ -16,6 +16,7 @@ class Square : Object
     void handle_input(SDL_Event *event);
     void move();
     void show();
+	
 };
 
 
