@@ -2,7 +2,8 @@
 #define VIDEO_H
 
 #include <SDL/SDL.h>
-#include "WinConstants.h"
+//replace with a PAL-type implementation.
+#include "../Main/WinConstants.h"
 #include <SDL/SDL_opengl.h>
 
 class VideoManager{
