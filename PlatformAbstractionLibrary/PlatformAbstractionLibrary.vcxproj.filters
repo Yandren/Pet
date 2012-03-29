@@ -44,10 +44,10 @@
     <ClInclude Include="WinConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math.h">
+    <ClInclude Include="pal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pal.h">
+    <ClInclude Include="mymath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

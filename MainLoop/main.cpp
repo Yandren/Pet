@@ -1,11 +1,10 @@
-#include "pal.h"
 #include "Video.h"
 #include "Object.h"
 #include "Physics.h"
 //Take out eventually
 #include "Square.h"
 #include "SceneGraph.h"
-
+#include "pal.h"
 
 bool 
 init()
