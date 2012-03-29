@@ -1,9 +1,9 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include "pal.h"
 #include <SDL/SDL.h>
 //replace with a PAL-type implementation.
-#include "../Main/WinConstants.h"
 #include <SDL/SDL_opengl.h>
 
 class VideoManager{

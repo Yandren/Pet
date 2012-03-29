@@ -1,7 +1,7 @@
 #ifndef PHYSICS_H
 #define	PHYSICS_H
 
-#include "../OtherLibs/Box2D/Box2D.h"
+#include "Box2D/Box2D.h"
 
 class b2World;
 

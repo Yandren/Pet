@@ -1,7 +1,5 @@
-#include "WinConstants.h"
+#include "pal.h"
 #include "Video.h"
-#include "Timer.h"
-#include "Log.h"
 #include "Object.h"
 #include "Physics.h"
 //Take out eventually

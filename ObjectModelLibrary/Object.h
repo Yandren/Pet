@@ -2,25 +2,25 @@
 #define OBJECT_H
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
+#include "Model.h"
 
 const int TICK_TRIGGER = 75;
 
 class Object{
 
   public:
-	Object( float x, float y, float xV, float yV)
+	Object(float x, float y, float xV, float yV, Model* model = NULL)
 		: x_pos(x), 
 		  y_pos(y), 
 		  xVel(xV), 
 		  yVel(yV), 
 		  tick(0),
-	      texture(NULL){};
+	      model(model){};
 	virtual ~Object(){};
 
     virtual void handle_input(SDL_Event *event) = 0;
 	virtual void move() = 0;
-	virtual void show() = 0;
+	virtual void show() { model->show(); };
 	
   protected:
 
@@ -30,7 +30,7 @@ class Object{
 	float xVel;
 	float yVel;
 	int tick;
-	SDL_Surface* texture;
+	Model* model;
 
 };
 

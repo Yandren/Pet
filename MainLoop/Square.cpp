@@ -1,10 +1,8 @@
 #include "Square.h"
 
 Square::Square() 
-  : Object(10, 10, 0, 0) 
-{
-		texture = SDL_LoadBMP("Untitled.bmp");
-}
+  : Object(10, 10, 0, 0, new Model(SDL_LoadBMP("Untitled.bmp"))) 
+{}
 
 void Square::handle_input(SDL_Event *event) {
 

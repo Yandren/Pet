@@ -1,6 +1,7 @@
 #ifndef SCENEGRAPH_H
 #define SCENEGRAPH_H
 
+#include "pal.h"
 #include "Object.h"
 #include <vector>
 

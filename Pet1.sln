@@ -1,18 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Renderer", "Renderer\Renderer.vcxproj", "{7727742D-283E-487A-9172-C676743B68C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RendererLibrary", "RendererLibrary\RendererLibrary.vcxproj", "{7727742D-283E-487A-9172-C676743B68C3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98400D17-43A5-1A40-95BE-C53AC78E7694} = {98400D17-43A5-1A40-95BE-C53AC78E7694}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pet1", "Main\Pet1.vcxproj", "{BAF820DB-B1BB-3BEA-00C1-BE51FF5E544E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainLoop", "MainLoop\MainLoop.vcxproj", "{BAF820DB-B1BB-3BEA-00C1-BE51FF5E544E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98400D17-43A5-1A40-95BE-C53AC78E7694} = {98400D17-43A5-1A40-95BE-C53AC78E7694}
 		{7727742D-283E-487A-9172-C676743B68C3} = {7727742D-283E-487A-9172-C676743B68C3}
+		{68991689-6224-44DA-B51E-E28F73348221} = {68991689-6224-44DA-B51E-E28F73348221}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "OtherLibs\Projects\vs2010\Box2D.vcxproj", "{98400D17-43A5-1A40-95BE-C53AC78E7694}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Object Model Library", "ObjectModelLibrary\ObjectModelLibrary.vcxproj", "{68991689-6224-44DA-B51E-E28F73348221}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlatformAbstractionLibrary", "PlatformAbstractionLibrary\PlatformAbstractionLibrary.vcxproj", "{D69C6556-507E-43B9-BE71-D66858400DAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +47,18 @@ Global
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|Win32.Build.0 = Release|Win32
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|x64.ActiveCfg = Release|x64
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release|x64.Build.0 = Release|x64
+		{68991689-6224-44DA-B51E-E28F73348221}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68991689-6224-44DA-B51E-E28F73348221}.Debug|Win32.Build.0 = Debug|Win32
+		{68991689-6224-44DA-B51E-E28F73348221}.Debug|x64.ActiveCfg = Debug|Win32
+		{68991689-6224-44DA-B51E-E28F73348221}.Release|Win32.ActiveCfg = Release|Win32
+		{68991689-6224-44DA-B51E-E28F73348221}.Release|Win32.Build.0 = Release|Win32
+		{68991689-6224-44DA-B51E-E28F73348221}.Release|x64.ActiveCfg = Release|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Debug|Win32.Build.0 = Debug|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Debug|x64.ActiveCfg = Debug|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|Win32.ActiveCfg = Release|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|Win32.Build.0 = Release|Win32
+		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
