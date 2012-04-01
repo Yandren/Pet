@@ -50,6 +50,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)RendererLibrary; $(SolutionDir)OtherLibs; $(SolutionDir)ObjectModelLibrary;$(SolutionDir)PlatformAbstractionLibrary</AdditionalIncludeDirectories>
+      <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>

@@ -46,6 +46,7 @@
       </PrecompiledHeaderFile>
       <SmallerTypeCheck>true</SmallerTypeCheck>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

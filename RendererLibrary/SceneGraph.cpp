@@ -32,7 +32,7 @@ SceneGraph::display(){
 
 	for(uint32_t i=0; i<vec.size(); i++)
 		vec.at(i)->show();
-
+	SDL_Flip(screen);
 };
 
 void

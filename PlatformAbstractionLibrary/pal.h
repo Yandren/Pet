@@ -7,8 +7,10 @@
 #include "Types.h"
 #include "Utilities.h"
 #include "math.h"
+//#include "mymath.h"
 
 //Windows specific
 #include "WinConstants.h"
 
+#include <SDL/SDL.h>
 #endif

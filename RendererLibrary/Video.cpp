@@ -4,7 +4,7 @@ bool
 VideoManager::Init(){
 
 	 if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) return false;
-    if( SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL ) == NULL ) return false;     //Create Window
+    if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL )) == NULL ) return false;     //Create Window
    
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

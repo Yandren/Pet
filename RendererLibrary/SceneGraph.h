@@ -9,6 +9,7 @@ class SceneGraph{
 	
   public:
 	//methods
+	  SceneGraph(SDL_Surface* s) : screen(s) {};
 	bool addObject(Object *obj ); 
     void handle_input(SDL_Event *event);
 	bool removeObject(Object *obj);
@@ -17,6 +18,7 @@ class SceneGraph{
 
 	//members
 	std::vector<Object*> vec;
+	SDL_Surface* screen;
 };
 
 

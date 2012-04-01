@@ -1,10 +1,9 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
-#include <SDL/SDL.h>
 //replace with a PAL-type implementation.
-#include <SDL/SDL_opengl.h>
 #include "pal.h"
+#include <SDL/SDL_opengl.h>
 
 class VideoManager{
 
@@ -17,7 +16,7 @@ public:
 	void Shutdown(){ SDL_Quit(); }
 
 private:
-
+	SDL_Surface* screen;
 };
 
 #endif
