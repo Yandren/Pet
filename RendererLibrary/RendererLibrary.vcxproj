@@ -69,12 +69,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="Video.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics.h" />
-    <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="Video.h" />
   </ItemGroup>
   <ItemGroup>
