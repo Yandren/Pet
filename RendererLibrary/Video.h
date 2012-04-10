@@ -29,13 +29,13 @@ public:
 	    SDL_Surface* screen;
     };
 
-
-	VideoManager(){}
+	VideoManager() : scene(NULL){}
 	~VideoManager(){}
-	static VideoManager &Get(){	
-      static VideoManager video; return video;}
+	static VideoManager &Get(){	static VideoManager video; return video;}
 	bool Init();
-	void Shutdown(){ delete scenegraph; SDL_Quit(); }
+	void Shutdown(){ delete scene; SDL_Quit(); }
+
+	SceneGraph* scene;
 
 };
 

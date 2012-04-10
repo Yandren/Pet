@@ -12,5 +12,5 @@
 //Windows specific
 #include "WinConstants.h"
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #endif

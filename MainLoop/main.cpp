@@ -5,6 +5,7 @@
 #include "Square.h"
 #include "pal.h"
 
+
 bool 
 init()
 {
@@ -35,10 +36,8 @@ main( int argc, char *argv[] )
     if( init() == false ) return 1;
 
 	Log::Get().Write(GEN_LOG, "TESTING");
-	SceneGraph* scene = (VideoManager::Get()).scenegraph;
     Object* square = (Object*)new Square();
-
-	scene->addObject(square);
+	VideoManager::Get().scene->addObject(square);
 
     //frame rate regulator
     Timer fps_reg;
@@ -50,16 +49,16 @@ main( int argc, char *argv[] )
 		//Event Handling
 		while( SDL_PollEvent( &event ) )
 		{
-            scene->handle_input(&event);
+            VideoManager::Get().scene->handle_input(&event);
 			if( event.type == SDL_QUIT ) quit = true;
 		}
 
 	    //Render
-	    scene->update();
+	    VideoManager::Get().scene->update();
 		  
 		//Display
 	    glClear( GL_COLOR_BUFFER_BIT );
-	    scene->display();
+	    VideoManager::Get().scene->display();
 
 	
 	    //Update screen

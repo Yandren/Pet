@@ -3,9 +3,9 @@
 
 bool 
 VideoManager::Init(){
-
+	SDL_Surface* tempScreen = NULL;
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) return false;
-    if( ( screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL )) == NULL ) return false;     //Create Window
+    if( ( tempScreen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL )) == NULL ) return false;     //Create Window
 
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -32,7 +32,7 @@ VideoManager::Init(){
     if( glGetError() != GL_NO_ERROR )  return false;
 
     SDL_WM_SetCaption( "OpenGL Test", NULL );
-	
+	scene = new SceneGraph(tempScreen);
     //SceneGraph* VideoManager::scenegraph = new SceneGraph(screen);
 	return true;
 }
