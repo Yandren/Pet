@@ -4,7 +4,7 @@
 //Take out eventually
 #include "Square.h"
 #include "pal.h"
-
+#include <SDL.h>
 
 bool 
 init()

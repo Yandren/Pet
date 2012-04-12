@@ -7,7 +7,6 @@
 #include "Object.h"
 #include <vector>
 
-
 class VideoManager{
 
 public:
