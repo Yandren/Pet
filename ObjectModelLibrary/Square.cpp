@@ -1,7 +1,7 @@
 #include "Square.h"
 
-Square::Square() 
-  : Object(10, 10, 0, 0, new Model(SDL_LoadBMP("Untitled.bmp"))) 
+Square::Square(float x, float y, float xV, float yV, SDL_Surface* screen, std::string model) 
+  : Object(10, 10, 0, 0, screen, model) 
 {}
 
 void Square::handle_input(SDL_Event *event) {

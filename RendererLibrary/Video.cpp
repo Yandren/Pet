@@ -3,6 +3,7 @@
 
 bool 
 VideoManager::Init(){
+	bool brs= false;
 	SDL_Surface* tempScreen = NULL;
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) return false;
     if( ( tempScreen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL )) == NULL ) return false;     //Create Window
@@ -32,28 +33,27 @@ VideoManager::Init(){
     if( glGetError() != GL_NO_ERROR )  return false;
 
     SDL_WM_SetCaption( "OpenGL Test", NULL );
-	scene = new SceneGraph(tempScreen);
-    //SceneGraph* VideoManager::scenegraph = new SceneGraph(screen);
-	return true;
+	return (scene = new SceneGraph(tempScreen))?true:false;
 }
 
 
 bool 
 VideoManager::SceneGraph::addObject(Object *obj ){
-	
 	vec.push_back(obj);
 	return true;
 }; 
 
 bool 
 VideoManager::SceneGraph::removeObject(Object *obj){
-
+	bool brs = false;
 	std::vector<Object*>::iterator it;
 
 	for(it=vec.begin(); it<=vec.end(); it++)
-		if(*it==obj)
+		if(*it==obj){
 			vec.erase(it);
-	return true;
+			brs = true;
+		}
+	return brs;
 
 };
 

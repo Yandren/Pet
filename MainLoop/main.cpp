@@ -36,8 +36,11 @@ main( int argc, char *argv[] )
     if( init() == false ) return 1;
 
 	Log::Get().Write(GEN_LOG, "TESTING");
-    Object* square = (Object*)new Square();
+
+	//this will be moved to the object model library code
+	Object* square = (Object*)new Square(1.0, 1.0, 0.0, 0.0, VideoManager::Get().scene->screen);
 	VideoManager::Get().scene->addObject(square);
+	//end stuff to be moved 
 
     //frame rate regulator
     Timer fps_reg;
