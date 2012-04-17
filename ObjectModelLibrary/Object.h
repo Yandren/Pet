@@ -11,14 +11,14 @@ class Object{
 
   public:
 
-	Object(float x, float y, float xV, float yV, SDL_Surface* screen, std::string modelStr = "defaultNoAsset.bmp")
+	Object(float x, float y, float xV, float yV, SDL_Surface* screen, std::string modelStr = "C:\\Users\\dragonerdriftr\\Documents\\Pet\\MainLoop\\defaultNoAsset.bmp")
 		: x_pos(x), 
 		  y_pos(y), 
 		  xVel(xV), 
 		  yVel(yV), 
 		  tick(0),
 		  display(screen),
-		  model(NULL){ printf( "returned: %d", system("dir")); model = new Model(SDL_LoadBMP(modelStr.c_str()));};
+		  model(NULL){ model = new Model(SDL_LoadBMP(modelStr.c_str()));};
 	virtual ~Object(){};
 
     virtual void handle_input(SDL_Event *event) = 0;

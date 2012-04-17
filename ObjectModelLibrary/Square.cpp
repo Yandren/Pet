@@ -129,6 +129,6 @@ void Square::show() {
 
     glLoadIdentity();
 	*/
-
+	Object::show();
 
 }
