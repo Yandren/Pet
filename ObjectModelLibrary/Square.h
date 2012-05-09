@@ -10,7 +10,7 @@ class Square : Object
 {
 
     public:
-    Square(float x, float y, float xV, float yV, SDL_Surface* screen, std::string model = "C:\\Users\\dragonerdriftr\\Documents\\Pet\\MainLoop\\Square.bmp");
+    Square(float x, float y, float xV, float yV, SDL_Surface* screen, std::string model = "C:\\Users\\dragonerdriftr\\Documents\\PetProject\\Square.bmp");
 	virtual ~Square(){};
 
     void handle_input(SDL_Event *event);
