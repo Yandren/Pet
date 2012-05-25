@@ -9,8 +9,8 @@ void Square::handle_input(SDL_Event *event) {
     if (event->type == SDL_KEYDOWN) {
         //Adjust the velocity
         switch (event->key.keysym.sym) {
-            //case SDLK_UP: yVel -= SQUARE_SPEED;
-              //  break;
+            case SDLK_UP: yVel -= SQUARE_SPEED;
+                break;
             case SDLK_DOWN: yVel += SQUARE_SPEED;
                 break;
             case SDLK_LEFT: xVel -= SQUARE_SPEED;
@@ -19,10 +19,10 @@ void Square::handle_input(SDL_Event *event) {
                 break;
             default: break;
         }
-    } /*else if (event->type == SDL_KEYUP) {
+    } else if (event->type == SDL_KEYUP) {
         //Adjust the velocity
         switch (event->key.keysym.sym) {
-            //case SDLK_UP: yVel += SQUARE_SPEED;
+            case SDLK_UP: yVel += SQUARE_SPEED;
                 //break;
             case SDLK_DOWN: yVel -= SQUARE_SPEED;
                 break;
@@ -33,16 +33,16 @@ void Square::handle_input(SDL_Event *event) {
             default: break;
         }
 		
-    }*/
+    }
 }
 
 void Square::move() {
 	
-	if(tick++==TICK_TRIGGER){
+	/*if(tick++==TICK_TRIGGER){
 	  yVel += SQUARE_SPEED;
 	  tick = 0;
 	  }
-
+	  */
     x_pos += xVel;
 
     //If the square went too far
@@ -61,74 +61,6 @@ void Square::move() {
 }
 
 void Square::show() {
-    //Move to offset
-    /*glTranslatef(x_pos, y_pos, 0);
-    glBegin(GL_QUADS);
-		// Front Face
-		glNormal3f( 0.0f, 0.0f, 1.0f);
-		//glTexCoord2f(0.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f( 1.0f, -1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 1.0f); 
-		glVertex3f( 1.0f,  1.0f,  1.0f);
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f(-1.0f,  1.0f,  1.0f);
-		// Back Face
-		glNormal3f( 0.0f, 0.0f,-1.0f);
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f, -1.0f);
-		//glTexCoord2f(1.0f, 1.0f); 
-		glVertex3f(-1.0f,  1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 1.0f,  1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 0.0f);
-		glVertex3f( 1.0f, -1.0f, -1.0f);
-		// Top Face
-		glNormal3f( 0.0f, 1.0f, 0.0f);
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f(-1.0f,  1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 0.0f); 
-		glVertex3f(-1.0f,  1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f( 1.0f,  1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 1.0f);
-		glVertex3f( 1.0f,  1.0f, -1.0f);
-		// Bottom Face
-		glNormal3f( 0.0f,-1.0f, 0.0f);
-		//glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-1.0f, -1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 1.0f, -1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 0.0f);
-		glVertex3f( 1.0f, -1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f,  1.0f);
-		// Right face
-		glNormal3f( 1.0f, 0.0f, 0.0f);
-		//glTexCoord2f(1.0f, 0.0f);
-		glVertex3f( 1.0f, -1.0f, -1.0f);
-		//glTexCoord2f(1.0f, 1.0f); 
-		glVertex3f( 1.0f,  1.0f, -1.0f);
-		//glTexCoord2f(0.0f, 1.0f); 
-		glVertex3f( 1.0f,  1.0f,  1.0f);
-		//glTexCoord2f(0.0f, 0.0f);
-		glVertex3f( 1.0f, -1.0f,  1.0f);
-		// Left Face
-		glNormal3f(-1.0f, 0.0f, 0.0f);
-		//glTexCoord2f(0.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f, -1.0f);
-		//glTexCoord2f(1.0f, 0.0f); 
-		glVertex3f(-1.0f, -1.0f,  1.0f);
-		//glTexCoord2f(1.0f, 1.0f); 
-		glVertex3f(-1.0f,  1.0f,  1.0f);
-		//glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-1.0f,  1.0f, -1.0f);
-	glEnd();
-
-
-    glLoadIdentity();
-	*/
 	Object::show();
 
 }

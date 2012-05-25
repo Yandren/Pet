@@ -67,12 +67,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Machine.cpp" />
+    <ClCompile Include="MachinePiece.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ObjectInterpreter.cpp" />
     <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Machine.h" />
+    <ClInclude Include="MachinePiece.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectInterpreter.h" />
     <ClInclude Include="Square.h" />
   </ItemGroup>
   <ItemGroup>

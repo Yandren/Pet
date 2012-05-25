@@ -6,7 +6,7 @@
 #include "Model.h"
 #include <cstdlib>
 
-const int TICK_TRIGGER = 75;
+const int TICK_TRIGGER = 1;
 
 class Object{
 
