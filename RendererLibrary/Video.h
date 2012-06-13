@@ -24,7 +24,7 @@ public:
         void update();
 
 	    //members
-	    std::vector<Object*> vec;
+	    std::vector<Object*> dynamicObjects;
 	    SDL_Surface* screen;
     };
 

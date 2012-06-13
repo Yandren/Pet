@@ -40,7 +40,7 @@ VideoManager::Init(){
 
 bool 
 VideoManager::SceneGraph::addObject(Object *obj ){
-	vec.push_back(obj);
+	dynamicObjects.push_back(obj);
 	return true;
 }; 
 
@@ -49,9 +49,9 @@ VideoManager::SceneGraph::removeObject(Object *obj){
 	bool brs = false;
 	std::vector<Object*>::iterator it;
 
-	for(it=vec.begin(); it<=vec.end(); it++)
+	for(it=dynamicObjects.begin(); it<=dynamicObjects.end(); it++)
 		if(*it==obj){
-			vec.erase(it);
+			dynamicObjects.erase(it);
 			brs = true;
 		}
 	return brs;
@@ -61,8 +61,8 @@ VideoManager::SceneGraph::removeObject(Object *obj){
 void 
 VideoManager::SceneGraph::handle_input(SDL_Event *event){
 
-	for(uint32_t i=0; i<vec.size(); i++)
-		vec.at(i)->handle_input(event);
+	for(uint32_t i=0; i<dynamicObjects.size(); i++)
+		dynamicObjects.at(i)->handle_input(event);
 	
 };
 
@@ -70,15 +70,16 @@ void
 VideoManager::SceneGraph::display(){
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	
-	for(uint32_t i=0; i<vec.size(); i++)
-		vec.at(i)->show();
+	for(uint32_t i=0; i<dynamicObjects.size(); i++)
+		dynamicObjects.at(i)->show();
 	SDL_Flip(screen);
 };
 
 void
 VideoManager::SceneGraph::update(){
 
-	for(uint32_t i=0; i<vec.size(); i++)
-		vec.at(i)->move();
+	for(uint32_t i=0; i<dynamicObjects.size(); i++)
+		dynamicObjects.at(i)->move();
+	
 
 };

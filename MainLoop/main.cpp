@@ -28,8 +28,7 @@ clean_up()
 
 
 int 
-main( int argc, char *argv[] )
-{
+main( int argc, char *argv[] ){
 	SDL_Event event;
     bool quit = false;
 
@@ -45,33 +44,23 @@ main( int argc, char *argv[] )
     //frame rate regulator
     Timer fps_reg;
 
-	while( quit == false )
-	{
+	while( quit == false ){
         fps_reg.start();
- 
 		//Event Handling
-		while( SDL_PollEvent( &event ) )
-		{
+		while( SDL_PollEvent( &event ) ){
             VideoManager::Get().scene->handle_input(&event);
 			if( event.type == SDL_QUIT ) quit = true;
 		}
-
-	    //Render
-	    VideoManager::Get().scene->update();
-		  
+	    //Update the scene
+	    VideoManager::Get().scene->update();		  
 		//Display
 	    glClear( GL_COLOR_BUFFER_BIT );
 	    VideoManager::Get().scene->display();
-
-	
-	    //Update screen
+	    //Update the screen
 	    SDL_GL_SwapBuffers();
-	
         //Cap the frame rate
         if( fps_reg.get_ticks() < 1000 / FRAMES_PER_SECOND ) SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps_reg.get_ticks() );
 	}
-
 	clean_up();
-
 	return 0;
 }

@@ -15,6 +15,7 @@ public:
 	bool Init();
 	void Shutdown();
 
+
 private:
 	b2World* world;
 
