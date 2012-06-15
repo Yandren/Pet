@@ -18,6 +18,7 @@ private:
 
 };
 
+
 class Object{
 
   public:
@@ -51,5 +52,11 @@ class Object{
 };
 
 
+class DynamicObject : Object {
 
+};
+
+class StaticObject : Object {
+
+};
 #endif

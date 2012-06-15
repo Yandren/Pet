@@ -1,7 +1,7 @@
 #include "Object.h"
 
 
-class MachinePiece {
+class MachinePiece : DynamicObject {
 
 public:
 	int health;

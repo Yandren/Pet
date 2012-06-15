@@ -2,7 +2,7 @@
 #include "MachinePiece.h"
 #include <vector>
 
-class Machine : Object{
+class Machine : DynamicObject{
 
 public:
 
