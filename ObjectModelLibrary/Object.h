@@ -8,16 +8,6 @@
 
 const int TICK_TRIGGER = 1;
 
-class AABB{
-
-public:
-	AABB(Object* object){};
-	~AABB(){};
-private:
-
-
-};
-
 
 class Object{
 
@@ -48,6 +38,16 @@ class Object{
 	int tick;
 	Model* model;
 	SDL_Surface* display;
+
+};
+
+class AABB{
+
+public:
+	AABB(Object* object){};
+	~AABB(){};
+private:
+
 
 };
 

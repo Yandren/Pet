@@ -15,9 +15,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainLoop", "MainLoop\MainLo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "OtherLibs\Projects\vs2010\Box2D.vcxproj", "{98400D17-43A5-1A40-95BE-C53AC78E7694}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Object Model Library", "ObjectModelLibrary\ObjectModelLibrary.vcxproj", "{68991689-6224-44DA-B51E-E28F73348221}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ObjectModelLibrary", "ObjectModelLibrary\ObjectModelLibrary.vcxproj", "{68991689-6224-44DA-B51E-E28F73348221}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlatformAbstractionLibrary", "PlatformAbstractionLibrary\PlatformAbstractionLibrary.vcxproj", "{D69C6556-507E-43B9-BE71-D66858400DAF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagementLibrary", "ResourceManagement\ResourceManagement.vcxproj", "{3A5D9296-059F-4496-AEE6-E6EB627D3118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,12 @@ Global
 		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|Win32.ActiveCfg = Release|Win32
 		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|Win32.Build.0 = Release|Win32
 		{D69C6556-507E-43B9-BE71-D66858400DAF}.Release|x64.ActiveCfg = Release|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Debug|Win32.Build.0 = Debug|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Debug|x64.ActiveCfg = Debug|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|Win32.ActiveCfg = Release|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|Win32.Build.0 = Release|Win32
+		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

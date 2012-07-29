@@ -11,7 +11,7 @@ class VideoManager{
 
 public:
 
-	class SceneGraph{
+	class SceneGraph : Octree{
 	
       public:
 	  //methods

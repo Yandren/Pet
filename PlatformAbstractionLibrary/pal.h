@@ -6,7 +6,7 @@
 #include "Timer.h"
 #include "Types.h"
 #include "Utilities.h"
-#include "math.h"
+//#include "math.h"
 //#include "mymath.h"
 
 //Windows specific
