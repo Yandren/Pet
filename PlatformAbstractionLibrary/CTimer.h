@@ -3,7 +3,7 @@
 
 #include <SDL/SDL.h>
 
-class Timer
+class CTimer
 {
     private:
 
@@ -12,7 +12,7 @@ class Timer
 
     public:
 
-    Timer();
+    CTimer();
     void start();
     void stop();
     void pause();

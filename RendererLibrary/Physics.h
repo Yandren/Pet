@@ -5,13 +5,12 @@
 
 class b2World;
 
-class PhysicsManager{
+class CPhysicsManager{
 
 public:
-	PhysicsManager(){}
-	~PhysicsManager(){}
-	static PhysicsManager &Get(){
-	  static PhysicsManager phys; return phys;}
+	CPhysicsManager(){}
+	~CPhysicsManager(){}
+
 	bool Init();
 	void Shutdown();
 

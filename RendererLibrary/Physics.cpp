@@ -1,7 +1,7 @@
 #include "Physics.h"
 
 bool 
-PhysicsManager::Init(){
+CPhysicsManager::Init(){
 	b2Vec2 gravity(0.0f, -10.0f);
 
 	world = new b2World(gravity);
@@ -10,7 +10,7 @@ PhysicsManager::Init(){
 
 
 void
-PhysicsManager::Shutdown(){
+CPhysicsManager::Shutdown(){
 
 	delete world;
 

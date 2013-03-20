@@ -21,12 +21,18 @@
     <ClCompile Include="Video.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

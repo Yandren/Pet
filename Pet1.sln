@@ -20,6 +20,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlatformAbstractionLibrary", "PlatformAbstractionLibrary\PlatformAbstractionLibrary.vcxproj", "{D69C6556-507E-43B9-BE71-D66858400DAF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagementLibrary", "ResourceManagement\ResourceManagement.vcxproj", "{3A5D9296-059F-4496-AEE6-E6EB627D3118}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D69C6556-507E-43B9-BE71-D66858400DAF} = {D69C6556-507E-43B9-BE71-D66858400DAF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -20,3 +20,9 @@ void tokenize(const string &str, vector<string> &tokens, const string &delimiter
 
 
 
+string getCWD(){
+
+	char CurrentPath[FILENAME_MAX];
+	return GetCurrentDir(CurrentPath, (sizeof(CurrentPath) / sizeof(char)));
+
+}

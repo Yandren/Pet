@@ -68,10 +68,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Video.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Video.h" />
   </ItemGroup>

@@ -1,7 +1,7 @@
-#include "Object.h"
+#include "IObject.h"
 
 
-class MachinePiece : DynamicObject {
+class CMachinePiece : DynamiObject {
 
 public:
 	int health;
@@ -9,7 +9,7 @@ public:
 
 protected:
 	int sector; // passed to MachinePiece, situates it on the model
-	MachinePiece* owner;
+	CMachinePiece* owner;
 
 	//HexSkeleton
 	//attachpoints

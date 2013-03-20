@@ -4,37 +4,40 @@
 //replace with a PAL-type implementation.
 #include "pal.h"
 #include <SDL/SDL_opengl.h>
-#include "Object.h"
+#include "IObject.h"
+#include "CCamera.h"
 #include <vector>
 
-class VideoManager{
+class CVideoManager{
 
 public:
 
-	class SceneGraph : Octree{
+	class CSceneGraph : COctree{
 	
       public:
 	  //methods
-	    SceneGraph(SDL_Surface* s) : screen(s) {};
-		~SceneGraph(){};
-	    bool addObject(Object *obj ); 
-        void handle_input(SDL_Event *event);
-	    bool removeObject(Object *obj);
+	    CSceneGraph(SDL_Surface* s) : screen(s) {};
+		~CSceneGraph(){ delete screen; delete camera;};
+	    bool addObject(IObject *obj );
+        void set_camera_position(float x_coord, float y_coord);
+		void set_camera_size(int new_height, int new_width);
+	    bool removeObject(IObject *obj);
 	    void display();
         void update();
 
 	    //members
-	    std::vector<Object*> dynamicObjects;
+	    std::vector<IObject*> dynamiObjects;
 	    SDL_Surface* screen;
+		CCamera* camera;
     };
 
-	VideoManager() : scene(NULL){}
-	~VideoManager(){}
-	static VideoManager &Get(){	static VideoManager video; return video;}
+	CVideoManager() : scene(NULL){}
+	~CVideoManager(){ Shutdown();}
+	
 	bool Init();
 	void Shutdown(){ delete scene; SDL_Quit(); }
 
-	SceneGraph* scene;
+	CSceneGraph* scene;
 
 };
 

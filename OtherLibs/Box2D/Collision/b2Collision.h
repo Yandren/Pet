@@ -31,7 +31,7 @@ class b2CircleShape;
 class b2EdgeShape;
 class b2PolygonShape;
 
-const uint8 b2_nullFeature = UCHAR_MAX;
+const uint8_t b2_nullFeature = UCHAR_MAX;
 
 /// The features that intersect to form the contact point
 /// This must be 4 bytes or less.
@@ -43,10 +43,10 @@ struct b2ContactFeature
 		e_face = 1
 	};
 
-	uint8 indexA;		///< Feature index on shapeA
-	uint8 indexB;		///< Feature index on shapeB
-	uint8 typeA;		///< The feature type on shapeA
-	uint8 typeB;		///< The feature type on shapeB
+	uint8_t indexA;		///< Feature index on shapeA
+	uint8_t indexB;		///< Feature index on shapeB
+	uint8_t typeA;		///< The feature type on shapeA
+	uint8_t typeB;		///< The feature type on shapeB
 };
 
 /// Contact ids to facilitate warm starting.

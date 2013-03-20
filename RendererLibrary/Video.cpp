@@ -2,12 +2,11 @@
 
 
 bool 
-VideoManager::Init(){
+CVideoManager::Init(){
 	bool brs= false;
 	SDL_Surface* tempScreen = NULL;
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) return false;
     if( ( tempScreen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF )) == NULL ) return false;     //Create Window
-
 
 	/*glClear(GL_COLOR_BUFFER_BIT);
 	glEnable(GL_TEXTURE_2D);							
@@ -34,24 +33,24 @@ VideoManager::Init(){
     if( glGetError() != GL_NO_ERROR )  return false;
 	*/
     SDL_WM_SetCaption( "Pet Project", NULL );
-	return (scene = new SceneGraph(tempScreen))?true:false;
+	return (scene = new CSceneGraph(tempScreen))?true:false;
 }
 
 
 bool 
-VideoManager::SceneGraph::addObject(Object *obj ){
-	dynamicObjects.push_back(obj);
+CVideoManager::CSceneGraph::addObject(IObject *obj ){
+	dynamiObjects.push_back(obj);
 	return true;
 }; 
 
 bool 
-VideoManager::SceneGraph::removeObject(Object *obj){
+CVideoManager::CSceneGraph::removeObject(IObject *obj){
 	bool brs = false;
-	std::vector<Object*>::iterator it;
+	std::vector<IObject*>::iterator it;
 
-	for(it=dynamicObjects.begin(); it<=dynamicObjects.end(); it++)
+	for(it=dynamiObjects.begin(); it<=dynamiObjects.end(); it++)
 		if(*it==obj){
-			dynamicObjects.erase(it);
+			dynamiObjects.erase(it);
 			brs = true;
 		}
 	return brs;
@@ -59,27 +58,34 @@ VideoManager::SceneGraph::removeObject(Object *obj){
 };
 
 void 
-VideoManager::SceneGraph::handle_input(SDL_Event *event){
-
-	for(uint32_t i=0; i<dynamicObjects.size(); i++)
-		dynamicObjects.at(i)->handle_input(event);
+CVideoManager::CSceneGraph::set_camera_position(float x_coord, float y_coord){
+	CSceneGraph::camera->y_coord = y_coord;
+	CSceneGraph::camera->x_coord = x_coord;
 	
 };
 
+void 
+CVideoManager::CSceneGraph::set_camera_size(int new_height, int new_width){
+	CSceneGraph::camera->viewport_height = new_height;
+	CSceneGraph::camera->viewport_width = new_width;
+	
+};
+
+
 void
-VideoManager::SceneGraph::display(){
+CVideoManager::CSceneGraph::display(){
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	
-	for(uint32_t i=0; i<dynamicObjects.size(); i++)
-		dynamicObjects.at(i)->show();
+
+	for(uint32_t i=0; i<dynamiObjects.size(); i++)
+		dynamiObjects.at(i)->show();
 	SDL_Flip(screen);
 };
 
 void
-VideoManager::SceneGraph::update(){
+CVideoManager::CSceneGraph::update(){
 
-	for(uint32_t i=0; i<dynamicObjects.size(); i++)
-		dynamicObjects.at(i)->move();
-	
+	//view frustum culling, based on camera
+
 
 };

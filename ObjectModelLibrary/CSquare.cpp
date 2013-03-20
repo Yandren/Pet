@@ -1,10 +1,15 @@
-#include "Square.h"
+#include "CSquare.h"
 
-Square::Square(float x, float y, float xV, float yV, SDL_Surface* screen, std::string model) 
-  : Object(10, 10, 0, 0, screen, model) 
-{}
+CSquare::CSquare(float x, float y, float xV, float yV, SDL_Surface* screen, std::string model) 
+  : IObject(10, 10, 0, 0, screen, model) {
+  if(model.empty()){ 
+	  model.assign(IObject::cwd.c_str()).append("/CSquare.bmp");
+      IObject::model = new CModel(SDL_LoadBMP(model.c_str()));
+	  CLog::Get().Write(GEN_CLog, "%s: model path: %s", __FUNCTION__, model.c_str());
+      };
+}
 
-void Square::handle_input(SDL_Event *event) {
+void CSquare::handle_input(SDL_Event *event) {
 
     if (event->type == SDL_KEYDOWN) {
         //Adjust the velocity
@@ -36,23 +41,22 @@ void Square::handle_input(SDL_Event *event) {
     }
 }
 
-void Square::move() {
+void CSquare::move() {
 	
-	/*if(tick++==TICK_TRIGGER){
+    if(tick++==TICK_TRIGGER){
 	  yVel += SQUARE_SPEED;
 	  tick = 0;
-	  }
-	  */
+	}
     x_pos += xVel;
 
-    //If the square went too far
+    //If the CSquare went too far
     if ((x_pos < 0) || (x_pos > SCREEN_WIDTH)) {
         x_pos -= xVel;
     }
 
     y_pos += yVel;
 
-    //If the square went too far
+    //If the CSquare went too far
     if ((y_pos < 0) || (y_pos > SCREEN_HEIGHT)) {
         y_pos -= yVel;
     }
@@ -60,7 +64,7 @@ void Square::move() {
 	yVel = xVel = 0;
 }
 
-void Square::show() {
-	Object::show();
+void CSquare::show() {
+	IObject::show();
 
 }

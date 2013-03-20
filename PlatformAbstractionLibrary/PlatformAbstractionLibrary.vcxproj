@@ -50,6 +50,7 @@
       <SmallerTypeCheck>true</SmallerTypeCheck>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -69,16 +70,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="CLog.cpp" />
+    <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="DataStructs.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Log.h" />
+    <ClInclude Include="CLog.h" />
+    <ClInclude Include="CTimer.h" />
+    <ClInclude Include="DataStructs.h" />
     <ClInclude Include="mymath.h" />
     <ClInclude Include="pal.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Timer.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="WinConstants.h" />

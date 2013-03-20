@@ -423,7 +423,7 @@ private:
 
 	b2BodyType m_type;
 
-	uint16 m_flags;
+	uint16_t m_flags;
 
 	int32 m_islandIndex;
 

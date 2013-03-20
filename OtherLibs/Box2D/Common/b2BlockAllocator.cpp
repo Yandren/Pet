@@ -40,7 +40,7 @@ int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] =
 	512,	// 12
 	640,	// 13
 };
-uint8 b2BlockAllocator::s_blockSizeLookup[b2_maxBlockSize + 1];
+uint8_t b2BlockAllocator::s_blockSizeLookup[b2_maxBlockSize + 1];
 bool b2BlockAllocator::s_blockSizeLookupInitialized;
 
 struct b2Chunk
@@ -73,12 +73,12 @@ b2BlockAllocator::b2BlockAllocator()
 			b2Assert(j < b2_blockSizes);
 			if (i <= s_blockSizes[j])
 			{
-				s_blockSizeLookup[i] = (uint8)j;
+				s_blockSizeLookup[i] = (uint8_t)j;
 			}
 			else
 			{
 				++j;
-				s_blockSizeLookup[i] = (uint8)j;
+				s_blockSizeLookup[i] = (uint8_t)j;
 			}
 		}
 
@@ -140,11 +140,11 @@ void* b2BlockAllocator::Allocate(int32 size)
 		b2Assert(blockCount * blockSize <= b2_chunkSize);
 		for (int32 i = 0; i < blockCount - 1; ++i)
 		{
-			b2Block* block = (b2Block*)((int8*)chunk->blocks + blockSize * i);
-			b2Block* next = (b2Block*)((int8*)chunk->blocks + blockSize * (i + 1));
+			b2Block* block = (b2Block*)((int8_t*)chunk->blocks + blockSize * i);
+			b2Block* next = (b2Block*)((int8_t*)chunk->blocks + blockSize * (i + 1));
 			block->next = next;
 		}
-		b2Block* last = (b2Block*)((int8*)chunk->blocks + blockSize * (blockCount - 1));
+		b2Block* last = (b2Block*)((int8_t*)chunk->blocks + blockSize * (blockCount - 1));
 		last->next = NULL;
 
 		m_freeLists[index] = chunk->blocks->next;
@@ -181,12 +181,12 @@ void b2BlockAllocator::Free(void* p, int32 size)
 		b2Chunk* chunk = m_chunks + i;
 		if (chunk->blockSize != blockSize)
 		{
-			b2Assert(	(int8*)p + blockSize <= (int8*)chunk->blocks ||
-						(int8*)chunk->blocks + b2_chunkSize <= (int8*)p);
+			b2Assert(	(int8_t*)p + blockSize <= (int8_t*)chunk->blocks ||
+						(int8_t*)chunk->blocks + b2_chunkSize <= (int8_t*)p);
 		}
 		else
 		{
-			if ((int8*)chunk->blocks <= (int8*)p && (int8*)p + blockSize <= (int8*)chunk->blocks + b2_chunkSize)
+			if ((int8_t*)chunk->blocks <= (int8_t*)p && (int8_t*)p + blockSize <= (int8_t*)chunk->blocks + b2_chunkSize)
 			{
 				found = true;
 			}

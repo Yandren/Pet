@@ -1,8 +1,8 @@
-#include "Object.h"
-#include "MachinePiece.h"
+#include "IObject.h"
+#include "CMachinePiece.h"
 #include <vector>
 
-class Machine : DynamicObject{
+class CMachine : DynamiObject{
 
 public:
 
@@ -13,7 +13,7 @@ public:
 
 
 
-	std::vector<MachinePiece *> pieces;
+	std::vector<CMachinePiece *> pieces;
 
 	//Damage Map
 	//  -model should be "dynamically generated", split into sectors

@@ -1,11 +1,12 @@
 #ifndef PAL_H
 #define	PAL_H
 
-#include "Log.h"
+#include "CLog.h"
 #include "resource.h"
-#include "Timer.h"
+#include "CTimer.h"
 #include "Types.h"
 #include "Utilities.h"
+#include "DataStructs.h"
 //#include "math.h"
 //#include "mymath.h"
 

@@ -1,9 +1,9 @@
-#include "Timer.h"
+#include "CTimer.h"
 
-Timer::Timer():startTicks(0),pausedTicks(0), paused(false), started(false)
+CTimer::CTimer():startTicks(0),pausedTicks(0), paused(false), started(false)
 {}
 
-void Timer::start()
+void CTimer::start()
 {
     started = true;
     paused = false;
@@ -11,13 +11,13 @@ void Timer::start()
     startTicks = SDL_GetTicks();
 }
 
-void Timer::stop()
+void CTimer::stop()
 {
     started = false;
     paused = false;
 }
 
-void Timer::pause()
+void CTimer::pause()
 {
     if( started && !paused )
     {
@@ -26,7 +26,7 @@ void Timer::pause()
     }
 }
 
-void Timer::unpause()
+void CTimer::unpause()
 {
     if( paused)
     {
@@ -36,7 +36,7 @@ void Timer::unpause()
     }
 }
 
-int Timer::get_ticks()
+int CTimer::get_ticks()
 {
     if( started)
     {
@@ -46,12 +46,12 @@ int Timer::get_ticks()
     return 0;
 }
 
-bool Timer::is_started()
+bool CTimer::is_started()
 {
     return started;
 }
 
-bool Timer::is_paused()
+bool CTimer::is_paused()
 {
     return paused;
 }

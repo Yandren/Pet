@@ -46,7 +46,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)PlatformAbstractionLibrary;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PlatformAbstractionLibrary; $(SolutionDir)ObjectModelLibrary; $(SolutionDir)/MainLoop; $(SolutionDir)/ObjectModelLibrary/Components; $(SolutionDir)/ObjectModelLibrary/ComponentSystem; $(SolutionDir)/OtherLibs/tinyxml2</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -67,19 +67,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Machine.cpp" />
-    <ClCompile Include="MachinePiece.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ObjectInterpreter.cpp" />
-    <ClCompile Include="Square.cpp" />
+    <ClCompile Include="..\OtherLibs\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="CMachine.cpp" />
+    <ClCompile Include="CMachinePiece.cpp" />
+    <ClCompile Include="CModel.cpp" />
+    <ClCompile Include="CObjectInterpreter.cpp" />
+    <ClCompile Include="CObjectManager.cpp" />
+    <ClCompile Include="ComponentSystem\ComponentIterators.cpp" />
+    <ClCompile Include="ComponentSystem\IComponent.cpp" />
+    <ClCompile Include="Components\CCmpEntity.cpp" />
+    <ClCompile Include="Components\CCmpPhysics.cpp" />
+    <ClCompile Include="Components\CCmpPlayer.cpp" />
+    <ClCompile Include="Components\CCmpRenderable.cpp" />
+    <ClCompile Include="Components\ICmpEntity.cpp" />
+    <ClCompile Include="Components\ICmpPhysics.cpp" />
+    <ClCompile Include="Components\ICmpPlayer.cpp" />
+    <ClCompile Include="Components\ICmpRenderable.cpp" />
+    <ClCompile Include="CSquare.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Machine.h" />
-    <ClInclude Include="MachinePiece.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="ObjectInterpreter.h" />
-    <ClInclude Include="Square.h" />
+    <ClInclude Include="..\OtherLibs\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="CMachine.h" />
+    <ClInclude Include="CMachinePiece.h" />
+    <ClInclude Include="CModel.h" />
+    <ClInclude Include="CObjectInterpreter.h" />
+    <ClInclude Include="CObjectManager.h" />
+    <ClInclude Include="ComponentSystem\CComponentMessage.h" />
+    <ClInclude Include="ComponentSystem\ComponentIterators.h" />
+    <ClInclude Include="ComponentSystem\ComponentStructs.h" />
+    <ClInclude Include="Components\CCmpEntity.h" />
+    <ClInclude Include="Components\CCmpPhysics.h" />
+    <ClInclude Include="Components\CCmpPlayer.h" />
+    <ClInclude Include="Components\CCmpRenderable.h" />
+    <ClInclude Include="Components\ICmpEntity.h" />
+    <ClInclude Include="Components\ICmpPhysics.h" />
+    <ClInclude Include="Components\ICmpPlayer.h" />
+    <ClInclude Include="Components\ICmpRenderable.h" />
+    <ClInclude Include="CSquare.h" />
+    <ClInclude Include="ComponentSystem\IComponent.h" />
+    <ClInclude Include="IObject.h" />
+    <ClInclude Include="SObjectManagerDB.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OtherLibs\Projects\vs2010\Box2D.vcxproj">

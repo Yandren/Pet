@@ -1,34 +1,23 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-class Octree {
+//typedef char int8_t;
+typedef signed char sint8_t;
+typedef unsigned char uint8_t;
 
-public:
+typedef short int16_t;
+typedef signed short sint16_t;
+typedef unsigned short uint16_t;
 
-	Octree() : 
-	  NorthWestTop(NULL),
-	  NorthWestBot(NULL),
-	  NorthEastTop(NULL),
-	  NorthEastBot(NULL),
-      SouthWestTop(NULL),
-	  SouthWestBot(NULL),
-	  SouthEastTop(NULL),
-	  SouthEastBot(NULL) {};
+typedef int int32_t;
+typedef signed int sint32_t;
+typedef unsigned int uint32_t;
 
+#ifndef NULL
+#define NULL 0
+#endif
 
-	static const int CAPACITY = 8;
+#define MAX_STR_LEN 1024
 
-	Octree* NorthWestTop;
-	Octree* NorthWestBot;
-	Octree* NorthEastTop;
-	Octree* NorthEastBot;
-    Octree* SouthWestTop;
-	Octree* SouthWestBot;
-	Octree* SouthEastTop;
-	Octree* SouthEastBot;
-
-private:
-
-};
 
 #endif

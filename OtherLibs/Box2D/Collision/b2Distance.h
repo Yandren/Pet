@@ -57,9 +57,9 @@ struct b2DistanceProxy
 struct b2SimplexCache
 {
 	float32 metric;		///< length or area
-	uint16 count;
-	uint8 indexA[3];	///< vertices on shape A
-	uint8 indexB[3];	///< vertices on shape B
+	uint16_t count;
+	uint8_t indexA[3];	///< vertices on shape A
+	uint8_t indexB[3];	///< vertices on shape B
 };
 
 /// Input for b2Distance.

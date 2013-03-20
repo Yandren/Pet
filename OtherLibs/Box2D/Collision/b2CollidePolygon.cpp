@@ -171,14 +171,14 @@ static void b2FindIncidentEdge(b2ClipVertex c[2],
 	int32 i2 = i1 + 1 < count2 ? i1 + 1 : 0;
 
 	c[0].v = b2Mul(xf2, vertices2[i1]);
-	c[0].id.cf.indexA = (uint8)edge1;
-	c[0].id.cf.indexB = (uint8)i1;
+	c[0].id.cf.indexA = (uint8_t)edge1;
+	c[0].id.cf.indexB = (uint8_t)i1;
 	c[0].id.cf.typeA = b2ContactFeature::e_face;
 	c[0].id.cf.typeB = b2ContactFeature::e_vertex;
 
 	c[1].v = b2Mul(xf2, vertices2[i2]);
-	c[1].id.cf.indexA = (uint8)edge1;
-	c[1].id.cf.indexB = (uint8)i2;
+	c[1].id.cf.indexA = (uint8_t)edge1;
+	c[1].id.cf.indexB = (uint8_t)i2;
 	c[1].id.cf.typeA = b2ContactFeature::e_face;
 	c[1].id.cf.typeB = b2ContactFeature::e_vertex;
 }
@@ -211,7 +211,7 @@ void b2CollidePolygons(b2Manifold* manifold,
 	const b2PolygonShape* poly2;	// incident polygon
 	b2Transform xf1, xf2;
 	int32 edge1;		// reference edge
-	uint8 flip;
+	uint8_t flip;
 	const float32 k_relativeTol = 0.98f;
 	const float32 k_absoluteTol = 0.001f;
 
