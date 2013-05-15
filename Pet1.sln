@@ -1,28 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RendererLibrary", "RendererLibrary\RendererLibrary.vcxproj", "{7727742D-283E-487A-9172-C676743B68C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Renderer Library", "Renderer Library\Renderer Library.vcxproj", "{7727742D-283E-487A-9172-C676743B68C3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98400D17-43A5-1A40-95BE-C53AC78E7694} = {98400D17-43A5-1A40-95BE-C53AC78E7694}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainLoop", "MainLoop\MainLoop.vcxproj", "{BAF820DB-B1BB-3BEA-00C1-BE51FF5E544E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main Game Loop", "Main Loop\Main Loop.vcxproj", "{BAF820DB-B1BB-3BEA-00C1-BE51FF5E544E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98400D17-43A5-1A40-95BE-C53AC78E7694} = {98400D17-43A5-1A40-95BE-C53AC78E7694}
 		{7727742D-283E-487A-9172-C676743B68C3} = {7727742D-283E-487A-9172-C676743B68C3}
 		{68991689-6224-44DA-B51E-E28F73348221} = {68991689-6224-44DA-B51E-E28F73348221}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "OtherLibs\Projects\vs2010\Box2D.vcxproj", "{98400D17-43A5-1A40-95BE-C53AC78E7694}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "Other Libs\Projects\vs2010\Box2D.vcxproj", "{98400D17-43A5-1A40-95BE-C53AC78E7694}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ObjectModelLibrary", "ObjectModelLibrary\ObjectModelLibrary.vcxproj", "{68991689-6224-44DA-B51E-E28F73348221}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Object Model Library", "Object Model Library\Object Model Library.vcxproj", "{68991689-6224-44DA-B51E-E28F73348221}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlatformAbstractionLibrary", "PlatformAbstractionLibrary\PlatformAbstractionLibrary.vcxproj", "{D69C6556-507E-43B9-BE71-D66858400DAF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Platform Abstraction Library", "Platform Abstraction Library\Platform Abstraction Library.vcxproj", "{D69C6556-507E-43B9-BE71-D66858400DAF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagementLibrary", "ResourceManagement\ResourceManagement.vcxproj", "{3A5D9296-059F-4496-AEE6-E6EB627D3118}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Resource Management Library", "Resource Management\Resource Management.vcxproj", "{3A5D9296-059F-4496-AEE6-E6EB627D3118}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D69C6556-507E-43B9-BE71-D66858400DAF} = {D69C6556-507E-43B9-BE71-D66858400DAF}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "User Interface Library", "User Interface\User Interface.vcxproj", "{9C7AAD9B-67E3-43C0-B861-33A01F709525}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2", "Other Libs\SDL\VisualC\SDL\SDL_VS2010.vcxproj", "{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +74,20 @@ Global
 		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|Win32.ActiveCfg = Release|Win32
 		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|Win32.Build.0 = Release|Win32
 		{3A5D9296-059F-4496-AEE6-E6EB627D3118}.Release|x64.ActiveCfg = Release|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Debug|Win32.Build.0 = Debug|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Debug|x64.ActiveCfg = Debug|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Release|Win32.ActiveCfg = Release|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Release|Win32.Build.0 = Release|Win32
+		{9C7AAD9B-67E3-43C0-B861-33A01F709525}.Release|x64.ActiveCfg = Release|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|Win32.Build.0 = Debug|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.ActiveCfg = Debug|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.Build.0 = Debug|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|Win32.ActiveCfg = Release|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|Win32.Build.0 = Release|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.ActiveCfg = Release|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
