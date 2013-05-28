@@ -1,18 +1,21 @@
-
 #ifndef CCAMERA_H
 #define CCAMERA_H
+
+#include "glm\glm\glm.hpp"
 
 class CCamera {
 
 public:
 
-	CCamera(){};
-	~CCamera(){};
+  CCamera(){};
+  ~CCamera(){};
 
-	float x_coord;
-	float y_coord;
-	int viewport_height;
-	int viewport_width;
+  glm::vec4 mPosition;
+  glm::vec4 mOrientation;
+  glm::mat4 mViewMatrix;
+  int mViewportHeight;
+  int mViewportWidth;
+
 };
 
 #endif

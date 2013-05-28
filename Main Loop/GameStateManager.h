@@ -20,7 +20,7 @@ public:
   
   bool Init();
   void Shutdown();
-  void handle_input(SDL_Event *event);
+  static void handle_input(int key, int action);
 
   //gets the current gamestate without altering the stack
   GameState getCurrentState() {return gameStates.back();}

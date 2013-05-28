@@ -2,11 +2,12 @@
 #define __CMODEL_H
 
 #include "pal.h"
+#include "glm\glm\glm.hpp"
 #include "CMesh.h"
 #include "CTexture.h"
 #include <string>
-#include "SDL\include\SDL.h"
-#include "SDL\include\SDL_opengl.h"
+
+class CVideoManager;
 
 
 class CModel {
@@ -14,20 +15,28 @@ class CModel {
 public:
   CModel(CTexture* tex) //add SDL_SetColorKeyf color param here for background color to ignore when drawing 
   : mTexture(tex),
-    mMesh()
+    mMesh(),
+    mModelViewMatrix(1.0f)
     {};
-  CModel(std::string texPath) 
+  CModel(std::string meshPath) 
   : mTexture(NULL),
-    mMesh()
-     { mTexture = new CTexture(texPath); };
+    mMesh(),
+    mModelViewMatrix(1.0f)
+     { loadMeshFromDisk(meshPath); mTexture = new CTexture();};
   CModel(){ mTexture = new CTexture(); }
-  virtual ~CModel(){delete mTexture;}
-  virtual bool show(Vec3 <float>* position, SDL_Surface* screen);
+  CModel(std::string meshPath, std::string texPath)
+    {loadMeshFromDisk(meshPath); loadTextureFromDisk(texPath);}
+  
+  virtual ~CModel(){delete mTexture; while(mMesh.size() > 0) {delete mMesh.back(); mMesh.pop_back();}}
+  virtual bool show(glm::vec4 * position, CVideoManager * vidMan);
+  bool loadMeshFromDisk(std::string path);
+  bool loadTextureFromDisk(std::string path);
+  glm::mat4 getModelViewMatrix(){ return mModelViewMatrix;}
 
 private:
   CTexture* mTexture;
-  Vec3<CMesh *> mMesh;
-
+  std::vector<CMesh *> mMesh;
+  glm::mat4 mModelViewMatrix;
 };
 
 

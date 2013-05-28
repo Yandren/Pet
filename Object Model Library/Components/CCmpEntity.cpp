@@ -56,15 +56,16 @@ bool CCmpEntity::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
         for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot; posRoot = posRoot->NextSiblingElement())
         {
           std::string nameAttr = posRoot->Attribute("name");
+          
           if(nameAttr == "X")
-            mPosition.X = atof(posRoot->FirstChild()->ToText()->Value());
+            mPosition.x = atof(posRoot->FirstChild()->ToText()->Value());
           else if(nameAttr == "Y")
-            mPosition.Y = atof(posRoot->FirstChild()->ToText()->Value());
+            mPosition.y = atof(posRoot->FirstChild()->ToText()->Value());
           else if(nameAttr == "Z")
-            mPosition.Z = atof(posRoot->FirstChild()->ToText()->Value());
+            mPosition.z = atof(posRoot->FirstChild()->ToText()->Value());
           else
             CLog::Get().Write(LOG_ERROR, "Unable to parse XML for CCmpEntity to get position %s", nameAttr.c_str());
-
+         
         }
       }         
     }
@@ -93,13 +94,13 @@ EMessageResult CCmpEntity::HandleMessage(const CComponentMessage &msg)
   case MT_POSITION_REQ_LOCAL:
     { 
 
-      SPositionInfo pos = SPositionInfo(GetPosition().X, GetPosition().Y, GetPosition().Z ); 
+      SPositionInfo pos = SPositionInfo(GetPosition().x, GetPosition().y, GetPosition().z, 1.0 ); 
       Globals::GetObjectManager().PostMessage(this->GetObjectId(), CComponentMessage(MT_POSITION, &pos));
       return MR_TRUE;
     }
   case MT_POSITION_REQ:
     { 
-      SPositionInfo pos = SPositionInfo(GetPosition().X, GetPosition().Y, GetPosition().Z ); 
+      SPositionInfo pos = SPositionInfo(GetPosition().x, GetPosition().y, GetPosition().z, 1.0 ); 
       Globals::GetObjectManager().BroadcastMessage(CComponentMessage(MT_POSITION, &pos));
       return MR_TRUE;
     }

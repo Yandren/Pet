@@ -8,10 +8,9 @@ void CGameStateManager::update()
 
 
 
-void CGameStateManager::handle_input(SDL_Event *event)
+ void CGameStateManager::handle_input(int key, int action)
 {	
-		CLog::Get().Write( LOG_GENERAL, "Gamestate handling input");
-
+		CLog::Get().Write( LOG_GENERAL, "Gamestate handling input; key %d action: %d", key, action);
 };
 
 bool CGameStateManager::Init()

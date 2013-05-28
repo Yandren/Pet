@@ -2,8 +2,8 @@
 #define __CTEXTURE_H
 
 #include <string>
-#include "SDL\include\SDL.h"
-#include "SDL\include\SDL_opengl.h"
+#include "glew\include\GL\glew.h"
+#include "glfw\include\GL\glfw.h"
 
 
 static const char *DEFAULT_ASSET_TEXTURE = "C:/Users/dragonerdriftr/Documents/Pet/defaultNoAsset.bmp";
@@ -34,29 +34,26 @@ public:
     mIsClamped(true),
     mTextureFilter(NOFILTER),
     mTexUsageType(DIFFUSE),
-    mWidth(0),
-    mHeight(0),
-    mType(GL_NONE),
-    mBPP(0),
-    mSDLsurf(NULL)
+    mBPP(0)
   { 
-    mSDLsurf = loadFromString(mPath.c_str());
+    loadFromDisk(mPath.c_str());
   }
 
-  CTexture(std::string pth) : mPath(pth){ mSDLsurf = loadFromString(mPath.c_str()); }
 
-  virtual ~CTexture() {SDL_FreeSurface(mSDLsurf);}
+  CTexture(std::string pth) : mPath(pth)
+  {
+    loadFromDisk(mPath.c_str()); }
+
+  virtual ~CTexture() {}
 
   std::string getPath() { return mPath;};
   std::string setPath(std::string pa) { mPath = pa; return mPath;};
-  SDL_Surface* getSDL_Surface() { return mSDLsurf;}
 
 private:
 
-  SDL_Surface* loadFromString(const char * string);
+  bool loadFromDisk(const char * string);
 
   std::string mPath;
-  SDL_Surface* mSDLsurf;
 
   bool mIsMipMapped;
   bool mIsFlipped;
@@ -66,11 +63,8 @@ private:
   ETexFilterType mTextureFilter;
   ETexFormatType mTexFormat; 
   ETexType mTexUsageType;
-
-  int mTextureID; // Texture ID Used To Select A Texture
-  int mWidth; // Image Width
-  int mHeight; // Image Height
-  int mType; // Image Type (GL_RGB, GL_RGBA)
+  
+  GLFWimage mImageRaw; //info and pointer to image
   int mBPP; // Image Color Depth In Bits Per Pixel
 
 };

@@ -21,10 +21,11 @@ public:
 struct SPositionInfo
 {
   SPositionInfo() {};
-  SPositionInfo(float x, float y, float z) : x_pos(x), y_pos(y), z_pos(z) {};
+  SPositionInfo(float x, float y, float z, float w) : x_pos(x), y_pos(y), z_pos(z), w_pos(w) {};
 	float x_pos;
 	float y_pos;
 	float z_pos;
+  float w_pos;
 };
 
 #endif //__CMESSAGE_H

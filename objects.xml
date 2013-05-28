@@ -13,7 +13,7 @@
       <component name="Player" description="Player control component">
       </component>
       <component name="Renderable">
-        <path name="model">C:\Users\dragonerdriftr\Documents\Pet\Square.bmp</path>
+        <path name="model">C:\Users\dragonerdriftr\Documents\Pet\Assets\Mesh\ShortPine.X</path>
       </component>
     </object>
 

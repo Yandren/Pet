@@ -75,14 +75,12 @@
     <ClCompile Include="CLog.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="DataStructs.cpp" />
-    <ClCompile Include="Math\Matrices.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLog.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="DataStructs.h" />
-    <ClInclude Include="Math\Matrices.h" />
     <ClInclude Include="Math\mymath.h" />
     <ClInclude Include="pal.h" />
     <ClInclude Include="resource.h" />

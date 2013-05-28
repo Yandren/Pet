@@ -1,11 +1,14 @@
 #include "CTexture.h"
 #include "CLog.h"
 
-SDL_Surface*
-CTexture::loadFromString(const char* string)
+
+bool
+  CTexture::loadFromDisk(const char* string)
 {
-  SDL_Surface * retval;
-  if( !(retval = SDL_LoadBMP(string)))
-      CLog::Get().Write( LOG_ERROR, "No texture loaded from %s", mPath.c_str()); 
-  return retval;
+  if( GL_FALSE == glfwReadImage(string, &mImageRaw, GLFW_ORIGIN_UL_BIT))
+  {
+    CLog::Get().Write( LOG_ERROR, "No texture loaded from %s", mPath.c_str()); 
+    return false;
+  }
+  return true;
 }

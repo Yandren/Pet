@@ -1,0 +1,7 @@
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/CMakeFiles/ALL_BUILD.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/CMakeFiles/ZERO_CHECK.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/code/CMakeFiles/assimp.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/tools/assimp_view/CMakeFiles/assimp_viewer.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/CMakeFiles/uninstall.dir
+C:/Users/dragonerdriftr/Documents/Pet/Other Libs/assimp/contrib/zlib/CMakeFiles/zlib.dir

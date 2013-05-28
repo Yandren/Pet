@@ -41,7 +41,7 @@ void
 
 int 
   main( int argc, char *argv[] ){
-    SDL_Event event;
+   
     bool quit = false;
 
     //frame rate regulator
@@ -55,22 +55,26 @@ int
     CVideoManager videoManager = Globals::GetVideoManager();
     CObjectManager objectManager = Globals::GetObjectManager();
 
-    CLog::Get().Write( LOG_GENERAL, "TESTING");
+    CLog::Get().Write( LOG_GENERAL, "Managers Initialized");
 
-    //this will be moved to the object model library code
-    //Load objects from file/load the level!
-    //1) 
+    void (*callback)(int, int) = &(gameStateManager.handle_input);
+
+    //TODO: Load objects from file/load the level!
+    //TODO: load splash screen here 
     objectManager.LoadObjectsFromFile(Globals::OBJECTS_XML_FILE);
     //IObject* square = (IObject*)new CSquare(1.0, 1.0, 0.0, 0.0, videoManager.scene->screen);
 
-    //videoManager.scene->addObject(square);
     //end stuff to be moved 
+
      fps_reg.start();
 
     //it's looping time!
     while( quit == false ){
 
       switch( gameStateManager.getCurrentState() ){
+
+      case Exiting:
+        quit = true;
 
       case Uninitialized:
         CLog::Get().Write( LOG_ERROR, "Uninitialized state!");
@@ -80,25 +84,29 @@ int
         //start our timer
         CLog::Get().Write( LOG_GENERAL, "Playing state");
        
-        //Event Handling
-        while( SDL_PollEvent( &event ) ){
+        //Event Handling - give it over to gamestate
+       
+        glfwSetKeyCallback(callback);
+        /*while( glfwPollEvents() ){
           gameStateManager.handle_input(&event);
           //CVideoManager::Get().scene->what_to_render();
           if( event.type == SDL_QUIT ) quit = true;
         }
+        */
+
         //Update
         //Update the game state 
         gameStateManager.update();
         //Update the scene (any changes in what's in view, etc)
-        videoManager.scene->update(&objectManager);
+        videoManager.mScene->update(&objectManager);
 
         //Display
         glClear( GL_COLOR_BUFFER_BIT );
-        videoManager.scene->display(&objectManager);
-        //Update the screen
-        //SDL_GL_SwapBuffers();
+        videoManager.mScene->display(&objectManager);
+        //Update the screen, updates Input events
+        
         //Cap the frame rate
-        if( fps_reg.get_ticks() < 1000 / FRAMES_PER_SECOND ) SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps_reg.get_ticks() );
+        if( fps_reg.get_ticks() < 1000 / FRAMES_PER_SECOND ) glfwSleep( (( 1000 / FRAMES_PER_SECOND ) - fps_reg.get_ticks()) / 1000 );
         break;
 
       case Loading:

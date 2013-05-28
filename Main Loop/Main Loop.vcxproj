@@ -56,10 +56,10 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Renderer Library\Renderer Library.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Object Model Library\Object Model Library.lib; $(SolutionDir)Bin\$(Platform)\$(Configuration)\SDL2\SDL.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Platform Abstraction Library\Platform Abstraction Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Renderer Library\Renderer Library.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Object Model Library\Object Model Library.lib; $(SolutionDir)Bin\$(Platform)\$(Configuration)\GLFW\glfw.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Platform Abstraction Library\Platform Abstraction Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalLibraryDirectories>C:\Users\dragonerdriftr\Documents\Pet\VC_lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\VC_lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,6 +91,9 @@
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\Other Libs\glfw\support\msvc100\GLFW.vcxproj">
+      <Project>{4da03747-f505-4a98-9124-03b3b73b9b3b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Platform Abstraction Library\Platform Abstraction Library.vcxproj">
       <Project>{d69c6556-507e-43b9-be71-d66858400daf}</Project>

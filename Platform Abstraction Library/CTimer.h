@@ -1,7 +1,8 @@
 #ifndef TIMER_H
 #define	TIMER_H
 
-#include "SDL\include\SDL.h"
+#include "glew\include\GL\glew.h"
+#include "glfw\include\GL\glfw.h"
 
 class CTimer
 {

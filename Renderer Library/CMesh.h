@@ -2,7 +2,8 @@
 #define __CMESH_H
 
 #include "pal.h"
-
+#include "glm\glm\glm.hpp"
+#include "assimp\include\assimp\scene.h"
 
 class CMesh {
 
@@ -10,43 +11,46 @@ public:
 
   CMesh()
   : mName("NoNameMesh"),
-    mPosition(Vec3<float>(0.0f, 0.0f, 0.0f)),
-    mOrientation(Vec3<float>(0.0f, 0.0f, 0.0f)),
+    mPosition(glm::vec4(0.0, 0.0, 0.0, 1.0)),
+    mOrientation(glm::vec4(0.0, 0.0, 0.0, 0.0)),
     mNumVerts(0),
     mNumInd(0),
     mNumTriangles(0)
       {};
   CMesh(std::string path)
    : mName(path.c_str()),
-     mPosition(Vec3<float>(0.0f, 0.0f, 0.0f)),
-     mOrientation(Vec3<float>(0.0f, 0.0f, 0.0f)),
+     mPosition(glm::vec4(0.0, 0.0, 0.0, 1.0)),
+     mOrientation(glm::vec4(0.0, 0.0, 0.0, 0.0)),
      mNumVerts(0),
      mNumInd(0),
      mNumTriangles(0)
-  {};
-  CMesh(std::vector<float> vec)
-   {mVertices = vec;};
-  void setOrientation(Vec3<float> orient){ mOrientation = orient; }
-  void setPosition(Vec3<float> pos) { mPosition = pos;} 
+  { setName(path);};
+  virtual ~CMesh(){ };//delete mVertices; delete mNormals; delete mBiNormals; }
+  void setOrientation(glm::vec4 orient){ mOrientation = orient; }
+  void setPosition(glm::vec4 pos) { mPosition = pos;} 
   void setName(std::string name) {mName = name;}
   std::string getName(){ return mName;}
-  Vec3<float> getPosition() {return mPosition;}
-  Vec3<float> getOrientation() { return mOrientation;}
+  glm::vec4 getPosition() {return mPosition;}
+  glm::vec4 getOrientation() { return mOrientation;}
+  glm::vec4 * getVerticesArray(){return &(mVertices[0]);}
+  bool loadFromImport(const aiMesh* loadMesh);
+
+  
+  int mNumVerts; //used to index into mVertices
+  int mNumFaces;
+  int mNumInd;
+  int mNumTriangles;
+
+  std::vector<glm::vec4> mVertices; //this is allocated/destroyed/managed internally
+  std::vector<glm::vec4> mNormals;
+  std::vector<glm::vec4> mBiNormals;
 
 private:
 
   std::string mName;
 
-  Vec3<float> mPosition;
-  Vec3<float> mOrientation;
-
-  int mNumVerts;
-  int mNumInd;
-  int mNumTriangles;
-
-  std::vector<float> mVertices;
-
-
+  glm::vec4 mPosition;
+  glm::vec4 mOrientation;
 
 };
 

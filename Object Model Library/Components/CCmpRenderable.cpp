@@ -4,7 +4,7 @@
 #include "tinyxml2.h"
 #include "CComponentMessage.h"
 #include "Video.h"
-#include <gl\gl.h>
+#include "glew\include\GL\glew.h"
 
 
 
@@ -109,23 +109,25 @@ EMessageResult CCmpRenderable::HandleMessage(const CComponentMessage &msg)
   case MT_RENDER:
     {
       //real deal, time to show how pretty we are
-      m_surface = (Globals::GetVideoManager()).scene->screen;
-      Vec3 <float> posVec = Vec3<float>(mPosition.x_pos, mPosition.y_pos, mPosition.z_pos);
-      if(m_surface)
-        glBindBuffer(GL_ARRAY_BUFFER, Globals::GetVideoManager()).scene->getVertexBuffer());
+      //m_surface = (Globals::GetVideoManager()).scene->screen
+      CVideoManager * vidMan = &(Globals::GetVideoManager());
+      glm::vec4 posVec = glm::vec4(mPosition.x_pos, mPosition.y_pos, mPosition.z_pos, mPosition.w_pos);
+      if(true)
+      {
+        if(m_model->show( &posVec, vidMan ))
+        {
 
-        // Give our vertices to OpenGL.
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-        if(m_model->show( &posVec, m_surface))
           retval = MR_TRUE;
+          }
         else
         {
           CLog::Get().Write( LOG_ERROR, "Not rendering! :( ");
           retval = MR_FALSE;
         }
+      }
       else
         CLog::Get().Write( LOG_ERROR, "no surface to render to");
+      
       return retval;
     }
   case MT_POSITION:

@@ -1,9 +1,12 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
-//replace with a PAL-type implementation.
+//replace with a PAL-type implementation lookup, or use GLEW.
+//#define GLFW_INCLUDE_GL3 1
+
 #include "pal.h"
-#include "SDL/include/SDL_opengl.h"
+#include "glew\include\GL\glew.h"
+#include "glfw\include\GL\glfw.h"
 #include "CCamera.h"
 #include <vector>
 
@@ -23,36 +26,45 @@ public:
 
   public:
     //methods
-    CSceneManager(SDL_Surface* s) : screen(s) 
-    { camera = new CCamera(); }
-    CSceneManager(SDL_Surface* s, CCamera* cam) : screen(s), camera(cam){}
-    ~CSceneManager(){ delete screen; delete camera;};
+    CSceneManager();   
+    CSceneManager(CCamera* cam) : mCamera(cam){}
+    ~CSceneManager(){ delete mCamera; glDeleteProgram(mShaderProgramID);};
     bool addObject(CObjectIdHash objID );
-    void set_camera_position(float x_coord, float y_coord);
+    void set_camera_position(float x_coord, float y_coord, float z_coord);
     void set_camera_size(int new_height, int new_width);
     bool removeObject(CObjectIdHash objID);
     void display(CObjectManager * objMan);
     void update(CObjectManager * objMan);
+    bool initShaders(const std::string vertPath, const std::string fragPath);
+    bool loadShader(const char * path, EShaderType type);
 
     //members
-    SDL_Surface* screen;
-    CCamera* camera;
+    CCamera* mCamera;
+    std::vector<GLuint> mShaderIDs;
+    GLuint mShaderProgramID;
+    float m_Degrees_FieldOfView;
+    float m_Radians_FieldOfView;
+    float mAspectRatio;
+    float mDisplayRangeLower;
+    float mDisplayRangeUpper;
   }; //end CSceneManager
 
-  CVideoManager() : scene(NULL){}
+  CVideoManager(){}
   ~CVideoManager(){ Shutdown();}
 
   bool Init();
-  bool loadShaders(char * path, EShaderType type);
+
   GLuint getVertexBuffer(){return mVertexBuffer;}
   bool initOpenGL();
-  void Shutdown(){ delete scene; SDL_Quit(); }
+  void Shutdown(){ delete mScene; glfwTerminate();}
 
-  CSceneManager* scene;
+  CSceneManager* mScene;
 
 private:
 
   GLuint mVertexBuffer;
+
+
 
 
 };

@@ -8,7 +8,7 @@ void CTimer::start()
     started = true;
     paused = false;
 
-    startTicks = SDL_GetTicks();
+    startTicks = glfwGetTime();
 }
 
 void CTimer::stop()
@@ -22,7 +22,7 @@ void CTimer::pause()
     if( started && !paused )
     {
         paused = true;
-        pausedTicks = SDL_GetTicks() - startTicks;
+        pausedTicks = glfwGetTime() - startTicks;
     }
 }
 
@@ -31,7 +31,7 @@ void CTimer::unpause()
     if( paused)
     {
         paused = false;
-        startTicks = SDL_GetTicks() - pausedTicks;
+        startTicks = glfwGetTime() - pausedTicks;
         pausedTicks = 0;
     }
 }
@@ -41,7 +41,7 @@ int CTimer::get_ticks()
     if( started)
     {
         if( paused) return pausedTicks;
-        else return SDL_GetTicks() - startTicks;
+        else return glfwGetTime() - startTicks;
     }
     return 0;
 }

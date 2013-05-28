@@ -13,3 +13,11 @@ Debug/*
 Debug
 debug
 debug/*
+*.vcxproj.filters
+*.vcxproj.user
+*.lastbuildstate
+*~
+Release
+Release/*
+release
+release/*

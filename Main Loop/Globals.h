@@ -16,6 +16,7 @@ namespace Globals
 	static const char * OBJECTS_XML_FILE = "C:/Users/dragonerdriftr/Documents/Pet/objects.xml";
 	static const char * BASE_DIR = "C:/Users/dragonerdriftr/Documents/Pet/";
 	
+
 	CObjectManager	  &GetObjectManager();
 	CGameStateManager &GetGameStateManager();
 	CTimer			  &GetCTimer();
