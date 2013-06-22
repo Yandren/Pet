@@ -2,6 +2,7 @@
 #define __CMESSAGE_H
 
 #include "pal.h"
+#include "glm\glm\glm.hpp"
 
 class CComponentMessage
 {
@@ -18,14 +19,17 @@ public:
 
 //Below are the types of structures we're using to pass info via messages
 
-struct SPositionInfo
+struct SSpacialInfo
 {
-  SPositionInfo() {};
-  SPositionInfo(float x, float y, float z, float w) : x_pos(x), y_pos(y), z_pos(z), w_pos(w) {};
-	float x_pos;
-	float y_pos;
-	float z_pos;
-  float w_pos;
+  SSpacialInfo() {};
+  SSpacialInfo(glm::vec4 position,
+               glm::vec4 direction,
+               glm::vec4 orientation)
+               : mPosition(position),
+                 mDirection(direction),
+                 mOrientation(orientation) {};
+  glm::vec4 mPosition;
+  glm::vec4 mDirection;
+  glm::vec4 mOrientation;
 };
-
 #endif //__CMESSAGE_H

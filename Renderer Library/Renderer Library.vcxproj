@@ -47,7 +47,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Other Libs; $(SolutionDir)Object Model Library;$(SolutionDir)Platform Abstraction Library;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Other Libs; $(SolutionDir)Object Model Library;$(SolutionDir)Platform Abstraction Library; $(SolutionDir)Renderer Library;</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -71,6 +71,7 @@
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CModel.cpp" />
     <ClCompile Include="CMesh.cpp" />
+    <ClCompile Include="CShaderManager.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Video.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CModel.h" />
     <ClInclude Include="CMesh.h" />
+    <ClInclude Include="CShaderManager.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Video.h" />
@@ -115,14 +117,6 @@
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-    <ProjectReference Include="..\Other Libs\Projects\vs2010\Box2D.vcxproj">
-      <Project>{98400d17-43a5-1a40-95be-c53ac78e7694}</Project>
-      <Private>true</Private>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
     <ProjectReference Include="..\Other Libs\SDL\VisualC\SDL\SDL_VS2010.vcxproj">
       <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>

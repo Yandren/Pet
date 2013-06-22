@@ -8,7 +8,7 @@ bool
 {
   if(mVertices.size() > 0)
   {
-    CLog::Get().Write( LOG_GENERAL, "--WARNING-- deleting Vertices previously in Mesh %s", mName.c_str()); 
+    CLog::Get()->Write( LOG_GENERAL, "--WARNING-- deleting Vertices previously in Mesh %s", mName.c_str()); 
     mVertices.clear();
   }
 

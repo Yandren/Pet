@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="CObjectManager.cpp" />
+    <ClCompile Include="Component System\ComponentIterators.cpp">
+      <Filter>Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="Component System\IComponent.cpp">
+      <Filter>Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Other Libs\tinyxml2\tinyxml2.cpp">
+      <Filter>Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Interfaces\ICmpEntity.cpp">
+      <Filter>Components\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Interfaces\ICmpInput.cpp">
+      <Filter>Components\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Interfaces\ICmpPhysics.cpp">
+      <Filter>Components\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Interfaces\ICmpPlayer.cpp">
+      <Filter>Components\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Interfaces\ICmpRenderable.cpp">
+      <Filter>Components\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Implementations\CCmpEntity.cpp">
+      <Filter>Components\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Implementations\CCmpPhysics.cpp">
+      <Filter>Components\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Implementations\CCmpPlayer.cpp">
+      <Filter>Components\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Implementations\CCmpRenderable.cpp">
+      <Filter>Components\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Implementations\CCmpUserInput.cpp">
+      <Filter>Components\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLWrapper.cpp">
+      <Filter>Component System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CObjectManager.h" />
+    <ClInclude Include="SObjectManagerDB.h" />
+    <ClInclude Include="Component System\ComponentIterators.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="Component System\ComponentStructs.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="Component System\CComponentMessage.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="Component System\IComponent.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Other Libs\tinyxml2\tinyxml2.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpEntity.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpInput.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpPhysics.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpPlayer.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpRenderable.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Implementations\CCmpEntity.h">
+      <Filter>Components\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Implementations\CCmpPhysics.h">
+      <Filter>Components\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Implementations\CCmpPlayer.h">
+      <Filter>Components\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Implementations\CCmpRenderable.h">
+      <Filter>Components\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Implementations\CCmpUserInput.h">
+      <Filter>Components\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLWrapper.h">
+      <Filter>Component System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Component System">
+      <UniqueIdentifier>{5ec3665b-5fce-4b35-9430-ca3aa0c77139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{d2887a39-c247-48ef-b770-14682f5da268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Interfaces">
+      <UniqueIdentifier>{4237b76b-2731-4a6d-aaa6-6fa81f1302f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Implementations">
+      <UniqueIdentifier>{4ca5e8d8-9625-406b-8e43-14a8e6248567}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

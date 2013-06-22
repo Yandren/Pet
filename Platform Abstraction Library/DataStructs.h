@@ -32,6 +32,7 @@ private:
 
 
 typedef	CHash CObjectIdHash;
+typedef CHash CComponentIdHash;
 
 
 class COctree {

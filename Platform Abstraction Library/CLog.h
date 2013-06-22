@@ -18,10 +18,10 @@ class CLog
 public:
 	CLog();
 	~CLog();
-	static CLog &Get();
+	static CLog* Get();
 
 	bool Init();
-	void Shutdown();
+	void DeInit();
 
 	void Write(int target, const char *msg, ...);
 

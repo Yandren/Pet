@@ -7,10 +7,10 @@ CLog::CLog(){}
 
 CLog::~CLog(){}
 
-CLog &CLog::Get()
+CLog* CLog::Get()
 {
-	static CLog CLog;
-	return CLog;
+	static CLog cLog;
+	return &cLog;
 }
 
 bool CLog::Init()
@@ -34,7 +34,7 @@ bool CLog::Init()
 	return true;
 }
 
-void CLog::Shutdown()
+void CLog::DeInit()
 {
 	generalCLog.close();
 	videoCLog.close();
@@ -44,6 +44,7 @@ void CLog::Shutdown()
 
 void CLog::Write(int target, const char *msg, ...)
 {
+#ifdef _DEBUG
 	va_list args; va_start(args,msg);// get additional params
 	char szBuf[1024];
 	vsprintf_s(szBuf,msg,args);
@@ -72,7 +73,7 @@ void CLog::Write(int target, const char *msg, ...)
 		generalCLog<<szBuf<<"\n";
 		generalCLog.flush();
 		break;
-
+    #endif
 	}
 
 }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Input Handling\IInputHandler.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputMapping.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Input Handling\Player\CPlayerInputHandler.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Input Handling\Player\CPlayerInputMapping.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Input Handling\IInputContext.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputIManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Input Handling\IInputHandler.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IInputMapping.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Input Handling\Player\CPlayerInputHandler.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Input Handling\Player\CPlayerInputMapping.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Input Handling\IInputContext.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputIManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="AI">
+      <UniqueIdentifier>{909e3b69-3e9e-4c37-89c2-63215c14a3fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{f1d05edd-652a-440f-9632-7a2edbc0aa1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{2221ebc0-1636-4c11-a391-336328abe486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{759f5392-6f40-49d2-867e-66d6495b13ea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -49,14 +49,14 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)Renderer Library; $(SolutionDir)Other Libs; $(SolutionDir)Object Model Library;$(SolutionDir)Platform Abstraction Library</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Renderer Library; $(SolutionDir)Other Libs; $(SolutionDir)Object Model Library;$(SolutionDir)Platform Abstraction Library; $(SolutionDir)Input Handling Library; $(SolutionDir)Game State Library;</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Renderer Library\Renderer Library.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Object Model Library\Object Model Library.lib; $(SolutionDir)Bin\$(Platform)\$(Configuration)\GLFW\glfw.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Platform Abstraction Library\Platform Abstraction Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Renderer Library\Renderer Library.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Object Model Library\Object Model Library.lib; $(SolutionDir)Bin\$(Platform)\$(Configuration)\Input Handling Library\Input Handling Library.lib ; $(SolutionDir)Bin\$(Platform)\$(Configuration)\GLFW\glfw3.lib;$(SolutionDir)Bin\$(Platform)\$(Configuration)\Platform Abstraction Library\Platform Abstraction Library.lib; $(SolutionDir)Bin\$(Platform)\$(Configuration)\Game State Library\Game State Library.lib; %(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalLibraryDirectories>$(SolutionDir)\VC_lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -79,7 +79,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -92,8 +91,13 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\Other Libs\glfw\support\msvc100\GLFW.vcxproj">
-      <Project>{4da03747-f505-4a98-9124-03b3b73b9b3b}</Project>
+    <ProjectReference Include="..\Other Libs\glfw\build\src\glfw.vcxproj">
+      <Project>{09d983d0-3fb4-4122-b032-21717699fa77}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
     <ProjectReference Include="..\Platform Abstraction Library\Platform Abstraction Library.vcxproj">
       <Project>{d69c6556-507e-43b9-be71-d66858400daf}</Project>
@@ -113,7 +117,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Globals.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,17 +2,17 @@
 
 bool 
 CPhysicsManager::Init(){
-	b2Vec2 gravity(0.0f, -10.0f);
+	//b2Vec2 gravity(0.0f, -10.0f);
 
-	world = new b2World(gravity);
+	//world = new b2World(gravity);
 	return true;
 }
 
 
 void
-CPhysicsManager::Shutdown(){
+CPhysicsManager::DeInit(){
 
-	delete world;
+	//delete world;
 
 }
 

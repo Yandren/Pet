@@ -1,4 +1,6 @@
 #include "CTimer.h"
+#include "glew\include\GL\glew.h"
+#include "glfw\include\GLFW\glfw3.h"
 
 CTimer::CTimer():startTicks(0),pausedTicks(0), paused(false), started(false)
 {}
@@ -36,14 +38,14 @@ void CTimer::unpause()
     }
 }
 
-int CTimer::get_ticks()
+float CTimer::get_ticks()
 {
     if( started)
     {
         if( paused) return pausedTicks;
         else return glfwGetTime() - startTicks;
     }
-    return 0;
+    return 0.0;
 }
 
 bool CTimer::is_started()

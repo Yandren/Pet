@@ -1,14 +1,11 @@
-#ifndef TIMER_H
-#define	TIMER_H
-
-#include "glew\include\GL\glew.h"
-#include "glfw\include\GL\glfw.h"
+#ifndef __TIMER_H
+#define	__TIMER_H
 
 class CTimer
 {
     private:
 
-    int startTicks, pausedTicks;
+    float startTicks, pausedTicks;
     bool paused, started;
 
     public:
@@ -19,7 +16,7 @@ class CTimer
     void pause();
     void unpause();
 
-    int get_ticks();
+    float get_ticks();
 
     bool is_started();
     bool is_paused();

@@ -23,7 +23,7 @@ public:
 
 	void		Reset(EComponentTypeId type);
 private:
-	CComponentMap::iterator mIter;
+	CCmpIDtoCmpMap::iterator mIter;
 	EComponentTypeId	mType;
 };
 

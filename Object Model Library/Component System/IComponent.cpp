@@ -19,5 +19,5 @@ EMessageResult IComponent::HandleMessage(const CComponentMessage &)
 // Gets the entity interface for this component.
 ICmpEntity *IComponent::GetEntity() const
 {
-	return static_cast<ICmpEntity *>(Globals::GetObjectManager().QueryInterface(mObjectId, IID_ENTITY));
+	return static_cast<ICmpEntity *>(Globals::GetObjectManager()->QueryInterface(mObjectId, IID_ENTITY));
 }

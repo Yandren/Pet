@@ -1,6 +1,7 @@
 #include "Video.h"
 #include "CObjectManager.h"
 #include "Component System\CComponentMessage.h"
+#include "glm/glm/gtc/matrix_transform.hpp"
 
 
 static const char * VERTEX_SHADER = "C:/Users/dragonerdriftr/Documents/Pet/Renderer Library/Shaders/base.vert";
@@ -9,28 +10,37 @@ static const char * FRAGMENT_SHADER = "C:/Users/dragonerdriftr/Documents/Pet/Ren
 
 
 bool 
-  CVideoManager::Init()
+  CVideoManager::Init(CObjectManager * objMan)
 {
   bool brs= false;
   //SDL_Surface* tempScreen = NULL;
 
   if(!glfwInit())
   {
-    CLog::Get().Write( LOG_ERROR, "Couldn't create window");
+    CLog::Get()->Write( LOG_ERROR, "Couldn't create window");
     return false;     //Create Window
   }
 
   if(!initOpenGL())
   {
-    CLog::Get().Write( LOG_ERROR, "Failed to initialize OpenGL");
+    CLog::Get()->Write( LOG_ERROR, "Failed to initialize OpenGL");
     return false;
   }
-  if((mScene = new CSceneManager()))
-  {
-    mScene->initShaders(VERTEX_SHADER, FRAGMENT_SHADER);
-    return true;
-    }
-  return false;
+  if(!(mScene = new CSceneManager()))
+    {
+    CLog::Get()->Write( LOG_ERROR, "Failed to make a new SceneManager");
+    return false;
+  }
+  //register callbacks for general objects that need to
+  //send information to the video manager (e.g. the camera)
+  if(!objMan->addCallbackForComponent(CHash("camera"), IID_ENTITY, std::bind(&CSceneManager::updateViewMatrix, this->mScene, std::placeholders::_1, std::placeholders::_2 )))
+   {
+    CLog::Get()->Write( LOG_ERROR, "Failed to register callbacks for objects: %s", "camera");
+    return false;
+  } 
+
+
+  return true;
 }
 
 bool CVideoManager::initOpenGL()
@@ -38,35 +48,41 @@ bool CVideoManager::initOpenGL()
   int err = 0;
 
   //TODO - move this to a config file
-  glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4); // 4x antialiasing
-  glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3); // We want OpenGL 3.3
-  glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-  glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL
-#ifdef DEBUG
-  glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+  glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL
+#ifdef _DEBUG
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif
 
   // Open a window and create its OpenGL context
-  if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
+  if( !(mScene->mWindow = glfwCreateWindow( 1024, 768, "Pet Project", NULL, NULL )) )
   {
-    CLog::Get().Write( LOG_ERROR, "Failed to open GLFW window\n" );
+    CLog::Get()->Write( LOG_ERROR, "Failed to open GLFW window\n" );
     glfwTerminate();
     return false;
   }
   if((err = glGetError()) != GL_NO_ERROR)
-  CLog::Get().Write( LOG_ERROR, " after window open OpenGL error %x", err);
+    CLog::Get()->Write( LOG_ERROR, " after window open OpenGL error %x", err);
   // Initialize GLEW
   glewExperimental=true; // Needed in core profile
   if (glewInit() != GLEW_OK) {
-    CLog::Get().Write( LOG_ERROR, "Failed to initialize GLEW\n");
+    CLog::Get()->Write( LOG_ERROR, "Failed to initialize GLEW\n");
     return false;
   }
-  if((err = glGetError()) != GL_NO_ERROR)
-  CLog::Get().Write( LOG_ERROR, " after glewinit OpenGL error %x", err);
-
-  glfwSetWindowTitle( "Pet Project" );
+  if((err = glGetError()) != GL_NO_ERROR && err != GL_INVALID_ENUM ) //sometimes init will cause GL_INVALID_ENUM for no reason...
+    CLog::Get()->Write( LOG_ERROR, " after glewinit OpenGL error %x", err);
 
   glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+
+  // Enable depth test
+  glEnable(GL_DEPTH_TEST);
+  // Accept fragment if it closer to the camera than the former one
+  glDepthFunc(GL_LESS); 
+  //cull triangles whose normals aren't facing us
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
 
   /* New bells
   glEnable(GL_MULTISAMPLE);
@@ -106,41 +122,182 @@ bool CVideoManager::initOpenGL()
   glClear(GL_COLOR_BUFFER_BIT);
   */
 
-  //START OF CRAP TO REMOVE
+  //create a vertex array
+  glGenVertexArrays(1, &mVertexArrayID);
+  glBindVertexArray(mVertexArrayID);
 
-
-  // Generate 1 buffer, put the resulting identifier in vertexbuffer
+  // Generate a vertex buffer, put the resulting identifier in vertexbuffer
   glGenBuffers(1, &mVertexBuffer);
   if((err = glGetError()) != GL_NO_ERROR)
-  CLog::Get().Write( LOG_ERROR, " after genbuffers OpenGL error %x", err);
+    CLog::Get()->Write( LOG_ERROR, " after genbuffers OpenGL error %x", err);
   // The following commands will talk about our 'vertexbuffer' buffer
   glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
   if((err = glGetError()) != GL_NO_ERROR)
-  CLog::Get().Write( LOG_ERROR, " after bind buffers OpenGL error %x", err);
+    CLog::Get()->Write( LOG_ERROR, " after bind buffers OpenGL error %x", err);
 
-  //END OF CRAP TO REMOVE
+  // Generate a color buffer, put the resulting identifier in our colorbuffer
+  glGenBuffers(1, &mColorBuffer);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, " after genbuffers OpenGL error %x", err);
+  // The following commands will talk about our 'vertexbuffer' buffer
+  glBindBuffer(GL_ARRAY_BUFFER, mColorBuffer);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, " after bind buffers OpenGL error %x", err);
+
 
   if( (err = glGetError()) != GL_NO_ERROR )
   {
-    CLog::Get().Write( LOG_ERROR, "OpenGL error %x", err);
+    CLog::Get()->Write( LOG_ERROR, "OpenGL error %x", err);
     return false;
   }
 
   return true;
 };
 
+bool
+  CVideoManager::loadAndBindBuffer(int attributeNum, int cmpPerData, 
+  size_t size, int stride, GLuint bufferID, const GLfloat * data )
+{
+  int err = 0;
+  glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, " after bind buffer OpenGL error %x", err);
+  //Vertices for shaders/drawing
+  glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW); 
+  //sizeof(glm::vec4) * mMesh[i]->mVertices.size(), &(mMesh[i]->mVertices[0]), GL_STATIC_DRAW);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, " after bufferdata OpenGL error %x", err);
+  // 1rst attribute buffer : vertices, prep for shaders
+  glEnableVertexAttribArray(attributeNum);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, " after enable VAA OpenGL error %x", err);
+  glVertexAttribPointer(
+    attributeNum,       // attribute 0. No particular reason for 0, but must match the layout in the shader.
+    cmpPerData,         // number of components per vertex
+    GL_FLOAT,           // type
+    GL_FALSE,           // normalized?
+    0,             // stride
+    (void*)0            // array buffer offset
+    );
+  if((err = glGetError()) != GL_NO_ERROR)
+  {
+    CLog::Get()->Write( LOG_ERROR, " after attribute pointer OpenGL error %x", err);
+    return false;
+  }
+  return true;
+}
+
+void
+  CVideoManager::DeInit()
+{
+  delete mScene; 
+  glDeleteBuffers(1, &mVertexBuffer);
+  glDeleteBuffers(1, &mColorBuffer); 
+  glDeleteVertexArrays(1, &mVertexArrayID);
+  glfwTerminate();
+
+}
+
 
 CVideoManager::CSceneManager::CSceneManager()
 {
-  mCamera = new CCamera();
-  /*
-  if(!initShaders(VERTEX_SHADER, FRAGMENT_SHADER))
+  //set up 
+  //mCamera = new CCamera(); <- moved to being an object in Object Manager
+  mShaderManager = new CShaderManager();
+  if(!mShaderManager->initShaders(VERTEX_SHADER, FRAGMENT_SHADER))
   {
-  CLog::Get().Write( LOG_ERROR, "Failed to init shaders!");
+    CLog::Get()->Write( LOG_ERROR, "Failed to init shaders!");
   }
-  */
-}
 
+  //set up default projection matrix
+  m_Degrees_FieldOfView = 45.0f;
+  mAspectRatio = 4.0f / 3.0f;
+  mDisplayRangeLower = 0.1f;
+  mDisplayRangeUpper = 100.0f;
+ }
+ 
+void
+  CVideoManager::CSceneManager::display(CObjectManager * objMan)
+{
+  int err = 0;
+  if( (err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, "display() errored before anything was done, %x", err );
+
+  glm::mat4 ViewProj = getViewProjectionMatrix(objMan);
+
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  if((err = glGetError()) != GL_NO_ERROR)
+    CLog::Get()->Write( LOG_ERROR, "display() clear errored, %x", err);
+
+  //validates, then tells OpenGL to use shader programs stored in manager
+  if(!mShaderManager->useShaderPrograms())
+    CLog::Get()->Write( LOG_ERROR, "Error using the shaders");
+
+  //send uniform MVP transformation to shaders
+  if(!mShaderManager->sendDataToShader("MVP", &ViewProj[0][0]))
+    CLog::Get()->Write( LOG_ERROR, "Problems giving data to shader!");
+
+
+  //Construct the neccesary render info for components
+  CComponentMessage renderMsg = CComponentMessage(MT_INIT_RENDER);
+  //renderMsg.mpData = &ViewProj;
+  objMan->BroadcastMessage(renderMsg);
+  objMan->BroadcastMessage(CComponentMessage(MT_RENDER));
+
+  //after all the things have been drawn, swap the buffers to see things
+  glfwSwapBuffers(mWindow);
+  
+  //clear the culling flag, since we've displayed for this loop
+  objMan->BroadcastMessage(CComponentMessage(MT_CLEAR_CULL_FLAG));
+};
+
+void
+  CVideoManager::CSceneManager::update(CObjectManager * objMan)
+{
+
+  //view frustum culling, based on camera
+  CComponentMessage cull = CComponentMessage(MT_FRUSTUM_CULL);
+
+  //send along the viewing volume we're using
+  //if(this->mCamera)
+  //{
+    //float buff[] = { mCamera->mPosition.x, mCamera->mPosition.y, mCamera->mViewportWidth, mCamera->mViewportHeight}; 
+    //cull.mpData = buff;
+  //}
+  objMan->BroadcastMessage(cull);
+
+};
+
+glm::mat4
+CVideoManager::CSceneManager::getViewProjectionMatrix(CObjectManager * objMan)
+{
+  
+  glm::mat4 projectionMatrix = glm::perspective(m_Degrees_FieldOfView,
+                                                mAspectRatio, 
+                                                mDisplayRangeLower, 
+                                                mDisplayRangeUpper);
+ 
+  //call to the Object Manager, which will net us a view matrix 
+  // from the camera (via callbacks) to work with.
+   CComponentMessage camRequest = CComponentMessage(MT_CALLBACK_INFO); 
+   
+   objMan->PostMessage(mCameraID, camRequest);
+   //now that the message was posted and callback serviced, we have
+   // an updated ViewMatrix to return
+   return (projectionMatrix * mViewMatrix);
+};
+
+bool 
+CVideoManager::CSceneManager::updateViewMatrix(int size, void * info)
+{
+  SSpacialInfo* cam = static_cast<SSpacialInfo*>(info);
+  if(!cam)
+    return false;
+  mViewMatrix = glm::lookAt(glm::vec3(cam->mPosition), glm::vec3(cam->mDirection), glm::vec3(cam->mOrientation));
+  return true;
+};
+
+/*
 bool 
   CVideoManager::CSceneManager::addObject(CObjectIdHash objID)
 {
@@ -156,210 +313,4 @@ bool
   return brs;
 
 };
-
-bool
-  CVideoManager::CSceneManager::initShaders(const std::string vertPath, const std::string fragPath){
-    int err = 0;
-    GLint Result = GL_FALSE;
-    int InfoLogLength;
-    int shadersAttached;
-
-    if(!loadShader(vertPath.c_str(), VERTEX))
-    {
-      CLog::Get().Write(LOG_ERROR, "Can't load vertex shader");
-      return false;
-    }
-    if(!loadShader(fragPath.c_str(), FRAGMENT))
-    {
-      CLog::Get().Write(LOG_ERROR, "Can't load vertex shader");
-      return false;
-    }
-    // Link the program
-    mShaderProgramID = glCreateProgram();
-    if((err = glGetError()) != GL_NO_ERROR)
-      CLog::Get().Write( LOG_ERROR, " creating shader program; OpenGL error %x", err);
-
-    for(int i =0; i < mShaderIDs.size(); i++)
-    {
-      glAttachShader(mShaderProgramID, mShaderIDs[i]);
-      if((err = glGetError()) != GL_NO_ERROR)
-        CLog::Get().Write( LOG_ERROR, " attaching shaders; OpenGL error %x", err);
-    }
-    glGetProgramiv(mShaderProgramID, GL_ATTACHED_SHADERS, &shadersAttached);
-    if(shadersAttached > mShaderIDs.size())
-      CLog::Get().Write( LOG_ERROR, "Not all shaders are attached to the shader program!");
-
-    glLinkProgram(mShaderProgramID);
-    if((err = glGetError()) != GL_NO_ERROR)
-      CLog::Get().Write( LOG_ERROR, " linking program; OpenGL error %x", err);
-
-    // Check the program
-
-    glGetProgramiv(mShaderProgramID, GL_LINK_STATUS, &Result);
-    glGetProgramiv(mShaderProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-
-    if(InfoLogLength > 0 || Result != GL_TRUE)
-    {
-
-      char * ProgramErrorMessage = new char[InfoLogLength +1];
-      glGetProgramInfoLog(mShaderProgramID, InfoLogLength, NULL, ProgramErrorMessage);
-      CLog::Get().Write(LOG_ERROR, "shader linking says: %s\n", ProgramErrorMessage);
-      delete ProgramErrorMessage;
-    }
-
-    //get rid of compiled shaders, now that they're all linked
-    int size = mShaderIDs.size();
-    for(int i = 0; i < size; i++)
-    {
-      glDeleteShader(mShaderIDs.back());
-      mShaderIDs.pop_back();
-    }
-
-    if(mShaderIDs.size() != 0)
-    {
-      CLog::Get().Write(LOG_GENERAL, "WARNING: shader not fully cleared, "\
-        "may not have deleted unlinked shaders; "\
-        "%d left in memory", mShaderIDs.size());
-    }
-
-    if(mShaderProgramID == 0)
-    {
-      CLog::Get().Write(LOG_ERROR, "ShaderProgram ID is 0 for some reason, we have an issue");
-      return false;
-    }
-    return true;
-}
-
-bool 
-  CVideoManager::CSceneManager::loadShader(const char* path, EShaderType type)
-{
-  GLint Result = GL_FALSE;
-  int InfoLogLength;
-  // Create the shader
-  GLuint ShaderID;
-
-  switch (type) {
-
-  case VERTEX:
-    ShaderID = glCreateShader(GL_VERTEX_SHADER);
-    break;
-
-  case FRAGMENT:
-    ShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-    break;
-
-  default:
-    CLog::Get().Write(LOG_ERROR, "Incorrect shader type given %d", type);
-    return false;
-    break;
-  }; 
-
-  // Read the Shader code from the file
-  std::string ShaderCode;
-  std::ifstream ShaderStream(path, std::ios::in);
-  if(ShaderStream.is_open())
-  {
-    std::string Line = "";
-    while(getline(ShaderStream, Line))
-      ShaderCode += "\n" + Line;
-    ShaderStream.close();
-  }
-
-  // Compile Shader
-  CLog::Get().Write( LOG_GENERAL, "Compiling shader : %s", path);
-  char const * SourcePointer = ShaderCode.c_str();
-  glShaderSource(ShaderID, 1, &SourcePointer , NULL);
-  glCompileShader(ShaderID);
-
-  // Check Shader
-  glGetShaderiv(ShaderID, GL_COMPILE_STATUS, &Result);
-  glGetShaderiv(ShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-
-  char * ShaderErrorMessage = new char[InfoLogLength +1];
-  if(InfoLogLength > 0 || Result != GL_TRUE)
-   {
-  glGetShaderInfoLog(ShaderID, InfoLogLength, NULL, ShaderErrorMessage);
-  CLog::Get().Write( LOG_ERROR, "Shader says: %s", ShaderErrorMessage);
-  delete ShaderErrorMessage;
-   }
-  //add it to the tracked Shader ID's
-  mShaderIDs.push_back(ShaderID);
-
-  return true;
-}
-
-void 
-  CVideoManager::CSceneManager::set_camera_position(float x_coord, float y_coord, float z_coord)
-{
-  glm::vec4 pos(x_coord, y_coord, z_coord, 1.0);
-  mCamera->mPosition = pos;
-};
-
-void 
-  CVideoManager::CSceneManager::set_camera_size(int new_height, int new_width)
-{
-  mCamera->mViewportHeight = new_height;
-  mCamera->mViewportWidth = new_width;
-
-};
-
-
-void
-  CVideoManager::CSceneManager::display(CObjectManager * objMan)
-{
-  int err = 0;
-  if( (err = glGetError()) != GL_NO_ERROR)
-    CLog::Get().Write( LOG_ERROR, "display() errored before anything was done, %x", err );
-
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  if((err = glGetError()) != GL_NO_ERROR)
-    CLog::Get().Write( LOG_ERROR, "display() clear errored, %x", err);
-
-
-  glUseProgram(mShaderProgramID);
-  if((err = glGetError()) != GL_NO_ERROR)
-    CLog::Get().Write( LOG_ERROR, "shader use errored, %x", err);
-
-
-  glValidateProgram(mShaderProgramID);
-  if((err = glGetError()) != GL_NO_ERROR)
-  {
-    int InfoLogLength = 0;
-    CLog::Get().Write( LOG_ERROR, "validation of shader program failed, %x!", err);
-    glGetProgramiv(mShaderProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-    char * ProgramErrorMessage = new char[InfoLogLength + 1];
-    glGetProgramInfoLog(mShaderProgramID, InfoLogLength, NULL, ProgramErrorMessage);
-    CLog::Get().Write(LOG_ERROR, "shader says: %s", ProgramErrorMessage);
-    delete ProgramErrorMessage;
-  }
-  GLint errOut = 0;
-  glGetProgramiv(mShaderProgramID, GL_VALIDATE_STATUS, &errOut);
-  if(errOut != GL_TRUE)
-    CLog::Get().Write( LOG_ERROR, "shader program not validated.");
-
-  objMan->BroadcastMessage(CComponentMessage(MT_INIT_RENDER));
-  objMan->BroadcastMessage(CComponentMessage(MT_RENDER));
-
-  //after all the things have been drawn, swap the buffers to see things
-  glfwSwapBuffers();
-
-  //clear the culling flag, since we've displayed for this loop
-  objMan->BroadcastMessage(CComponentMessage(MT_CLEAR_CULL_FLAG));
-};
-
-void
-  CVideoManager::CSceneManager::update(CObjectManager * objMan)
-{
-
-  //view frustum culling, based on camera
-  CComponentMessage cull = CComponentMessage(MT_FRUSTUM_CULL);
-
-  //send along the viewing volume we're using
-  if(this->mCamera)
-  {
-    float buff[] = { mCamera->mPosition.x, mCamera->mPosition.y, mCamera->mViewportWidth, mCamera->mViewportHeight}; 
-    cull.mpData = buff;
-  }
-  objMan->BroadcastMessage(cull);
-
-};
+*/

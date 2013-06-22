@@ -7,13 +7,61 @@
           <float name="X">0.1</float>
           <float name="Y">0.1</float>
           <float name="Z">0.1</float>
-        </position>
+  </position>
+  <direction>
+          <float name="X">0.1</float>
+          <float name="Y">0.1</float>
+          <float name="Z">0.1</float>
+  </direction>
+  <orientation>
+          <float name="X">0.1</float>
+          <float name="Y">0.1</float>
+          <float name="Z">0.1</float>
+        </orientation>
         <bool name="interact">true</bool>
       </component>
       <component name="Player" description="Player control component">
       </component>
+      <component name="UserInput">
+	      <key name="W">moveUp</key>
+	      <key name="S">moveDown</key>
+	      <key name="A">moveLeft</key>
+	      <key name="D">moveRight</key>
+      </component>
       <component name="Renderable">
-        <path name="model">C:\Users\dragonerdriftr\Documents\Pet\Assets\Mesh\ShortPine.X</path>
+        <path name="model">C:\Users\dragonerdriftr\Documents\Pet\Assets\Test\Mesh\ShortPine.X</path>
+      </component>
+    </object>
+    
+<object name="Camera">
+      <component name="Entity" description="Standard position data for all objects">
+        <position>
+          <float name="X">3.0</float>
+          <float name="Y">3.0</float>
+          <float name="Z">3.0</float>
+  </position>
+  <direction>
+          <float name="X">0.0</float>
+          <float name="Y">0.0</float>
+          <float name="Z">0.0</float>
+  </direction>
+  <orientation>
+          <float name="X">0.0</float>
+          <float name="Y">1.0</float>
+          <float name="Z">0.0</float>
+        </orientation>
+        <bool name="interact">false</bool>
+      </component>
+      <component name="Player" description="Player control component">
+      </component>
+      <component name="UserInput">
+	      <key name="LEFT_ARROW">moveLeft</key>
+	      <key name="RIGHT_ARROW">moveRight</key>
+	      <key name="DOWN_ARROW">moveDown</key>
+	      <key name="UP_ARROW">moveUp</key>
+      </component>
+      <component name="Renderable">
+        <path name="model">C:\Users\dragonerdriftr\Documents\Pet\Assets\Test\Mesh\ShortPine.X</path>
       </component>
     </object>
 

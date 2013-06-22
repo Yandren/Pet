@@ -46,7 +46,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)Platform Abstraction Library; $(SolutionDir)Object Model Library; $(SolutionDir)/Main Loop; $(SolutionDir)/Object Model Library/Components; $(SolutionDir)/Object Model Library/Component System; $(SolutionDir)/Other Libs/tinyxml2; $(SolutionDir)/Other Libs; $(SolutionDir)/Renderer Library;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Platform Abstraction Library; $(SolutionDir)Object Model Library; $(SolutionDir)/Main Loop; $(SolutionDir)/Object Model Library/Components/Implementations; $(SolutionDir)Object Model Library/Components/Interfaces; $(SolutionDir)/Object Model Library/Component System; $(SolutionDir)/Other Libs/tinyxml2; $(SolutionDir)/Other Libs; $(SolutionDir)Renderer Library; $(SolutionDir)Input Handling Library</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -71,14 +71,17 @@
     <ClCompile Include="CObjectManager.cpp" />
     <ClCompile Include="Component System\ComponentIterators.cpp" />
     <ClCompile Include="Component System\IComponent.cpp" />
-    <ClCompile Include="Components\CCmpEntity.cpp" />
-    <ClCompile Include="Components\CCmpPhysics.cpp" />
-    <ClCompile Include="Components\CCmpPlayer.cpp" />
-    <ClCompile Include="Components\CCmpRenderable.cpp" />
-    <ClCompile Include="Components\ICmpEntity.cpp" />
-    <ClCompile Include="Components\ICmpPhysics.cpp" />
-    <ClCompile Include="Components\ICmpPlayer.cpp" />
-    <ClCompile Include="Components\ICmpRenderable.cpp" />
+    <ClCompile Include="Components\Implementations\CCmpEntity.cpp" />
+    <ClCompile Include="Components\Implementations\CCmpPhysics.cpp" />
+    <ClCompile Include="Components\Implementations\CCmpPlayer.cpp" />
+    <ClCompile Include="Components\Implementations\CCmpRenderable.cpp" />
+    <ClCompile Include="Components\Implementations\CCmpUserInput.cpp" />
+    <ClCompile Include="Components\Interfaces\ICmpEntity.cpp" />
+    <ClCompile Include="Components\Interfaces\ICmpInput.cpp" />
+    <ClCompile Include="Components\Interfaces\ICmpPhysics.cpp" />
+    <ClCompile Include="Components\Interfaces\ICmpPlayer.cpp" />
+    <ClCompile Include="Components\Interfaces\ICmpRenderable.cpp" />
+    <ClCompile Include="XMLWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Other Libs\tinyxml2\tinyxml2.h" />
@@ -86,26 +89,21 @@
     <ClInclude Include="Component System\CComponentMessage.h" />
     <ClInclude Include="Component System\ComponentIterators.h" />
     <ClInclude Include="Component System\ComponentStructs.h" />
-    <ClInclude Include="Components\CCmpEntity.h" />
-    <ClInclude Include="Components\CCmpPhysics.h" />
-    <ClInclude Include="Components\CCmpPlayer.h" />
-    <ClInclude Include="Components\CCmpRenderable.h" />
-    <ClInclude Include="Components\ICmpEntity.h" />
-    <ClInclude Include="Components\ICmpPhysics.h" />
-    <ClInclude Include="Components\ICmpPlayer.h" />
-    <ClInclude Include="Components\ICmpRenderable.h" />
     <ClInclude Include="Component System\IComponent.h" />
+    <ClInclude Include="Components\Implementations\CCmpEntity.h" />
+    <ClInclude Include="Components\Implementations\CCmpPhysics.h" />
+    <ClInclude Include="Components\Implementations\CCmpPlayer.h" />
+    <ClInclude Include="Components\Implementations\CCmpRenderable.h" />
+    <ClInclude Include="Components\Implementations\CCmpUserInput.h" />
+    <ClInclude Include="Components\Interfaces\ICmpEntity.h" />
+    <ClInclude Include="Components\Interfaces\ICmpInput.h" />
+    <ClInclude Include="Components\Interfaces\ICmpPhysics.h" />
+    <ClInclude Include="Components\Interfaces\ICmpPlayer.h" />
+    <ClInclude Include="Components\Interfaces\ICmpRenderable.h" />
     <ClInclude Include="SObjectManagerDB.h" />
+    <ClInclude Include="XMLWrapper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Other Libs\Projects\vs2010\Box2D.vcxproj">
-      <Project>{98400d17-43a5-1a40-95be-c53ac78e7694}</Project>
-      <Private>true</Private>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
-    </ProjectReference>
     <ProjectReference Include="..\Platform Abstraction Library\Platform Abstraction Library.vcxproj">
       <Project>{d69c6556-507e-43b9-be71-d66858400daf}</Project>
       <Private>true</Private>

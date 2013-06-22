@@ -2,11 +2,10 @@
 #define __CTEXTURE_H
 
 #include <string>
-#include "glew\include\GL\glew.h"
-#include "glfw\include\GL\glfw.h"
 
+class GLFWImage;
 
-static const char *DEFAULT_ASSET_TEXTURE = "C:/Users/dragonerdriftr/Documents/Pet/defaultNoAsset.bmp";
+static const char *DEFAULT_ASSET_TEXTURE = "C:/Users/dragonerdriftr/Documents/Pet/Assets/Test/Texture/test.dds";
 
 class CTexture 
 {
@@ -18,7 +17,7 @@ class CTexture
 
   enum ETexFormatType 
   {
-    UNKNOWN, BMP, GIF, JPG, LBM, PCX, PNG, PNM, TGA, TIFF, XCF, XPM, XV
+    UNKNOWN, BMP, DDS, GIF, JPG, LBM, PCX, PNG, PNM, TGA, TIFF, XCF, XPM, XV
   };
 
   enum ETexFilterType 
@@ -27,6 +26,8 @@ class CTexture
   };
 
 public:
+
+  //methods
   CTexture()  
     : mPath(DEFAULT_ASSET_TEXTURE),
     mIsMipMapped(false),
@@ -36,13 +37,18 @@ public:
     mTexUsageType(DIFFUSE),
     mBPP(0)
   { 
+    //parse out FormatType here
+
     loadFromDisk(mPath.c_str());
   }
 
 
   CTexture(std::string pth) : mPath(pth)
   {
-    loadFromDisk(mPath.c_str()); }
+    //parse out FormatType here, call for the correct loader
+    //BREAKTHIS
+    loadFromDisk(mPath.c_str()); 
+  }
 
   virtual ~CTexture() {}
 
@@ -51,20 +57,26 @@ public:
 
 private:
 
-  bool loadFromDisk(const char * string);
+  //methods
+  bool loadFromDisk(const char * path);
 
+  //template this stufffff
+  bool loadDDS(const char * path);
+  bool loadTGA(const char * path);
+
+
+  //members
   std::string mPath;
-
   bool mIsMipMapped;
   bool mIsFlipped;
   bool mIsClamped;
 
-  //Enums for convenienve
+  //Enums for convenience
   ETexFilterType mTextureFilter;
   ETexFormatType mTexFormat; 
   ETexType mTexUsageType;
-  
-  GLFWimage mImageRaw; //info and pointer to image
+
+  //GLFWimage mImageRaw; //info and pointer to image
   int mBPP; // Image Color Depth In Bits Per Pixel
 
 };

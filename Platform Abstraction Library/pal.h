@@ -1,5 +1,5 @@
-#ifndef PAL_H
-#define	PAL_H
+#ifndef __PAL_H
+#define	__PAL_H
 
 #include "CLog.h"
 #include "resource.h"

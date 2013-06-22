@@ -34,7 +34,7 @@ bool CComponentByTypeIterator::IsDone(void) const
 {
 	if (mType == CID_INVALID)
 		return true;
-	return (mIter == Globals::GetObjectManager().mDB->mMap_CmpType_to_Cmp[mType].end());
+	return (mIter == Globals::GetObjectManager()->mDB->mMap_ObjID_to_Cmp[mType].end());
 }
 
 IComponent	*CComponentByTypeIterator::GetComponent(void) const
@@ -52,7 +52,7 @@ void CComponentByTypeIterator::Reset(EComponentTypeId type)
 	mType = type;
 	if (mType == CID_INVALID)
 		return;
-	mIter = Globals::GetObjectManager().mDB->mMap_CmpType_to_Cmp[type].begin();
+	mIter = Globals::GetObjectManager()->mDB->mMap_ObjID_to_Cmp[type].begin();
 }
 
 /*****************************************************/
@@ -68,7 +68,7 @@ mCompIter(CID_INVALID) // We're going to reset it before it's used
 
 void CComponentByInterfaceIterator::SetToFirstValidComponent()
 {
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
 	const int32_t numComponentTypes = static_cast<int32_t>(db.mSet_InterfaceType_to_CmpType[mInterfaceType].size());
 
 	if (numComponentTypes <= 0)
@@ -89,7 +89,7 @@ void CComponentByInterfaceIterator::SetToFirstValidComponent()
 
 CComponentByInterfaceIterator &CComponentByInterfaceIterator::operator++()
 {
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
 	std::set<EComponentTypeId>::iterator compTypeEndIter = db.mSet_InterfaceType_to_CmpType[mInterfaceType].end();
 
 	if (mCompTypeIter == compTypeEndIter)
@@ -121,7 +121,7 @@ CComponentByInterfaceIterator CComponentByInterfaceIterator::operator++(int)
 
 bool CComponentByInterfaceIterator::IsDone(void) const
 {
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
 	std::set<EComponentTypeId>::iterator compTypeEndIter = db.mSet_InterfaceType_to_CmpType[mInterfaceType].end();
 
 	if (mCompTypeIter == compTypeEndIter)
@@ -155,8 +155,8 @@ CComponentByObjectIterator::CComponentByObjectIterator(CObjectIdHash oId) : mObj
 void CComponentByObjectIterator::SetToFirstValidComponent()
 {
 	assert (NUM_COMPONENT_TYPE_IDS > 0);
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
-	if (db.mMap_CmpType_to_Cmp[mIndex].find(mObjectId) == db.mMap_CmpType_to_Cmp[mIndex].end())
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
+	if (db.mMap_ObjID_to_Cmp[mIndex].find(mObjectId) == db.mMap_ObjID_to_Cmp[mIndex].end())
 	{ // Couldn't find a component belonging to oId in the first list, now a simple increment will do
 		++(*this);
 	}
@@ -167,11 +167,11 @@ CComponentByObjectIterator &CComponentByObjectIterator::operator++()
 	// There can be only one component implementing an interface in each object, so we don't have to 
 	// check the rest of the map mIndex is pointing at. Move on until we have found another.
 
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
 
 	while (++mIndex < NUM_COMPONENT_TYPE_IDS)
 	{
-		CComponentMap &compMap = db.mMap_CmpType_to_Cmp[mIndex];
+		CCmpIDtoCmpMap &compMap = db.mMap_ObjID_to_Cmp[mIndex];
 		if (compMap.find(mObjectId) != compMap.end())
 			break; // We found a component pointer, so we'll stop here.
 	}
@@ -199,7 +199,7 @@ IComponent	*CComponentByObjectIterator::GetComponent(void) const
 		return NULL;
 	}
 
-	SObjectManagerDB &db = *Globals::GetObjectManager().mDB;
-	IComponent *pComponent = (db.mMap_CmpType_to_Cmp[mIndex].find(mObjectId))->second;
+	SObjectManagerDB &db = *Globals::GetObjectManager()->mDB;
+	IComponent *pComponent = (db.mMap_ObjID_to_Cmp[mIndex].find(mObjectId))->second;
 	return pComponent;
 }

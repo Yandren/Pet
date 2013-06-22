@@ -14,21 +14,26 @@ class CModel {
 
 public:
   CModel(CTexture* tex) //add SDL_SetColorKeyf color param here for background color to ignore when drawing 
-  : mTexture(tex),
+    : mTexture(tex),
     mMesh(),
     mModelViewMatrix(1.0f)
-    {};
+  {};
   CModel(std::string meshPath) 
-  : mTexture(NULL),
+    : mTexture(NULL),
     mMesh(),
     mModelViewMatrix(1.0f)
-     { loadMeshFromDisk(meshPath); mTexture = new CTexture();};
+  { loadMeshFromDisk(meshPath); mTexture = new CTexture();};
   CModel(){ mTexture = new CTexture(); }
   CModel(std::string meshPath, std::string texPath)
-    {loadMeshFromDisk(meshPath); loadTextureFromDisk(texPath);}
-  
-  virtual ~CModel(){delete mTexture; while(mMesh.size() > 0) {delete mMesh.back(); mMesh.pop_back();}}
-  virtual bool show(glm::vec4 * position, CVideoManager * vidMan);
+  {loadMeshFromDisk(meshPath); loadTextureFromDisk(texPath);}
+
+  virtual ~CModel()
+  {
+    delete mTexture; 
+    while(mMesh.size() > 0) {delete mMesh.back(); mMesh.pop_back();}
+  }
+  virtual bool show(glm::vec4 * position, glm::vec4 * direction, 
+    glm::vec4 * orientation, CVideoManager * vidMan);
   bool loadMeshFromDisk(std::string path);
   bool loadTextureFromDisk(std::string path);
   glm::mat4 getModelViewMatrix(){ return mModelViewMatrix;}
