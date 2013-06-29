@@ -15,7 +15,7 @@ bool
       if(Globals::GetVideoManager()->Init(Globals::GetObjectManager()))
         if(Globals::GetGameStateManager()->Init())
           if(Globals::GetPhysicsManager()->Init())
-            if(Globals::GetInputManager()->Init(Globals::GetObjectManager()))
+            if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mScene->mWindow))
               return true;
             else
               return false;
@@ -55,6 +55,7 @@ int
 
     //grab global managers into locals
     CGameStateManager* gameStateManager = Globals::GetGameStateManager();
+    gameStateManager->pushState("Loading");
     CPhysicsManager* physicsManager = Globals::GetPhysicsManager();
     CVideoManager* videoManager = Globals::GetVideoManager();
     CObjectManager* objectManager = Globals::GetObjectManager();
@@ -64,8 +65,11 @@ int
 
     //void (*callback)(int, int) = &(gameStateManager->handle_input);
 
+
+    //put this all in the gameState manager
     //TODO: Load objects from file/load the level!
     //TODO: load splash screen here 
+
     objectManager->LoadObjectsFromFile(Globals::OBJECTS_XML_FILE);
     //IObject* square = (IObject*)new CSquare(1.0, 1.0, 0.0, 0.0, videoManager.scene->screen);
 
@@ -77,16 +81,20 @@ int
     //it's looping time!
     while( quit == false ){
 
-      switch( gameStateManager->getCurrentState() ){
+      const char * gameState = gameStateManager->getCurrentState()->name.c_str();
 
-      case Exiting:
+
+      if(gameState == "Exiting")
+      {
         quit = true;
-
-      case Uninitialized:
+      }
+      else if(gameState == "Uninitialized")
+      {
         CLog::Get()->Write( LOG_ERROR, "Uninitialized state!");
         return false;
-
-      case Playing:
+      }
+      else if(gameState == "Playing")
+      {
         //Start a game-state specific clock?
 
 
@@ -101,9 +109,8 @@ int
         }
         */
         //Get any inputs
-        if(! inputManager->mPlayerInputHandler->processInput(
-                                          videoManager->mScene->mWindow, fps_reg) )
-           CLog::Get()->Write( LOG_ERROR, "Input processing failure!");                                  
+        if(! inputManager->processStoredInput(videoManager->mScene->mWindow) )
+          CLog::Get()->Write( LOG_ERROR, "Input processing failure!");                                  
 
         //Update
         //Update the game state 
@@ -120,25 +127,27 @@ int
         //Cap the frame rate?
         fps = fps_reg->get_ticks();
         //if( fps < 1000 / FRAMES_PER_SECOND ) glfwSleep( (( 1000 / FRAMES_PER_SECOND ) - fps) / 1000 );
-        break;
+      }
 
-      case Loading:
+      else if(gameState ==  "Loading")
+      {
         CLog::Get()->Write( LOG_GENERAL, "Loading gamestate");
         gameStateManager->popState();
-        gameStateManager->pushState(Menu);
-        break;
+        gameStateManager->pushState("Menu");
+      }
 
-      case Menu:
+      else if(gameState ==  "Menu")
+      {
         //TODO - put in menu system, actually allow stuff
         CLog::Get()->Write( LOG_GENERAL, "Menu gamestate");
         gameStateManager->popState();
         //we'd normally get here through selecting an option in the menu, in the GUI code
-        gameStateManager->pushState(Playing);
-        break;
-      default:
-        CLog::Get()->Write( LOG_GENERAL, "Default reached in GameState switch...?");
-        break;
+        gameStateManager->pushState("Playing");
       }
+      else
+        CLog::Get()->Write( LOG_GENERAL, "No state acted on, State: %s");
+
+
     }
 
     clean_up();

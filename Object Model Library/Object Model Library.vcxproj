@@ -95,11 +95,13 @@
     <ClInclude Include="Components\Implementations\CCmpPlayer.h" />
     <ClInclude Include="Components\Implementations\CCmpRenderable.h" />
     <ClInclude Include="Components\Implementations\CCmpUserInput.h" />
+    <ClInclude Include="Components\Interfaces\ICmpAI.h" />
     <ClInclude Include="Components\Interfaces\ICmpEntity.h" />
     <ClInclude Include="Components\Interfaces\ICmpInput.h" />
     <ClInclude Include="Components\Interfaces\ICmpPhysics.h" />
     <ClInclude Include="Components\Interfaces\ICmpPlayer.h" />
     <ClInclude Include="Components\Interfaces\ICmpRenderable.h" />
+    <ClInclude Include="Components\Interfaces\ICmpScript.h" />
     <ClInclude Include="SObjectManagerDB.h" />
     <ClInclude Include="XMLWrapper.h" />
   </ItemGroup>

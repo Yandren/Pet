@@ -73,10 +73,10 @@ bool CObjectManager::LoadObjectsFromFile(const char *fileName)
   if(doc.Error() || err != 0)
     return false;
 
-  return LoadObjects(&doc);
+  return LoadObjects(&doc, fileName);
 }
 
-bool CObjectManager::LoadObjects(tinyxml2::XMLNode *docRoot)
+bool CObjectManager::LoadObjects(tinyxml2::XMLNode *docRoot, const char * filename)
 {
   CLog::Get()->Write( LOG_GENERAL, "Loading Objects from XML doc");
 
@@ -97,6 +97,9 @@ bool CObjectManager::LoadObjects(tinyxml2::XMLNode *docRoot)
       return false;
     }
     CObjectIdHash oId = CreateObject(cur);
+    //record our object->filename, so we can unload/load
+    //objects/files as we please (e.g. loading levels)
+    filenameToObjectsMap[filename].push_back(oId);
 
     PostMessage(oId, MT_OBJECT_CREATED);
   }

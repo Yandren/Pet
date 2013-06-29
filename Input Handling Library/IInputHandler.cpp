@@ -1,12 +1,15 @@
 #include "IInputHandler.h"
 
+//initialize our static queue
+std::queue< SInput_t *> IInputHandler::mIncomingInput;
 
 
 IInputHandler::~IInputHandler()
 { 
-  for (int i = 0; i < mActiveInputs.size(); i++)
+  for (uint32_t i = 0; i < mIncomingInput.size(); i++)
   {
-    delete mActiveInputs[i];
+    delete mIncomingInput.front();
+    mIncomingInput.pop();
   }
 }
 
@@ -29,8 +32,8 @@ bool
 bool
   IInputHandler::addActiveInput(SInput_t *input)
 {
-  mActiveInputs.insert(std::pair<int, SInput_t *> (input->getValue(), input));
-  if(mActiveInputs.at(input->getValue()) != input)
+  mIncomingInput.push(input);
+  if(mIncomingInput.back() != input)
   {
     CLog::Get()->Write(LOG_ERROR,"problem adding value %s to polling", input->getIdentifier());
     return false;

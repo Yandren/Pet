@@ -4,7 +4,7 @@
 #include "tinyxml2.h"
 #include "CComponentMessage.h"
 #include "CInputManager.h"
-#include "CPlayerInputHandler.h"
+#include "Player\CPlayerInputHandler.h"
 #include <map>
 #include <functional>
 
@@ -42,8 +42,7 @@ bool
   CLog::Get()->Write(LOG_GENERAL,"TODO! Write a configurable keyboard thing in CCmpUserInput");
 
   //map the characters we'll load up from our XML to in-game constants
-  IInputHandler * inputHandler = Globals::GetInputManager()->mPlayerInputHandler;
-  CObjectManager * objManager = ;
+  IInputHandler * inputHandler = Globals::GetInputManager()->mInputHandlers[INPUT_PLAYER];
   // Get XML info
   try
   {
@@ -55,9 +54,11 @@ bool
         SInput_t * key = new SKeyboardKey_t(element->Attribute("name"));
         int state = atoi(element->Attribute("state"));
 
-        //Add the key that we need to poll
+        
         CLog::Get()->Write(LOG_GENERAL,"working on input for %s", key->getIdentifier());
-        inputHandler->addActiveInput( key );
+        
+        
+        //inputHandler->addActiveInput( key );
 
         //callback tomfoolery
         /*auto binding = std::bind(&CObjectManager::PostMessage, Globals::GetObjectManager(), GetObjectId(), std::placeholders::_1);

@@ -22,18 +22,18 @@ class CComponentMessage;
 *************************************/
  
  //our callback function signature
-typedef std::function<void (CHash,  CComponentMessage &)> playerInputFunctionCallback;
+//typedef std::function<void (CHash,  CComponentMessage &)> playerInputFunctionCallback;
 
 //Structure which we store in the input+action->callback mapping;
 //specifically
-struct SPlayerInputCallback : public SCallbackSignature
+/*struct SPlayerInputCallback : public SCallbackSignature
 {
 
   playerInputFunctionCallback pCallback;
   virtual void * getCallback() const { return (void *)&pCallback;};
 
 };
-
+*/
 
 
 

@@ -20,7 +20,7 @@ namespace Globals
   CTimer*			       GetTimer();
   CPhysicsManager*   GetPhysicsManager();
   CVideoManager*     GetVideoManager();
-  CInputManager*        GetInputManager();
+  CInputManager*     GetInputManager();
 }
 
 #endif

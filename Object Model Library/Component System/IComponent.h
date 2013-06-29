@@ -1,9 +1,8 @@
 #ifndef __ICOMPONENT_H
 #define __ICOMPONENT_H
 
-#include "types.h"
 #include "pal.h"
-#include "ComponentStructs.h"
+#include "Component System\ComponentStructs.h"
 
 
 /************************************
@@ -26,11 +25,11 @@ public:
 	IComponent();
 	virtual ~IComponent();
   //methods
-	virtual bool    Init(CObjectIdHash, tinyxml2::XMLNode &) = 0;
-	virtual void    Deinit(void) = 0;
-	CObjectIdHash       GetObjectId(void) const     { return mObjectId; }
-	ICmpEntity      *GetEntity() const;
-	virtual EMessageResult		HandleMessage(const CComponentMessage &) = 0;
+	virtual bool              Init(CObjectIdHash, tinyxml2::XMLNode &) = 0;
+	virtual void              Deinit(void) = 0;
+	CObjectIdHash             GetObjectId(void) const     { return mObjectId; }
+	ICmpEntity *              GetEntity() const;
+	virtual EMessageResult    HandleMessage(const CComponentMessage &) = 0;
 	virtual EComponentTypeId	GetComponentTypeId(void) = 0;
   //members
 protected:

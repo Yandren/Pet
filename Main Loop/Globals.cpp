@@ -40,6 +40,7 @@ CVideoManager* Globals::GetVideoManager()
 	return &video;
 }
 	
+
   CInputManager* Globals::GetInputManager()
 { 
 	static CInputManager inputMan; 

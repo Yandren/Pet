@@ -1,13 +1,11 @@
 #include "GameStateManager.h"
-#include "Globals.h"
-#include "glew\include\GL\glew.h"
-#include "glfw\include\GLFW\glfw3.h"
-#include "Video.h"
-#include "CTimer.h"
+#include "pal.h"
+#include "CGenericGameState.h"
 
 CGameStateManager::CGameStateManager()
-{
-  gameStates.push_back(Uninitialized);
+{ 
+  IGameState *state = new CGenericGameState("Uninitialized");
+  mGameStates.push_back(state);
 }
 
 void CGameStateManager::update()
@@ -17,17 +15,27 @@ void CGameStateManager::update()
 
 bool CGameStateManager::Init()
 {
-  gameStates.push_back(Loading);
+  //mGameStates.push_back(Loading);
+
   return true;
 };
 
 void CGameStateManager::DeInit()
 {
-
+  for(int i = 0; i < mGameStates.size(); i++)
+  {
+    delete mGameStates.back();
+    mGameStates.pop_back();
+  }
 
 };
 
-
+void CGameStateManager::pushState(std::string name)
+{
+  
+  IGameState *state = new CGenericGameState(name.c_str());
+  mGameStates.push_back(state);
+}
 /*
 void CGameStateManager::handle_input(int key, int action)
 {	

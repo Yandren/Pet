@@ -49,7 +49,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Other Libs; $(SolutionDir)Platform Abstraction Library; $(SolutionDir)Main Loop; $(SolutionDir)Object Model Library; $(SolutionDir)User Interface\Input Handling</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Other Libs; $(SolutionDir)Platform Abstraction Library; $(SolutionDir)Main Loop; $(SolutionDir)Object Model Library; $(SolutionDir)Input Handling Library; $(SolutionDir)Input Handling Library\Player; $(SolutionDir)Input Handling Library\Network; $(SolutionDir)Input Handling Library\AI;</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -70,20 +70,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CInputIManager.h" />
+    <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="IInputContext.h" />
+    <ClInclude Include="IInputHandler.h" />
     <ClInclude Include="IInputMapping.h" />
-    <ClInclude Include="Input Handling\IInputContext.h" />
-    <ClInclude Include="Input Handling\IInputHandler.h" />
-    <ClInclude Include="Input Handling\Player\CPlayerInputHandler.h" />
-    <ClInclude Include="Input Handling\Player\CPlayerInputMapping.h" />
+    <ClInclude Include="Player\CPlayerInputHandler.h" />
+    <ClInclude Include="Player\CPlayerInputMapping.h" />
+    <ClInclude Include="SInput_t.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CInputIManager.cpp" />
+    <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="IInputContext.cpp" />
+    <ClCompile Include="IInputHandler.cpp" />
     <ClCompile Include="IInputMapping.cpp" />
-    <ClCompile Include="Input Handling\IInputContext.cpp" />
-    <ClCompile Include="Input Handling\IInputHandler.cpp" />
-    <ClCompile Include="Input Handling\Player\CPlayerInputHandler.cpp" />
-    <ClCompile Include="Input Handling\Player\CPlayerInputMapping.cpp" />
+    <ClCompile Include="Player\CPlayerInputHandler.cpp" />
+    <ClCompile Include="Player\CPlayerInputMapping.cpp" />
+    <ClCompile Include="SInput_t.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

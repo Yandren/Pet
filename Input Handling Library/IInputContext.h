@@ -1,7 +1,10 @@
 #ifndef __IINPUTCONTEXT_H
 #define __IINPUTCONTEXT_H
 
-
+#include <string>
+#include <map>
+#include "IInputMapping.h"
+#include "SInput_t.h"
 
 /************************************
 *
@@ -9,27 +12,7 @@
 *
 ************************************/
 
-//different types of input
-struct SActionInput_t 
-{
 
-
-
-};
-
-struct SRangeInput_t
-{
-
-
-
-};
-
-struct SStateInput_t
-{
-
-
-
-};
 /************************************
 *
 * Classes
@@ -39,17 +22,23 @@ class IInputContext
 {
 
 public:
-//constructors/destructors
-IInputContext(){}
-~IInputContext(){}
-//methods
-//members
+  //constructors/destructors
+  IInputContext(){}
+  ~IInputContext(){}
+
+  //methods
+
+  //members
+  std::string name;
 
 private:
 
-//methods
-//members
+  //methods
 
+  //members
+
+  //a mapping of an input (e.g. "S" key) to some sort of state change/action/etc
+  std::map< SInput_t, IInputMapping * > mInputMappings;
 
 
 }; //end of class IInputContext

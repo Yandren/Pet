@@ -1,8 +1,9 @@
 #ifndef __COMPONENTSTRUCTS_H
 #define __COMPONENTSTRUCTS_H
 
-#include "IComponent.h"
+//#include "IComponent.h"
 #include <functional>
+#include "types.h"
 
 //callbacks for components to call whenever an external source wants
 //some kind of data

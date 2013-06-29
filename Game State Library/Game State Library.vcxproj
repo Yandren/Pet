@@ -45,6 +45,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <AdditionalIncludeDirectories>$(SolutionDir)Object Model Library; $(SolutionDir)Input Handling Library; $(SolutionDir)Platform Abstraction Library</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,7 +68,9 @@
     <ClCompile Include="GameStateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CGenericGameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="IGameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

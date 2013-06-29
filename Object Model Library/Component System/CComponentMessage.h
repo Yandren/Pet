@@ -2,14 +2,15 @@
 #define __CMESSAGE_H
 
 #include "pal.h"
+#include "ComponentStructs.h"
 #include "glm\glm\glm.hpp"
 
 class CComponentMessage
 {
 public:
-	CComponentMessage()																	{}
-	CComponentMessage(EMessageType type) : mType(type)									{}
-	CComponentMessage(EMessageType type, void *data) : mType(type), mpData(data)			{}
+	CComponentMessage(){}
+	CComponentMessage(EMessageType type) : mType(type){}
+	CComponentMessage(EMessageType type, void *data) : mType(type), mpData(data){}
 
 public:
 	EMessageType	mType;

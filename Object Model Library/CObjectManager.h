@@ -91,7 +91,7 @@ public:
 private:
   //methods
   //parses the TinyXml node passed in for objects (and their components) to create
-	bool	    LoadObjects(tinyxml2::XMLNode * node);
+	bool	    LoadObjects(tinyxml2::XMLNode * node, const char * filename);
 	void		  RegisterAllComponentTypes(void);
 	bool		  AddComponentToDb(CObjectIdHash oId, IComponent* pCmp);
 	// Creates an object from the tinyXML node passed in, using the object id passed in
@@ -105,6 +105,7 @@ private:
 
   //members
 	SObjectManagerDB	*mDB;
+  std::map<const char *, std::vector<CHash>> filenameToObjectsMap;
 
 	friend CComponentByTypeIterator;
 	friend CComponentByInterfaceIterator;

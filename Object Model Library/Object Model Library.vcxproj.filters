@@ -96,6 +96,12 @@
     <ClInclude Include="XMLWrapper.h">
       <Filter>Component System</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpAI.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Interfaces\ICmpScript.h">
+      <Filter>Components\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component System">
