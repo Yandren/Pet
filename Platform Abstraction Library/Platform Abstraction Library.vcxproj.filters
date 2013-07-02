@@ -56,5 +56,8 @@
     <ClInclude Include="Math\mymath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

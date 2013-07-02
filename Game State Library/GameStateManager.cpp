@@ -22,7 +22,7 @@ bool CGameStateManager::Init()
 
 void CGameStateManager::DeInit()
 {
-  for(int i = 0; i < mGameStates.size(); i++)
+  for(uint32_t i = 0; i < mGameStates.size(); i++)
   {
     delete mGameStates.back();
     mGameStates.pop_back();

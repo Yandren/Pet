@@ -60,6 +60,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "Other Libs\glfw\bui
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game State Library", "Game State Library\Game State Library.vcxproj", "{2E130617-4E61-4C3A-8A6F-71786E296D0A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Script Management Library", "Script Management Library\Script Management Library.vcxproj", "{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MX|Win32 = Debug MX|Win32
@@ -310,6 +312,24 @@ Global
 		{2E130617-4E61-4C3A-8A6F-71786E296D0A}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
 		{2E130617-4E61-4C3A-8A6F-71786E296D0A}.RelWithDebInfo|Win32.Build.0 = Release|Win32
 		{2E130617-4E61-4C3A-8A6F-71786E296D0A}.RelWithDebInfo|x64.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug MX|Win32.ActiveCfg = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug MX|Win32.Build.0 = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug MX|x64.ActiveCfg = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug|Win32.Build.0 = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Debug|x64.ActiveCfg = Debug|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.MinSizeRel|Win32.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.MinSizeRel|Win32.Build.0 = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.MinSizeRel|x64.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release MX|Win32.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release MX|Win32.Build.0 = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release MX|x64.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release|Win32.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release|Win32.Build.0 = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.Release|x64.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.RelWithDebInfo|Win32.Build.0 = Release|Win32
+		{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}.RelWithDebInfo|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

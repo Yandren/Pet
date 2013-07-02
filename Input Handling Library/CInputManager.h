@@ -9,23 +9,26 @@ struct GLFWwindow;
 
 class CInputManager
 {
-  public:
-   //Constructors/Destructors
-   CInputManager(){};
-   ~CInputManager(){DeInit();}
-   //methods
-   bool Init(GLFWwindow * window/*IConfig * config*/);
-   bool DeInit();
-   bool createInputMapping(SInput_t * input, std::string name);
-   bool processStoredInput(GLFWwindow * window);
+public:
+  //Constructors/Destructors
+  ~CInputManager(){DeInit();}
+  //methods
+  bool Init(GLFWwindow * window/*IConfig * config*/);
+  bool DeInit();
+  static CInputManager * getInstance()
+   { static CInputManager * inMan = new CInputManager(); return inMan;}
 
-   //members
-   //map our input handlers to the types of input they handle
-   std::map< EInputType, IInputHandler *> mInputHandlers;
+  bool createInputMapping(SInput_t * input, std::string name);
+  bool processStoredInput(GLFWwindow * window);
+
+  //members
+  //map our input handlers to the types of input they handle
+  std::map< EInputType, IInputHandler *> mInputHandlers;
 
 
-   private:
-   
+private:
+  //Constructor - singleton
+    CInputManager(){};
 
 };
 #endif

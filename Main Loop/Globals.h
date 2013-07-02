@@ -7,6 +7,7 @@ class CTimer;
 class CGameStateManager;
 class CVideoManager;
 class CInputManager;
+class CScriptManager;
 
 namespace Globals
 {
@@ -21,6 +22,8 @@ namespace Globals
   CPhysicsManager*   GetPhysicsManager();
   CVideoManager*     GetVideoManager();
   CInputManager*     GetInputManager();
-}
+  CScriptManager*    GetScriptManager();
+
+};
 
 #endif

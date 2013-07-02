@@ -5,44 +5,59 @@
 #include "CTimer.h"
 #include "Video.h"
 #include "CInputManager.h"
+#include "CScriptManager.h"
 
-CObjectManager* Globals::GetObjectManager()
+CObjectManager* 
+Globals::GetObjectManager()
 { 
-	static CObjectManager objMan; 
-	return &objMan;
+	CObjectManager * objMan = CObjectManager::getInstance(); 
+	return objMan;
 }
 
 
-CGameStateManager* Globals::GetGameStateManager()
+CGameStateManager* 
+Globals::GetGameStateManager()
 {
-	static CGameStateManager gState; 
-	return &gState;
+  CGameStateManager * gState = CGameStateManager::getInstance(); 
+	return gState;
 }
 
 
-CTimer* Globals::GetTimer()
+CTimer* 
+Globals::GetTimer()
 { 
 	static CTimer time;
 	return &time;
 }
 
 
-CPhysicsManager* Globals::GetPhysicsManager()
+CPhysicsManager* 
+Globals::GetPhysicsManager()
 { 
-	static CPhysicsManager phys;
-	return &phys;
+  CPhysicsManager * phys = CPhysicsManager::getInstance(); 
+	return phys;
 }
 
 
-CVideoManager* Globals::GetVideoManager()
+CVideoManager* 
+Globals::GetVideoManager()
 { 
-	static CVideoManager video;
-	return &video;
+  CVideoManager * video = CVideoManager::getInstance(); 
+	return video;
 }
 	
 
-  CInputManager* Globals::GetInputManager()
+  CInputManager* 
+  Globals::GetInputManager()
 { 
-	static CInputManager inputMan; 
-	return &inputMan;
+  CInputManager * inputMan = CInputManager::getInstance(); 
+	return inputMan;
+}
+
+
+  CScriptManager* 
+  Globals::GetScriptManager()
+{ 
+  CScriptManager * scriptMan = CScriptManager::getInstance(); 
+	return scriptMan;
 }

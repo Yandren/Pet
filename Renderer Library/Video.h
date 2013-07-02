@@ -53,22 +53,28 @@ public:
 
   }; //end CSceneManager
 
+  //Constructors/Destructors
+  ~CVideoManager()
+    { DeInit(); }
+
   //methods
-  CVideoManager(){}
-  ~CVideoManager(){ DeInit();}
   bool Init(CObjectManager * objMan);
+  void DeInit();
+  static CVideoManager * getInstance()
+    { static CVideoManager * vidMan = new CVideoManager(); return vidMan;}
+
   bool initOpenGL();
   GLuint getVertexBuffer(){return mVertexBuffer;}
   GLuint getColorBuffer(){return mColorBuffer;}
-  void DeInit();
   bool loadAndBindBuffer(int attributeNum, int cmpPerData, 
     size_t size, int stride, GLuint bufferID, const GLfloat * data); 
   //members
   CSceneManager* mScene;
 
 private:
+  //Constructor - singleton
+  CVideoManager(){}
   //methods
-
 
   //members
   GLuint mVertexArrayID;

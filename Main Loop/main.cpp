@@ -3,9 +3,13 @@
 #include "Physics.h"
 #include "CObjectManager.h"
 #include "CInputManager.h"
+#include "CScriptManager.h"
 #include "Globals.h"
 //Take out eventually
 #include "pal.h"
+
+
+//TODO: Clean this up into an engine-like library - make callable, namespace, manage loading/unloading managers, etc.
 
 bool 
   init()
@@ -16,7 +20,10 @@ bool
         if(Globals::GetGameStateManager()->Init())
           if(Globals::GetPhysicsManager()->Init())
             if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mScene->mWindow))
-              return true;
+              if(Globals::GetScriptManager()->Init())
+                return true;
+              else
+                return false;
             else
               return false;
           else
@@ -38,6 +45,8 @@ void
   Globals::GetVideoManager()->DeInit();
   Globals::GetPhysicsManager()->DeInit();
   Globals::GetObjectManager()->DeInit();
+  Globals::GetInputManager()->DeInit();
+  Globals::GetScriptManager()->DeInit();
   CLog::Get()->DeInit();
 
 }
@@ -60,6 +69,7 @@ int
     CVideoManager* videoManager = Globals::GetVideoManager();
     CObjectManager* objectManager = Globals::GetObjectManager();
     CInputManager* inputManager = Globals::GetInputManager();
+    CScriptManager* scriptManager = Globals::GetScriptManager();
 
     CLog::Get()->Write( LOG_GENERAL, "Managers Initialized");
 
@@ -151,5 +161,11 @@ int
     }
 
     clean_up();
+    delete gameStateManager;
+    delete inputManager;
+    delete videoManager;
+    delete physicsManager;
+    delete objectManager;
+    delete scriptManager;
     return 0;
 }

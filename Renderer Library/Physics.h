@@ -8,14 +8,17 @@
 class CPhysicsManager{
 
 public:
-	CPhysicsManager(){}
+	
 	~CPhysicsManager(){}
 
 	bool Init();
 	void DeInit();
-
+  static CPhysicsManager * getInstance()
+    { static CPhysicsManager * physMan = new CPhysicsManager(); return physMan;}
 
 private:
+  //Constructor - singleton
+  CPhysicsManager(){}
 	//b2World* world;
 
 };

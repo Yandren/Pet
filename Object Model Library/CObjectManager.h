@@ -1,5 +1,5 @@
-#ifndef __ObjectMANAGER_H
-#define __ObjectMANAGER_H
+#ifndef __COBJECTMANAGER_H
+#define __COBJECTMANAGER_H
 
 #include "types.h"
 #include <set>
@@ -38,7 +38,7 @@ typedef std::function<bool (IComponent *)> ComponentDestructionMethod;
 // to an outside class (e.g. to a manager)
 //typedef std::function<void (CObjectIdHash)> CreationCallbackToExternal;
 
-//function pointer to give to DB which will be called by the component
+//functor to give to DB which will be called by the component
 //whenever it needs to pass information outside of the object system
 // (e.g. give camera stats to renderer)
 typedef std::function<bool (int, void*)> ComponentCallbackToExternal;
@@ -49,12 +49,14 @@ class CObjectManager
 
 public:
   //Constructors/Destructors
-	CObjectManager();
 	~CObjectManager();
 
   //methods
 	bool Init(void);
 	void DeInit(void);
+  static CObjectManager * getInstance()
+    { static CObjectManager * objMan = new CObjectManager(); return objMan;}
+
 	bool	LoadObjectsFromFile(const char *fileName);
 	// If an interface is registered with an object, returns a pointer to the component
 	// that implements it
@@ -89,6 +91,9 @@ public:
   //members
 
 private:
+    //Constructor - Singleton
+  CObjectManager();
+
   //methods
   //parses the TinyXml node passed in for objects (and their components) to create
 	bool	    LoadObjects(tinyxml2::XMLNode * node, const char * filename);
