@@ -11,9 +11,9 @@
 *
 *************************************/
 namespace tinyxml2 {class XMLNode;}
-class CComponentMessage;
-class ICmpEntity;
-class ObjectManager;
+class     CComponentMessage;
+class     ICmpEntity;
+class     ObjectManager;
 
 // The IComponent class. All our component classes inherit from this
 class IComponent
@@ -34,11 +34,11 @@ public:
   //members
 protected:
   //methods
-  void      addExternalCallback(ExternalComponentInfoCallback func) { mExternalCallback = func;}
-	void      SetObjectId(CObjectIdHash oId)  { mObjectId = oId; }
+  void                      addExternalCallback(ExternalComponentInfoCallback func) { mExternalCallback = func;}
+	void                      SetObjectId(CObjectIdHash oId)  { mObjectId = oId; }
 	
   //members
-  CObjectIdHash       mObjectId;
+  CObjectIdHash                 mObjectId;
   //callback function for whatever use component wants it. Registered via ObjectManager
   ExternalComponentInfoCallback mExternalCallback;
 	

@@ -27,7 +27,7 @@ public:
     ~CSceneManager(){ delete mShaderManager;}
     //bool addObject(CObjectIdHash objID );
     //bool removeObject(CObjectIdHash objID);
-    void display(CObjectManager * objMan);
+    void display(GLFWwindow * window, CObjectManager * objMan);
     void update(CObjectManager * objMan);
     glm::mat4 getViewProjectionMatrix(CObjectManager * objMan);
     bool updateViewMatrix(int size, void * info);
@@ -35,7 +35,7 @@ public:
     //CCamera* mCamera;
     CHash mCameraID;
     CShaderManager* mShaderManager;
-    GLFWwindow * mWindow;
+
 
     // some basic properties about our scene
     float m_Degrees_FieldOfView;
@@ -55,21 +55,24 @@ public:
 
   //Constructors/Destructors
   ~CVideoManager()
-    { DeInit(); }
+  { DeInit(); }
 
   //methods
-  bool Init(CObjectManager * objMan);
-  void DeInit();
-  static CVideoManager * getInstance()
-    { static CVideoManager * vidMan = new CVideoManager(); return vidMan;}
+  bool     Init(CObjectManager * objMan);
+  void     DeInit();
+  static   CVideoManager * getInstance()
+  { static CVideoManager * vidMan = new CVideoManager(); return vidMan;}
 
-  bool initOpenGL();
-  GLuint getVertexBuffer(){return mVertexBuffer;}
-  GLuint getColorBuffer(){return mColorBuffer;}
-  bool loadAndBindBuffer(int attributeNum, int cmpPerData, 
+  bool     initOpenGL();
+  void     display(CObjectManager * objMan)
+    { return mScene->display(mWindow, objMan);}
+  GLuint   getVertexBuffer(){return mVertexBuffer;}
+  GLuint   getColorBuffer(){return mColorBuffer;}
+  bool     loadAndBindBuffer(int attributeNum, int cmpPerData, 
     size_t size, int stride, GLuint bufferID, const GLfloat * data); 
   //members
   CSceneManager* mScene;
+  GLFWwindow *   mWindow;
 
 private:
   //Constructor - singleton
@@ -77,9 +80,9 @@ private:
   //methods
 
   //members
-  GLuint mVertexArrayID;
-  GLuint mVertexBuffer;
-  GLuint mColorBuffer;
+  GLuint     mVertexArrayID;
+  GLuint     mVertexBuffer;
+  GLuint     mColorBuffer;
 
 };
 

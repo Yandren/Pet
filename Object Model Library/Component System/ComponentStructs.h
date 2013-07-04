@@ -14,11 +14,13 @@ typedef std::function<bool (int, void *)> ExternalComponentInfoCallback;
 
 struct EventInfo
 {
+  //Constructors
 	EventInfo() {}
 	EventInfo(CHash eventName) : mEventName(eventName) {}
 	EventInfo(CHash eventName, CObjectIdHash targetId)  : mEventName(eventName), mTargetId(targetId) {}
 	EventInfo(CHash eventName, CObjectIdHash targetId, CObjectIdHash actorId)  : mEventName(eventName), mTargetId(targetId), mActorId(actorId) {}
-	CHash		mEventName;		
+	//member variables
+  CHash		      mEventName;		
 	CObjectIdHash	mTargetId;		// The object that was affected by this event
 	CObjectIdHash	mActorId;		// The object that caused this event
 };

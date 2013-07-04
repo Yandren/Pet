@@ -22,8 +22,8 @@ public:
     {DeInit();}
 
   //Methods
-  bool Init();
-  void DeInit();
+  bool                       Init();
+  void                       DeInit();
   static CGameStateManager * getInstance()
     { static CGameStateManager * gameMan = new CGameStateManager(); return gameMan;}
 
@@ -53,7 +53,7 @@ private:
   //methods
   //members
   std::vector<IGameState *> mGameStates;
-  float mPreviousInputTick;
+  float                     mPreviousInputTick;
 
 };
 

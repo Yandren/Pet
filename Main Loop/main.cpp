@@ -19,7 +19,7 @@ bool
       if(Globals::GetVideoManager()->Init(Globals::GetObjectManager()))
         if(Globals::GetGameStateManager()->Init())
           if(Globals::GetPhysicsManager()->Init())
-            if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mScene->mWindow))
+            if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mWindow))
               if(Globals::GetScriptManager()->Init())
                 return true;
               else
@@ -119,7 +119,7 @@ int
         }
         */
         //Get any inputs
-        if(! inputManager->processStoredInput(videoManager->mScene->mWindow) )
+        if(! inputManager->processStoredInput(videoManager->mWindow) )
           CLog::Get()->Write( LOG_ERROR, "Input processing failure!");                                  
 
         //Update
@@ -130,7 +130,7 @@ int
 
         //Display
         glClear( GL_COLOR_BUFFER_BIT );
-        videoManager->mScene->display(objectManager);
+        videoManager->display(objectManager);
         //Update the screen, updates Input events
 
 

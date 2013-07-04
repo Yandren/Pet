@@ -53,13 +53,13 @@ public:
   //methods
   
   // Static methods
-	static void			RegisterComponentType(void);
-	static IComponent	*CreateMe();
-	static bool			DestroyMe(IComponent *);
+	static void			          RegisterComponentType(void);
+	static IComponent	*       CreateMe();
+	static bool			          DestroyMe(IComponent *);
 
   // Virtual IComponent methods
-	virtual bool		Init(CObjectIdHash, tinyxml2::XMLNode&);
-	virtual void		Deinit(void);
+	virtual bool		          Init(CObjectIdHash, tinyxml2::XMLNode&);
+	virtual void		          Deinit(void);
 	virtual EMessageResult		HandleMessage(const CComponentMessage &);
 	virtual EComponentTypeId	GetComponentTypeId(void);
 

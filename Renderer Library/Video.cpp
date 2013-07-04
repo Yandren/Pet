@@ -20,21 +20,20 @@ bool
     CLog::Get()->Write( LOG_ERROR, "Couldn't create window");
     return false;     //Create Window
   }
-
   if(!initOpenGL())
   {
     CLog::Get()->Write( LOG_ERROR, "Failed to initialize OpenGL");
     return false;
   }
-  if(!(mScene = new CSceneManager()))
-    {
+    if(!(mScene = new CSceneManager()))
+  {
     CLog::Get()->Write( LOG_ERROR, "Failed to make a new SceneManager");
     return false;
   }
   //register callbacks for general objects that need to
   //send information to the video manager (e.g. the camera)
   if(!objMan->addCallbackForComponent(CHash("camera"), IID_ENTITY, std::bind(&CSceneManager::updateViewMatrix, this->mScene, std::placeholders::_1, std::placeholders::_2 )))
-   {
+  {
     CLog::Get()->Write( LOG_ERROR, "Failed to register callbacks for objects: %s", "camera");
     return false;
   } 
@@ -57,12 +56,13 @@ bool CVideoManager::initOpenGL()
 #endif
 
   // Open a window and create its OpenGL context
-  if( !(mScene->mWindow = glfwCreateWindow( 1024, 768, "Pet Project", NULL, NULL )) )
+  if( !(mWindow = glfwCreateWindow( 1024, 768, "Pet Project", NULL, NULL )) )
   {
     CLog::Get()->Write( LOG_ERROR, "Failed to open GLFW window\n" );
     glfwTerminate();
     return false;
   }
+  glfwMakeContextCurrent(mWindow);
   if((err = glGetError()) != GL_NO_ERROR)
     CLog::Get()->Write( LOG_ERROR, " after window open OpenGL error %x", err);
   // Initialize GLEW
@@ -214,10 +214,10 @@ CVideoManager::CSceneManager::CSceneManager()
   mAspectRatio = 4.0f / 3.0f;
   mDisplayRangeLower = 0.1f;
   mDisplayRangeUpper = 100.0f;
- }
- 
+}
+
 void
-  CVideoManager::CSceneManager::display(CObjectManager * objMan)
+  CVideoManager::CSceneManager::display(GLFWwindow * window, CObjectManager * objMan)
 {
   int err = 0;
   if( (err = glGetError()) != GL_NO_ERROR)
@@ -245,8 +245,8 @@ void
   objMan->BroadcastMessage(CComponentMessage(MT_RENDER));
 
   //after all the things have been drawn, swap the buffers to see things
-  glfwSwapBuffers(mWindow);
-  
+  glfwSwapBuffers(window);
+
   //clear the culling flag, since we've displayed for this loop
   objMan->BroadcastMessage(CComponentMessage(MT_CLEAR_CULL_FLAG));
 };
@@ -261,34 +261,34 @@ void
   //send along the viewing volume we're using
   //if(this->mCamera)
   //{
-    //float buff[] = { mCamera->mPosition.x, mCamera->mPosition.y, mCamera->mViewportWidth, mCamera->mViewportHeight}; 
-    //cull.mpData = buff;
+  //float buff[] = { mCamera->mPosition.x, mCamera->mPosition.y, mCamera->mViewportWidth, mCamera->mViewportHeight}; 
+  //cull.mpData = buff;
   //}
   objMan->BroadcastMessage(cull);
 
 };
 
 glm::mat4
-CVideoManager::CSceneManager::getViewProjectionMatrix(CObjectManager * objMan)
+  CVideoManager::CSceneManager::getViewProjectionMatrix(CObjectManager * objMan)
 {
-  
+
   glm::mat4 projectionMatrix = glm::perspective(m_Degrees_FieldOfView,
-                                                mAspectRatio, 
-                                                mDisplayRangeLower, 
-                                                mDisplayRangeUpper);
- 
+    mAspectRatio, 
+    mDisplayRangeLower, 
+    mDisplayRangeUpper);
+
   //call to the Object Manager, which will net us a view matrix 
   // from the camera (via callbacks) to work with.
-   CComponentMessage camRequest = CComponentMessage(MT_CALLBACK_INFO); 
-   
-   objMan->PostMessage(mCameraID, camRequest);
-   //now that the message was posted and callback serviced, we have
-   // an updated ViewMatrix to return
-   return (projectionMatrix * mViewMatrix);
+  CComponentMessage camRequest = CComponentMessage(MT_CALLBACK_INFO); 
+
+  objMan->PostMessage(mCameraID, camRequest);
+  //now that the message was posted and callback serviced, we have
+  // an updated ViewMatrix to return
+  return (projectionMatrix * mViewMatrix);
 };
 
 bool 
-CVideoManager::CSceneManager::updateViewMatrix(int size, void * info)
+  CVideoManager::CSceneManager::updateViewMatrix(int size, void * info)
 {
   SSpacialInfo* cam = static_cast<SSpacialInfo*>(info);
   if(!cam)
@@ -299,18 +299,18 @@ CVideoManager::CSceneManager::updateViewMatrix(int size, void * info)
 
 /*
 bool 
-  CVideoManager::CSceneManager::addObject(CObjectIdHash objID)
+CVideoManager::CSceneManager::addObject(CObjectIdHash objID)
 {
 
-  return true;
+return true;
 }; 
 
 bool 
-  CVideoManager::CSceneManager::removeObject(CObjectIdHash objID)
+CVideoManager::CSceneManager::removeObject(CObjectIdHash objID)
 {
-  bool brs = false;
+bool brs = false;
 
-  return brs;
+return brs;
 
 };
 */

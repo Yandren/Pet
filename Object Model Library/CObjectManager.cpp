@@ -99,7 +99,7 @@ bool CObjectManager::LoadObjects(tinyxml2::XMLNode *docRoot, const char * filena
     CObjectIdHash oId = CreateObject(cur);
     //record our object->filename, so we can unload/load
     //objects/files as we please (e.g. loading levels)
-    filenameToObjectsMap[filename].push_back(oId);
+    mFilenameToObjectsMap[filename].push_back(oId);
 
     PostMessage(oId, MT_OBJECT_CREATED);
   }
@@ -358,8 +358,9 @@ bool
 
   //add to DB
   mDB->mMapCallbackToObjectWithCmp[cmpInterface].insert(map);
-  //check for problems
-  if( &((mDB->mMapCallbackToObjectWithCmp[cmpInterface])[oId]) != &func) 
+  //check for problems, only on a very basic level
+  //TODO - better error reporting on callback registry
+  if( mDB->mMapCallbackToObjectWithCmp[cmpInterface][oId] == NULL) 
   {
     CLog::Get()->Write( LOG_ERROR, "Error registering callback in database for component"); 
     return false;
