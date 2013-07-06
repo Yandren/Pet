@@ -25,19 +25,11 @@ bool
     CLog::Get()->Write( LOG_ERROR, "Failed to initialize OpenGL");
     return false;
   }
-    if(!(mScene = new CSceneManager()))
+  if(!(mScene = new CSceneManager()))
   {
     CLog::Get()->Write( LOG_ERROR, "Failed to make a new SceneManager");
     return false;
   }
-  //register callbacks for general objects that need to
-  //send information to the video manager (e.g. the camera)
-  if(!objMan->addCallbackForComponent(CHash("camera"), IID_ENTITY, std::bind(&CSceneManager::updateViewMatrix, this->mScene, std::placeholders::_1, std::placeholders::_2 )))
-  {
-    CLog::Get()->Write( LOG_ERROR, "Failed to register callbacks for objects: %s", "camera");
-    return false;
-  } 
-
 
   return true;
 }
@@ -288,14 +280,32 @@ glm::mat4
 };
 
 bool 
-  CVideoManager::CSceneManager::updateViewMatrix(int size, void * info)
+  CVideoManager::CSceneManager::updateViewMatrix(int size, SSpacialInfo * info)
 {
-  SSpacialInfo* cam = static_cast<SSpacialInfo*>(info);
-  if(!cam)
+  //SSpacialInfo* cam = static_cast<SSpacialInfo*>(info);
+  if(!info)
     return false;
-  mViewMatrix = glm::lookAt(glm::vec3(cam->mPosition), glm::vec3(cam->mDirection), glm::vec3(cam->mOrientation));
+  mViewMatrix = glm::lookAt(glm::vec3(info->mPosition), glm::vec3(info->mDirection), glm::vec3(info->mOrientation));
   return true;
 };
+
+bool
+  CVideoManager::CSceneManager::attachCamera(CObjectManager * objMan)
+{
+  //register callbacks for general objects that need to
+  //send information to the video manager (e.g. the camera)
+  //if(!objMan->addCallbackForCmpInterface(CHash("camera"), IID_ENTITY, std::bind(&CSceneManager::updateViewMatrix, this, std::placeholders::_1, std::placeholders::_2 )))
+  CComponentMessage msg = CComponentMessage( MT_CALLBACK_INFO, &std::bind(&CSceneManager::updateViewMatrix, this, std::placeholders::_1, std::placeholders::_2 ));
+  objMan->PostMessage(CHash("camera"), msg);
+  //TODO: need to report message-delivery results, in ObjectManager
+  /*if()
+  {
+  CLog::Get()->Write( LOG_ERROR, "Failed to attach camera");
+  return false;
+  } 
+  */
+  return true;
+}
 
 /*
 bool 

@@ -39,6 +39,8 @@ protected:
 	
   //members
   CObjectIdHash                 mObjectId;
+  //what interface is this component implementing?
+  EInterfaceId                  mImplementing;
   //callback function for whatever use component wants it. Registered via ObjectManager
   ExternalComponentInfoCallback mExternalCallback;
 	

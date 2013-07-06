@@ -153,9 +153,14 @@ EMessageResult CCmpEntity::HandleMessage(const CComponentMessage &msg)
     case MT_CALLBACK_INFO:
     {
       //something outside wants to know positional information
-      //so, call our registered callback for this component
+      
+      typedef std::function< bool ( int, SSpacialInfo * ) > callback_t;
       SSpacialInfo sinfo(mPosition, mDirection, mOrientation);
-      mExternalCallback(sizeof(SSpacialInfo), &sinfo); 
+      //we are passed a callback
+      callback_t * callback = (callback_t *) msg.mpData;
+      //call the callback passed in
+      (*callback)(sizeof(sinfo), &sinfo);
+      //mExternalCallback(sizeof(SSpacialInfo), &sinfo); 
     }
   }
   return MR_IGNORED;

@@ -7,6 +7,8 @@
 #include "Component System/IComponent.h"
 #include <functional>
 
+//This was heavily inspired by the work in GPG 5, fyi!
+
 
 /************************************
 *
@@ -24,14 +26,14 @@ typedef std::function<bool (IComponent *)>                      ComponentDestruc
 //typedefs to make maptypes a little more readable
 typedef std::map<CComponentIdHash, IComponent*>                 CCmpIDtoCmpMap;
 typedef std::map<CObjectIdHash, IComponent*>                    CObjIDtoCmpMap;
-typedef std::map<CObjectIdHash, ExternalComponentInfoCallback > CObjIDtoCallbackMap;
+//typedef std::map<CObjectIdHash, ExternalComponentInfoCallback > CObjIDtoCallbackMap;
 
 
 struct SComponentTypeInfo
 {
 	ComponentCreationMethod     mCreationMethod;
 	ComponentDestructionMethod  mDestructionMethod;
-	CHash                       mTypeHash;
+	CHash                       mName;
 }; 
 
 struct SObjectManagerDB
@@ -45,7 +47,7 @@ struct SObjectManagerDB
   //an array of object->component mappings, indexed into via component type IDS
 	CObjIDtoCmpMap	            mMap_ObjID_to_Cmp[NUM_COMPONENT_TYPE_IDS];
 	//an array of object->callback mappings, indexed into via Interface type IDs
-  CObjIDtoCallbackMap         mMapCallbackToObjectWithCmp[NUM_INTERFACE_IDS];
+  //CObjIDtoCallbackMap         mMapCallbackToObjectWithCmp[NUM_INTERFACE_IDS];
 	// Message data
 	std::set<EComponentTypeId>	mSet_MsgType_to_CmpType[NUM_MESSAGE_TYPES];
 };

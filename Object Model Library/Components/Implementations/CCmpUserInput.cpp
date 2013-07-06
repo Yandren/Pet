@@ -51,9 +51,13 @@ bool
       std::string name = element->Name();
       if(name == "key")
       {
+        
         SInput_t * key = new SKeyboardKey_t(element->Attribute("name"));
-        int state = atoi(element->Attribute("state"));
+        int state = 0;
+        if(element->Attribute("state") != NULL)
+          state = atoi(element->Attribute("state"));
 
+          
         
         CLog::Get()->Write(LOG_GENERAL,"working on input for %s", key->getIdentifier());
         

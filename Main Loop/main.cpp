@@ -81,6 +81,7 @@ int
     //TODO: load splash screen here 
 
     objectManager->LoadObjectsFromFile(Globals::OBJECTS_XML_FILE);
+    videoManager->mScene->attachCamera(objectManager);
     //IObject* square = (IObject*)new CSquare(1.0, 1.0, 0.0, 0.0, videoManager.scene->screen);
 
 

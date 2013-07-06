@@ -7,11 +7,12 @@
 #include "pal.h"
 #include "glew\include\GL\glew.h"
 #include "glfw\include\GLFW\glfw3.h"
-#include "CCamera.h"
+//#include "CCamera.h"
 #include "CShaderManager.h"
 #include "glm\glm\glm.hpp"
 
 class CObjectManager;
+struct SSpacialInfo;
 
 class CVideoManager
 {
@@ -21,35 +22,35 @@ public:
   {
 
   public:
-    //methods
+    //Constructors/Destructors
     CSceneManager();   
     //CSceneManager(CCamera* cam) : mCamera(cam){}
     ~CSceneManager(){ delete mShaderManager;}
-    //bool addObject(CObjectIdHash objID );
-    //bool removeObject(CObjectIdHash objID);
-    void display(GLFWwindow * window, CObjectManager * objMan);
-    void update(CObjectManager * objMan);
-    glm::mat4 getViewProjectionMatrix(CObjectManager * objMan);
-    bool updateViewMatrix(int size, void * info);
+
+    //methods
+    void       display(GLFWwindow * window, CObjectManager * objMan);
+    void       update(CObjectManager * objMan);
+    glm::mat4  getViewProjectionMatrix(CObjectManager * objMan);
+    bool       updateViewMatrix(int size, SSpacialInfo * info);
+    bool       attachCamera(CObjectManager * objMan);
+    
     //members
     //CCamera* mCamera;
-    CHash mCameraID;
-    CShaderManager* mShaderManager;
-
+    CHash            mCameraID;
+    CShaderManager*  mShaderManager;
 
     // some basic properties about our scene
-    float m_Degrees_FieldOfView;
-    float m_Radians_FieldOfView;
-    float mAspectRatio;
-    float mDisplayRangeLower;
-    float mDisplayRangeUpper;
-    float mToClipPlaneNear;
-    float mToClipPlaneFar;
-
+    float            m_Degrees_FieldOfView;
+    float            m_Radians_FieldOfView;
+    float            mAspectRatio;
+    float            mDisplayRangeLower;
+    float            mDisplayRangeUpper;
+    float            mToClipPlaneNear;
+    float            mToClipPlaneFar;
     //View matrix from the camera; since it's an object
     // in object manager, need to query for it and it'll call
     // a callback
-    glm::mat4 mViewMatrix;
+    glm::mat4        mViewMatrix;
 
   }; //end CSceneManager
 

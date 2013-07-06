@@ -9,7 +9,7 @@
 #include "SObjectManagerDB.h"
 #include <functional>
 
-
+//This was heavily inspired by the work in GPG 5, fyi!
 
 /************************************
 *
@@ -81,7 +81,7 @@ public:
 	EComponentTypeId	        GetComponentTypeFromHash(CHash typeName) const;
 	// Goes through all the interfaces implemented by the component and finds out if the interface id passed in is one of them.
 	bool			                IsInterfaceImplementedByComponent(EInterfaceId iID, IComponent * pCmp) const;
-  bool                      addCallbackForComponent(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func);
+  //bool                      addCallbackForCmpInterface(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func);
 
 
 	// The following methods get iterators that iterate over all the components that fulfill the criteria passed in.

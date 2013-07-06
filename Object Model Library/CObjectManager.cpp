@@ -5,7 +5,6 @@
 #include <assert.h>
 #include "Component System/CComponentMessage.h"
 
-
 // All the component classes
 #include "CCmpEntity.h"
 #include "CCmpPhysics.h"
@@ -19,8 +18,6 @@ const CHash OBJ = CHash("object");
 const CHash OBJS = CHash("objects");
 const CHash OBJFILE = CHash("objectsfile");
 const CHash COMPONENT = CHash("component");
-
-
 
 
 CObjectManager::CObjectManager() : mDB(NULL)
@@ -147,7 +144,7 @@ void CObjectManager::RegisterAllComponentTypes()
 {
   //TODO - this is fucking gross, make this happen dynamically without having to keep track manually
   //Maybe parse this from the XML file based on naming convention
-  //or even do some weird template compiler magic shit
+  //or even do some weird template compiler magic
   //anything but this
   //for the love of all that is holy
   //anything
@@ -167,7 +164,7 @@ void CObjectManager::RegisterComponentType(EComponentTypeId cmpID, ComponentCrea
 {
   mDB->mComponentTypeInfo[cmpID].mCreationMethod = pCreationFn;
   mDB->mComponentTypeInfo[cmpID].mDestructionMethod = pDestructionFn;
-  mDB->mComponentTypeInfo[cmpID].mTypeHash = typeHash;
+  mDB->mComponentTypeInfo[cmpID].mName = typeHash;
 }
 
 IComponent *CObjectManager::QueryInterface(CObjectIdHash oId, EInterfaceId iid)
@@ -213,6 +210,15 @@ IComponent *CObjectManager::CreateComponent(CObjectIdHash oId, tinyxml2::XMLNode
   {
     pCmp->SetObjectId(oId);
     pCmp->Init(oId, *node);
+    //give any callbacks it needs to it, based on what it implements
+   /* std::set<EComponentTypeId>
+    for(int i = 0; i < NUM_INTERFACE_IDS; i++)
+    
+     std::set<EComponentTypeId> &cmpTypeSet = mDB->mSet_InterfaceType_to_CmpType[i];
+     
+     if(mDB->mSet_InterfaceType_to_CmpType-> == cTypeId)
+    pCmp->addExternalCallback(mDB->mMapCallbackToObjectWithCmp[][oId]);
+  */
   }
   return pCmp;
 }
@@ -249,7 +255,7 @@ EComponentTypeId CObjectManager::GetComponentTypeFromHash(CHash typeName) const
 {
   for (int32_t i = 0 ; i < NUM_COMPONENT_TYPE_IDS ; ++i)
   {
-    if (mDB->mComponentTypeInfo[i].mTypeHash == typeName)
+    if (mDB->mComponentTypeInfo[i].mName == typeName)
     {
       return static_cast<EComponentTypeId>(i);
     }
@@ -348,13 +354,12 @@ void CObjectManager::BroadcastMessage(CComponentMessage &msg)
   }
 }
 
-
+/*
 bool
-  CObjectManager::addCallbackForComponent(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func)
+  CObjectManager::addCallbackForCmpInterface(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func)
 {
   //readability
   std::pair<CObjectIdHash, ComponentCallbackToExternal> map = std::pair<CObjectIdHash, ComponentCallbackToExternal>(oId, func);
-  IComponent *component = this->QueryInterface(oId, cmpInterface);
 
   //add to DB
   mDB->mMapCallbackToObjectWithCmp[cmpInterface].insert(map);
@@ -365,11 +370,11 @@ bool
     CLog::Get()->Write( LOG_ERROR, "Error registering callback in database for component"); 
     return false;
   }
-  //add to actual component
-  component->addExternalCallback(func);
-  return true;
-}
 
+  return true;
+
+}
+*/
 
 
 
