@@ -5,7 +5,7 @@
 #include "CTimer.h"
 #include "Video.h"
 #include "CInputManager.h"
-#include "CScriptManager.h"
+#include "CScriptLocator.h"
 
 CObjectManager* 
 Globals::GetObjectManager()
@@ -55,9 +55,9 @@ Globals::GetVideoManager()
 }
 
 
-  CScriptManager* 
-  Globals::GetScriptManager()
+  CScriptLocator* 
+  Globals::GetScriptLocator()
 { 
-  CScriptManager * scriptMan = CScriptManager::getInstance(); 
+  CScriptLocator * scriptMan = CScriptLocator::getInstance(); 
 	return scriptMan;
 }

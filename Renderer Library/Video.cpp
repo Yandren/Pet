@@ -265,27 +265,27 @@ glm::mat4
 {
 
   glm::mat4 projectionMatrix = glm::perspective(m_Degrees_FieldOfView,
-    mAspectRatio, 
-    mDisplayRangeLower, 
-    mDisplayRangeUpper);
-
+                                                mAspectRatio, 
+                                                mDisplayRangeLower, 
+                                                mDisplayRangeUpper);
   //call to the Object Manager, which will net us a view matrix 
   // from the camera (via callbacks) to work with.
-  CComponentMessage camRequest = CComponentMessage(MT_CALLBACK_INFO); 
-
-  objMan->PostMessage(mCameraID, camRequest);
+  if(!attachCamera(objMan))
+     CLog::Get()->Write( LOG_ERROR, "Couldn't find camera object" );
+  
   //now that the message was posted and callback serviced, we have
   // an updated ViewMatrix to return
   return (projectionMatrix * mViewMatrix);
 };
 
 bool 
-  CVideoManager::CSceneManager::updateViewMatrix(int size, SSpacialInfo * info)
+  CVideoManager::CSceneManager::updateViewMatrix(int size, SSpacialInfo info)
 {
-  //SSpacialInfo* cam = static_cast<SSpacialInfo*>(info);
-  if(!info)
+  /*
+  if(info)
     return false;
-  mViewMatrix = glm::lookAt(glm::vec3(info->mPosition), glm::vec3(info->mDirection), glm::vec3(info->mOrientation));
+    */
+  mViewMatrix = glm::lookAt(glm::vec3(info.mPosition), glm::vec3(info.mDirection), glm::vec3(info.mOrientation));
   return true;
 };
 
@@ -295,32 +295,11 @@ bool
   //register callbacks for general objects that need to
   //send information to the video manager (e.g. the camera)
   //if(!objMan->addCallbackForCmpInterface(CHash("camera"), IID_ENTITY, std::bind(&CSceneManager::updateViewMatrix, this, std::placeholders::_1, std::placeholders::_2 )))
-  CComponentMessage msg = CComponentMessage( MT_CALLBACK_INFO, &std::bind(&CSceneManager::updateViewMatrix, this, std::placeholders::_1, std::placeholders::_2 ));
-  objMan->PostMessage(CHash("camera"), msg);
+  SpacialCallback_t binding = std::bind(&CSceneManager::updateViewMatrix, this, std::placeholders::_1, std::placeholders::_2 );
+  SSpacialCallbackInfo call(binding);
+  CComponentMessage msg = CComponentMessage( MT_CALLBACK_INFO, &call);
+  objMan->PostMessage(mCameraID, msg);
   //TODO: need to report message-delivery results, in ObjectManager
-  /*if()
-  {
-  CLog::Get()->Write( LOG_ERROR, "Failed to attach camera");
-  return false;
-  } 
-  */
+ 
   return true;
 }
-
-/*
-bool 
-CVideoManager::CSceneManager::addObject(CObjectIdHash objID)
-{
-
-return true;
-}; 
-
-bool 
-CVideoManager::CSceneManager::removeObject(CObjectIdHash objID)
-{
-bool brs = false;
-
-return brs;
-
-};
-*/

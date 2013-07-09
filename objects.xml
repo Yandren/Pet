@@ -39,13 +39,13 @@
           <float name="X">3.0</float>
           <float name="Y">3.0</float>
           <float name="Z">3.0</float>
-  </position>
-  <direction>
+        </position>
+        <direction>
           <float name="X">0.0</float>
           <float name="Y">0.0</float>
           <float name="Z">0.0</float>
-  </direction>
-  <orientation>
+        </direction>
+        <orientation>
           <float name="X">0.0</float>
           <float name="Y">1.0</float>
           <float name="Z">0.0</float>

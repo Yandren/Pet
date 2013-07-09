@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CScriptManager.cpp" />
+    <ClCompile Include="CScriptLocator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CScriptManager.h" />
+    <ClInclude Include="CScriptLocator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CFDF1861-CFBE-46E6-9CC0-92EA5C7E3A85}</ProjectGuid>

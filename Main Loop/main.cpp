@@ -3,7 +3,7 @@
 #include "Physics.h"
 #include "CObjectManager.h"
 #include "CInputManager.h"
-#include "CScriptManager.h"
+#include "CScriptLocator.h"
 #include "Globals.h"
 //Take out eventually
 #include "pal.h"
@@ -14,13 +14,14 @@
 bool 
   init()
 {
+//TODO: decouple this a little more by replacing managers with service locators - pretty important for when we implement thread management
   if(CLog::Get()->Init())
     if(Globals::GetObjectManager()->Init())
       if(Globals::GetVideoManager()->Init(Globals::GetObjectManager()))
         if(Globals::GetGameStateManager()->Init())
           if(Globals::GetPhysicsManager()->Init())
             if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mWindow))
-              if(Globals::GetScriptManager()->Init())
+              if(Globals::GetScriptLocator()->Init())
                 return true;
               else
                 return false;
@@ -46,7 +47,7 @@ void
   Globals::GetPhysicsManager()->DeInit();
   Globals::GetObjectManager()->DeInit();
   Globals::GetInputManager()->DeInit();
-  Globals::GetScriptManager()->DeInit();
+  Globals::GetScriptLocator()->DeInit();
   CLog::Get()->DeInit();
 
 }
@@ -69,7 +70,7 @@ int
     CVideoManager* videoManager = Globals::GetVideoManager();
     CObjectManager* objectManager = Globals::GetObjectManager();
     CInputManager* inputManager = Globals::GetInputManager();
-    CScriptManager* scriptManager = Globals::GetScriptManager();
+    CScriptLocator* scriptManager = Globals::GetScriptLocator();
 
     CLog::Get()->Write( LOG_GENERAL, "Managers Initialized");
 
@@ -81,6 +82,7 @@ int
     //TODO: load splash screen here 
 
     objectManager->LoadObjectsFromFile(Globals::OBJECTS_XML_FILE);
+    videoManager->mScene->mCameraID = CHash("Camera");
     videoManager->mScene->attachCamera(objectManager);
     //IObject* square = (IObject*)new CSquare(1.0, 1.0, 0.0, 0.0, videoManager.scene->screen);
 
@@ -92,7 +94,7 @@ int
     //it's looping time!
     while( quit == false ){
 
-      const char * gameState = gameStateManager->getCurrentState()->name.c_str();
+      std::string gameState = gameStateManager->getCurrentState()->name;
 
 
       if(gameState == "Exiting")

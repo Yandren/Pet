@@ -4,6 +4,7 @@
 #include "pal.h"
 #include "ComponentStructs.h"
 #include "glm\glm\glm.hpp"
+#include <functional>
 
 class CComponentMessage
 {
@@ -22,7 +23,7 @@ public:
 
 struct SSpacialInfo
 {
-  SSpacialInfo() {};
+  SSpacialInfo() {}
   SSpacialInfo(glm::vec4 position,
                glm::vec4 direction,
                glm::vec4 orientation)
@@ -33,4 +34,15 @@ struct SSpacialInfo
   glm::vec4 mDirection;
   glm::vec4 mOrientation;
 };
+
+typedef std::function< bool ( int, SSpacialInfo ) > SpacialCallback_t;
+
+struct SSpacialCallbackInfo
+{
+  SSpacialCallbackInfo(){}
+  SSpacialCallbackInfo(SpacialCallback_t callback) : mCallback(callback){}
+  
+  SpacialCallback_t mCallback;
+};
+
 #endif //__CMESSAGE_H

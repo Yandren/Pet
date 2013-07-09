@@ -22,6 +22,8 @@ void CCmpEntity::RegisterComponentType()
   Globals::GetObjectManager()->SubscribeToMessageType(CID_ENTITY, MT_SPACIAL_REQ_LOCAL);
   Globals::GetObjectManager()->SubscribeToMessageType(CID_ENTITY, MT_HIDE);
   Globals::GetObjectManager()->SubscribeToMessageType(CID_ENTITY, MT_SHOW);
+  Globals::GetObjectManager()->SubscribeToMessageType(CID_ENTITY, MT_CALLBACK_INFO);
+
 }
 
 IComponent *CCmpEntity::CreateMe()
@@ -154,13 +156,12 @@ EMessageResult CCmpEntity::HandleMessage(const CComponentMessage &msg)
     {
       //something outside wants to know positional information
       
-      typedef std::function< bool ( int, SSpacialInfo * ) > callback_t;
       SSpacialInfo sinfo(mPosition, mDirection, mOrientation);
       //we are passed a callback
-      callback_t * callback = (callback_t *) msg.mpData;
+      SSpacialCallbackInfo callback =  *(static_cast<SSpacialCallbackInfo*>(msg.mpData));
       //call the callback passed in
-      (*callback)(sizeof(sinfo), &sinfo);
-      //mExternalCallback(sizeof(SSpacialInfo), &sinfo); 
+      (callback.mCallback)((int)sizeof(sinfo), sinfo);
+      return MR_TRUE;
     }
   }
   return MR_IGNORED;

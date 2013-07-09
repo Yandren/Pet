@@ -142,7 +142,7 @@ CComponentByObjectIterator CObjectManager::GetComponentsByObjectId(CObjectIdHash
 // in turn sets up everything necessary for the component in question.
 void CObjectManager::RegisterAllComponentTypes()
 {
-  //TODO - this is fucking gross, make this happen dynamically without having to keep track manually
+  //TODO - this is gross, make this happen dynamically without having to keep track manually
   //Maybe parse this from the XML file based on naming convention
   //or even do some weird template compiler magic
   //anything but this

@@ -31,7 +31,7 @@ public:
     void       display(GLFWwindow * window, CObjectManager * objMan);
     void       update(CObjectManager * objMan);
     glm::mat4  getViewProjectionMatrix(CObjectManager * objMan);
-    bool       updateViewMatrix(int size, SSpacialInfo * info);
+    bool       updateViewMatrix(int size, SSpacialInfo info);
     bool       attachCamera(CObjectManager * objMan);
     
     //members
