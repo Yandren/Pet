@@ -15,3 +15,11 @@ bool
   
   return true;
 }
+
+bool
+  CScriptLocator::registerScript()
+  {
+
+
+  return false;
+  }

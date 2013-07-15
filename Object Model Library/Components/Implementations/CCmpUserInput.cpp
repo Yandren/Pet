@@ -56,11 +56,8 @@ bool
         int state = 0;
         if(element->Attribute("state") != NULL)
           state = atoi(element->Attribute("state"));
-
-          
         
         CLog::Get()->Write(LOG_GENERAL,"working on input for %s", key->getIdentifier());
-        
         
         //inputHandler->addActiveInput( key );
 
