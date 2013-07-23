@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "CPlayerInputHandler.h"
 #include "CObjectManager.h"
+#include "CGameStateManager.h"
 #include "glfw\include\GLFW\glfw3.h"
 #include <queue>
 
@@ -14,8 +15,8 @@ bool
   typedef std::pair<EInputType, IInputHandler *> handlerInit;
   //get this stuff from the config class in the future
   IInputHandler * temp = new CPlayerInputHandler(window);
-  mInputHandlers.insert( handlerInit(INPUT_PLAYER, temp));
-
+  mInputHandlers.insert( handlerInit(INPUT_PLAYER_KEY, temp));
+mInputHandlers.insert( handlerInit(INPUT_PLAYER_MOUSE, temp));
 
   float currentTick = Globals::GetTimer()->get_ticks();
 
@@ -47,11 +48,16 @@ CInputManager::processStoredInput(GLFWwindow * window)
   //static among handlers, so only one
   int queueSize = mInputHandlers[INPUT_GENERIC]->mIncomingInput.size();
   std::queue< SInput_t *> * input = &mInputHandlers[INPUT_GENERIC]->mIncomingInput;
+  
+  //Get the valid input contexts from the game state  
+  IGameState * state = Globals::GetGameStateManager()->getCurrentState();
+  std::vector<IInputContext *> contexts = state->flattenContexts();
+
   //cycle through input queue and give each to correct handler
   for(int i = 0; i < queueSize; i++)
   {
     //give the handler of the correct type its input
-    mInputHandlers[input->front()->type]->processInput(window, input->front());
+    mInputHandlers[input->front()->type]->processInput(window, input->front(), contexts);
     input->pop();
   }
 

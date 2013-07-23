@@ -1,17 +1,15 @@
 #ifndef __IINPUTMAPPING_H
 #define __IINPUTMAPPING_H
 
-#include "SInput_t.h"
-
 class IInputMapping
 {
 
 public:
   //constructors/destructors
   IInputMapping(){}
-  ~IInputMapping(){}
+  virtual ~IInputMapping(){}
   //methods
- 
+  virtual bool evoke() = 0;
   //members
 
 private:
@@ -23,19 +21,28 @@ private:
 
 class IState : public IInputMapping
 {
+public:
   IState(){}
   virtual ~IState(){}
+
+  virtual bool evoke() = 0;
 };
 
 class IAction : public IInputMapping
 {
+public:
   IAction(){}
   virtual ~IAction(){}
+
+  virtual bool evoke() = 0;
 };
 
 class IRange : public IInputMapping
 {
+public:
   IRange(){}
   virtual ~IRange(){}
+
+  virtual bool evoke() = 0;
 };
 #endif

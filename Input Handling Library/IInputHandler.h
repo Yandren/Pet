@@ -4,8 +4,9 @@
 #include "pal.h"
 #include <functional>
 #include <queue>
+#include <vector>
 #include "SInput_t.h"
-
+#include "IInputContext.h"
 
 /************************************
 *
@@ -13,7 +14,6 @@
 *
 *************************************/
 struct GLFWwindow;
-
 
 /************************************
 *
@@ -52,7 +52,7 @@ public:
   IInputHandler(){};
   virtual ~IInputHandler();
   //methods
-  virtual bool processInput(GLFWwindow* window, SInput_t * input) = 0;
+  virtual bool processInput(GLFWwindow* window, SInput_t * input, std::vector<IInputContext *> contexts) = 0;
   //bool registerCallback(SInput_t *input, int action, const SCallbackSignature func);
   //virtual bool pollInputList(GLFWwindow* window, CTimer * time) = 0;
   virtual bool addActiveInput(SInput_t *input);

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include "IInputContext.h"
 
 /************************************
@@ -27,7 +28,7 @@ public:
   virtual ~IGameState(){}
 
   //methods
-
+  std::vector<IInputContext *> flattenContexts();
   //members
   std::string name;
 

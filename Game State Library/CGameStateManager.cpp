@@ -1,4 +1,4 @@
-#include "GameStateManager.h"
+#include "CGameStateManager.h"
 #include "pal.h"
 #include "CGenericGameState.h"
 

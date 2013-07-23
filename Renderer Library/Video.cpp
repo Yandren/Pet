@@ -280,11 +280,7 @@ glm::mat4
 
 bool 
   CVideoManager::CSceneManager::updateViewMatrix(int size, SSpacialInfo info)
-{
-  /*
-  if(info)
-    return false;
-    */
+{ //update our view matrix
   mViewMatrix = glm::lookAt(glm::vec3(info.mPosition), glm::vec3(info.mDirection), glm::vec3(info.mOrientation));
   return true;
 };
@@ -301,5 +297,6 @@ bool
   objMan->PostMessage(mCameraID, msg);
   //TODO: need to report message-delivery results, in ObjectManager
  
+
   return true;
 }

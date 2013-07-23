@@ -4,9 +4,6 @@
     <ClInclude Include="Player\CPlayerInputHandler.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="Player\CPlayerInputMapping.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="IInputContext.h">
       <Filter>Interface</Filter>
     </ClInclude>
@@ -20,12 +17,12 @@
     <ClInclude Include="SInput_t.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Player\PlayerInputMapping.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player\CPlayerInputHandler.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\CPlayerInputMapping.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="IInputContext.cpp">
@@ -40,6 +37,9 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="SInput_t.cpp">
       <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerInputMapping.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

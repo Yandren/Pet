@@ -65,11 +65,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="CGameStateManager.cpp" />
+    <ClCompile Include="IGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGenericGameState.h" />
-    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="CGameStateManager.h" />
     <ClInclude Include="IGameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

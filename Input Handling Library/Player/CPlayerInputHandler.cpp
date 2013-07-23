@@ -19,90 +19,38 @@ CPlayerInputHandler::CPlayerInputHandler(GLFWwindow* window)
 }
 
 bool
- CPlayerInputHandler::processInput(GLFWwindow* window, SInput_t * input)
+  CPlayerInputHandler::processInput(GLFWwindow* window, SInput_t * input, std::vector<IInputContext *> contexts)
 {
-  //update the state of our input signals
-  //glfwPollEvents();
-  /*
-  //Callback fun! Index into the mappings based on key, then the map there by action to get callback
-  for(float i = 0; i < mIncomingInput.size(); i++)
+  if(window != mWindow)
   {
-     SKeyboardKey_t * keybrdKey = dynamic_cast<SKeyboardKey_t*>(mIncomingInput.at(i));
-    //if there's a callback, do it.
-    
-    if( keybrdKey != NULL  )//&& executeCallbackForKey(window, keybrdKey))
-      CLog::Get()->Write(LOG_GENERAL, "called keyboard input callback");
-    else 
-    {
-      //code here to deal with non-callback related things 
-      CLog::Get()->Write(LOG_ERROR, "somehow failed to execute key callback for key %s, action %d", mIncomingInput[i]->getIdentifier(), action);
-    }
-  }
-*/
-  return true;
-}
-
- void
-CPlayerInputHandler::keyboardKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-   SKeyboardKey_t * keyPress = new SKeyboardKey_t(key);
-   mIncomingInput.push(keyPress);
-}
-
-bool
-  CPlayerInputHandler::executeCallbackForKey(GLFWwindow* window, SKeyboardKey_t* key)
-{
-  if(glfwGetKey(window, key->getValue()) == key->state)
-  {
-    CComponentMessage msg(MT_KEYBOARD_INPUT, &key);
-    //Globals::GetObjectManager()->BroadcastMessage();
-    /*
-    if(mActionCallbackMap[key][key->state].type != PLAYER)
-    {
-      //set up the message to be sent
-      CComponentMessage msg(MT_KEYBOARD_INPUT, &key);
-      mActionCallbackMap[*key][key->state].callback(&msg);
-      return true;
-    } 
-    else
-    {
-      CLog::Get()->Write(LOG_GENERAL, "Passing on executing callback - %s doesn't have the type we handle %d", key->getIdentifier(), mActionCallbackMap[key][key->state].type);
-      return false;
-    }*/
-  }
-  else
-  {
-    CLog::Get()->Write(LOG_ERROR, " GetKey() is failing, can't execture callback");
+    CLog::Get()->Write(LOG_ERROR, "Handling input for window we shouldn't be");
     return false;
   }
-  return false;
-}
-
-/*
-bool
-  CPlayerInputHandler::configureKeys(IConfig * config)
-{
-  CLog::Get()->Write(LOG_ERROR, "Configure Keys TBI!");
-  return false;
-
-  }
-  */
-  /*
-bool
-  CPlayerInputHandler::pollInputList(GLFWwindow* window, CTimer * time)
-{
-
-
-  //update our state information
-  CLog::Get()->Write(LOG_GENERAL,"Polling input list");
-  for(float i = 0; i < mIncomingInput.size(); i++)
+  for(int i = 0; i < contexts.size(); i++)
   {
-    mIncomingInput.at(i)->state = glfwGetKey(window, mIncomingInput[i]->getValue());
-  }
+    IInputContext * activeContext = contexts.front();
+    if(!activeContext->containsKey(input))
+    {
+      break;
+    }
+    //get the mapping for our input
+    activeContext->mInputMappings.at(input)->evoke();
 
+  }//end for loop
   return true;
 }
-*/
+
+void
+  CPlayerInputHandler::keyboardKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+  SKeyboardKey_t * keyPress = new SKeyboardKey_t(key);
+  mIncomingInput.push(keyPress);
+}
+
+
+//TODO - we are using GLFW in place of platform-dependent input handling.
+//someday I might get bored enough to go implement all the specifics
+
 
 // Initializing the static values of our char->int value key mapping
 const static std::pair<const char *, int> mappingData[] =

@@ -31,9 +31,9 @@ struct GLFWwindow;
 *************************************/
 struct SKeyboardKey_t : public SInput_t
 {  //expanding on SInput_t from IInputHandler interface
-   SKeyboardKey_t(){type = INPUT_PLAYER;}
-   SKeyboardKey_t(std::string k) : SInput_t(k){type = INPUT_PLAYER;}
-   SKeyboardKey_t(const char * c) : SInput_t(c){type = INPUT_PLAYER;}
+   SKeyboardKey_t(){type = INPUT_PLAYER_KEY;}
+   SKeyboardKey_t(std::string k) : SInput_t(k){type = INPUT_PLAYER_KEY;}
+   SKeyboardKey_t(const char * c) : SInput_t(c){type = INPUT_PLAYER_KEY;}
    SKeyboardKey_t(int v) { identifier.assign(valuesToCharacters.at(v)); }
    //we have a specific mapping for values to return, overriding SInput_t
    virtual int getValue(){return charactersToValues.at(identifier.c_str());}
@@ -66,12 +66,9 @@ public:
   virtual ~CPlayerInputHandler(){};
 
   //methods
-  bool processInput(GLFWwindow* window, SInput_t * input);
+  bool processInput(GLFWwindow* window, SInput_t * input, std::vector<IInputContext *> contexts);
   static void keyboardKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods);
-   //this will be called from configureKeys in the future and will be a private method
-  bool executeCallbackForKey(GLFWwindow* window, SKeyboardKey_t* key);
-  //bool pollInputList(GLFWwindow* window, CTimer * time);
-
+  
   //members
 
   protected:

@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Physics.h"
 #include "CObjectManager.h"
-#include "GameStateManager.h"
+#include "CGameStateManager.h"
 #include "CTimer.h"
 #include "Video.h"
 #include "CInputManager.h"

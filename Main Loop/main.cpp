@@ -1,5 +1,5 @@
 #include "Video.h"
-#include "GameStateManager.h"
+#include "CGameStateManager.h"
 #include "Physics.h"
 #include "CObjectManager.h"
 #include "CInputManager.h"

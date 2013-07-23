@@ -16,7 +16,6 @@ void
   Globals::GetObjectManager()->SubscribeToMessageType(CID_INPUT, MT_OBJECT_CREATED);
   Globals::GetObjectManager()->SubscribeToMessageType(CID_INPUT, MT_KEYBOARD_INPUT);
   Globals::GetObjectManager()->SubscribeToMessageType(CID_INPUT, MT_MOUSE_INPUT);
-
 }
 
 
@@ -41,9 +40,7 @@ bool
   //Globals::GetObjectManager()->BroadcastMessage
   CLog::Get()->Write(LOG_GENERAL,"TODO! Write a configurable keyboard thing in CCmpUserInput");
 
-  //map the characters we'll load up from our XML to in-game constants
-  IInputHandler * inputHandler = Globals::GetInputManager()->mInputHandlers[INPUT_PLAYER];
-  // Get XML info
+    // Get XML info
   try
   {
     tinyxml2::XMLElement * element = NULL;
@@ -51,7 +48,9 @@ bool
       std::string name = element->Name();
       if(name == "key")
       {
-        
+        //map the characters we'll load up from our XML to in-game constants
+        IInputHandler * inputHandler = Globals::GetInputManager()->mInputHandlers[INPUT_PLAYER_KEY];
+
         SInput_t * key = new SKeyboardKey_t(element->Attribute("name"));
         int state = 0;
         if(element->Attribute("state") != NULL)
@@ -59,6 +58,8 @@ bool
         
         CLog::Get()->Write(LOG_GENERAL,"working on input for %s", key->getIdentifier());
         
+        CLog::Get()->Write(LOG_ERROR,"TODO! Writing the init for certain common actions");
+
         //inputHandler->addActiveInput( key );
 
         //callback tomfoolery
@@ -73,7 +74,6 @@ bool
         //create a scriptComponent
         //  -> scriptManager will get script filename from XML, return a handle/register a message/give a callback
 
-   
       } //end if - name == key
 
     } //end for
