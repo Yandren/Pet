@@ -4,6 +4,7 @@ Bin
 Build
 Bin/*
 Build/*
+!Other\ Libs/glew/build/vc10/*
 *.suo
 bin/*
 bin
