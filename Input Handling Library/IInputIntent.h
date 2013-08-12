@@ -1,13 +1,13 @@
-#ifndef __IINPUTMAPPING_H
-#define __IINPUTMAPPING_H
+#ifndef __IInputIntent_H
+#define __IInputIntent_H
 
-class IInputMapping
+class IInputIntent
 {
 
 public:
   //constructors/destructors
-  IInputMapping(){}
-  virtual ~IInputMapping(){}
+  IInputIntent(){}
+  virtual ~IInputIntent(){}
   //methods
   virtual bool evoke() = 0;
   //members
@@ -16,10 +16,11 @@ private:
   //methods
   //members
 
-}; //end of class IInputMapping
+}; //end of class IInputIntent
 
+/*
 
-class IState : public IInputMapping
+class IState : public IInputIntent
 {
 public:
   IState(){}
@@ -28,7 +29,7 @@ public:
   virtual bool evoke() = 0;
 };
 
-class IAction : public IInputMapping
+class IAction : public IInputIntent
 {
 public:
   IAction(){}
@@ -37,7 +38,7 @@ public:
   virtual bool evoke() = 0;
 };
 
-class IRange : public IInputMapping
+class IRange : public IInputIntent
 {
 public:
   IRange(){}
@@ -45,4 +46,6 @@ public:
 
   virtual bool evoke() = 0;
 };
+
+*/
 #endif

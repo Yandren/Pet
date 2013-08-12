@@ -1,8 +1,11 @@
 #ifndef __PLAYERINPUTMAPPING_H
 #define __PLAYERINPUTMAPPING_H
 
-#include "IInputMapping.h"
+#include "IInputIntent.h"
+#include "PlayerInput_types.h"
 #include <functional>
+#include <string>
+#include "pal.h"
 
 //Forward Declaration
 namespace tinyxml2 { class XMLNode; };
@@ -12,17 +15,28 @@ namespace tinyxml2 { class XMLNode; };
 //some defaults are included, standard for an engine
 
 //Ideally, most of this will be replaced by lua scripting, depending on performance
-class CMovementAction : public IAction
+class CIntentToObjectsMapping : public IInputIntent
 {
 
  public:
- CMovementAction(tinyxml2::XMLNode & node);
- CMovementAction();
+// CIntentToObjectsMapping(std::string objName, tinyxml2::XMLNode & node);
+ CIntentToObjectsMapping(std::string objName);
+
+ bool evoke();
+
+ private:
+ CObjectIdHash mObjName;
+ std::string mIntentName;
+};
+
+class CMouseToObjectsMapping : public IInputIntent
+{
+public:
+ CMouseToObjectsMapping();
 
  bool evoke();
 
 };
-
 
 
 

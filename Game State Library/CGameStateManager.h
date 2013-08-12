@@ -27,32 +27,32 @@ public:
   static CGameStateManager * getInstance()
     { static CGameStateManager * gameMan = new CGameStateManager(); return gameMan;}
 
-  void update();
+  void         update();
   //static void handle_input(int key, int action);
 
   //gets the last time that the time on the gamestate was updated
-  float getPreviousInputTime()
-    {return mPreviousInputTick;}
-  float setInputTime(float time)
-    {return (mPreviousInputTick = time);}
+  float        getPreviousInputTime();
+  float        setInputTime(float time);
   //gets the current gamestate without altering the stack
-  IGameState * getCurrentState() {return mGameStates.back();}
+  IGameState * getCurrentState() {return mCurrentGameStates.back();}
   //pops the gamestate off the top of the stack
-  IGameState * popState()
-    { IGameState * retval = mGameStates.front(); mGameStates.pop_back(); return retval; }
-  void pushState(IGameState * state)
-    { mGameStates.push_back(state);}
+  IGameState * popState();
+  void         pushState(IGameState * state);
   //adds a generic state with a name to the stack
-  void pushState(std::string name);
+  void         pushState(std::string name);
+  void         addEncounteredState(std::string name);
+  bool         encounteredState(std::string name) { return mEncounteredStates.find(name) != mEncounteredStates.end(); }
 
   //Members
+  std::map<std::string, IGameState *>   mEncounteredStates; //all possible gamestates, different from the stack of states
 
 private:
   //Constructor - singleton
   CGameStateManager();
   //methods
   //members
-  std::vector<IGameState *> mGameStates;
+  std::vector<IGameState *>             mCurrentGameStates;
+  
   float                     mPreviousInputTick;
 
 };

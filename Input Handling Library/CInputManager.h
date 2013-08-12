@@ -13,7 +13,7 @@ public:
   //Constructors/Destructors
   ~CInputManager(){DeInit();}
   //methods
-  bool        Init(GLFWwindow * window/*IConfig * config*/);
+  bool        Init(GLFWwindow * window, std::string fileName/*IConfig * config*/);
   bool        DeInit();
   static      CInputManager * getInstance()
    { static CInputManager * inMan = new CInputManager(); return inMan;}

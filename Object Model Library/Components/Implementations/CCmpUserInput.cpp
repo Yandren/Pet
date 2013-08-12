@@ -4,7 +4,8 @@
 #include "tinyxml2.h"
 #include "CComponentMessage.h"
 #include "CInputManager.h"
-#include "Player\CPlayerInputHandler.h"
+#include "Player/CPlayerInputHandler.h"
+#include "Player/PlayerInput_types.h"
 #include <map>
 #include <functional>
 
@@ -44,7 +45,8 @@ bool
   try
   {
     tinyxml2::XMLElement * element = NULL;
-    for(element = node.FirstChild()->ToElement(); element; element = element->NextSiblingElement()) {
+    for(element = node.FirstChildElement(); element; element = element->NextSiblingElement()) 
+    {
       std::string name = element->Name();
       if(name == "key")
       {
@@ -60,14 +62,15 @@ bool
         
         CLog::Get()->Write(LOG_ERROR,"TODO! Writing the init for certain common actions");
 
-        //inputHandler->addActiveInput( key );
+        //TODO: write more generalized code to allow for customization.
+        // currently, you define key mappings here in objects - ideally
+        // you'd define them in one config to a generalized "Intent" (i.e. "hero action 1")
+        // which is then mapped to the object, but I just want to get this working for now
 
-        //callback tomfoolery
-        /*auto binding = std::bind(&CObjectManager::PostMessage, Globals::GetObjectManager(), GetObjectId(), std::placeholders::_1);
-        SCallbackSignature sig(PLAYER, sizeof(binding), binding); 
-        //register what we'll do when our input gets hit 
-        inputHandler->registerCallback(key, state, sig);
-        */
+
+
+
+
 
         //THIS is where we register some script handle with our input handling
         //TODO:

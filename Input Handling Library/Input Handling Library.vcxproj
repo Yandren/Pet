@@ -73,16 +73,17 @@
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="IInputContext.h" />
     <ClInclude Include="IInputHandler.h" />
-    <ClInclude Include="IInputMapping.h" />
+    <ClInclude Include="IInputIntent.h" />
     <ClInclude Include="Player\CPlayerInputHandler.h" />
     <ClInclude Include="Player\PlayerInputMapping.h" />
+    <ClInclude Include="Player\PlayerInput_types.h" />
     <ClInclude Include="SInput_t.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="IInputContext.cpp" />
     <ClCompile Include="IInputHandler.cpp" />
-    <ClCompile Include="IInputMapping.cpp" />
+    <ClCompile Include="IInputIntent.cpp" />
     <ClCompile Include="Player\CPlayerInputHandler.cpp" />
     <ClCompile Include="Player\PlayerInputMapping.cpp" />
     <ClCompile Include="SInput_t.cpp" />

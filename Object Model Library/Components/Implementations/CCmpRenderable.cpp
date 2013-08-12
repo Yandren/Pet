@@ -44,8 +44,13 @@ bool CCmpRenderable::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
   try
   {
     tinyxml2::XMLElement * element = NULL;
-    for(element = node.FirstChild()->ToElement(); element; element = element->NextSiblingElement())
-     {
+    if(!node.FirstChildElement("float"))
+    {
+      CLog::Get()->Write(LOG_ERROR, "No child element to this node");
+      return false;
+    }
+    for(element = node.FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+    {
       std::string name = element->Name();
       if(name == "path")
       {
@@ -95,13 +100,13 @@ EMessageResult CCmpRenderable::HandleMessage(const CComponentMessage &msg)
       //real deal, time to show how pretty we are
       CVideoManager * vidMan = Globals::GetVideoManager();
       if(mSpacialInfo.mPosition.length() > 0 &&
-         mSpacialInfo.mDirection.length() > 0 &&
-         mSpacialInfo.mOrientation.length() > 0)
+        mSpacialInfo.mDirection.length() > 0 &&
+        mSpacialInfo.mOrientation.length() > 0)
       {
-        if(m_model->show( &mSpacialInfo.mPosition, &mSpacialInfo.mDirection, &mSpacialInfo.mOrientation, vidMan ))
+        if(m_model != NULL && m_model->show( &mSpacialInfo.mPosition, &mSpacialInfo.mDirection, &mSpacialInfo.mOrientation, vidMan ))
         {
           retval = MR_TRUE;
-          }
+        }
         else
         {
           CLog::Get()->Write( LOG_ERROR, "Not rendering! :( ");
@@ -110,7 +115,7 @@ EMessageResult CCmpRenderable::HandleMessage(const CComponentMessage &msg)
       }//end if - position isn't null
       else
         CLog::Get()->Write( LOG_ERROR, "no position");
-      
+
       return retval;
     }
   case MT_SPACIAL:

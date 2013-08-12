@@ -68,8 +68,10 @@ bool CObjectManager::LoadObjectsFromFile(const char *fileName)
     err = doc.LoadFile(fileName);
 
   if(doc.Error() || err != 0)
+  {
+    CLog::Get()->Write( LOG_ERROR, "No document from object file; err: %d",  err);
     return false;
-
+  } 
   return LoadObjects(&doc, fileName);
 }
 
@@ -211,14 +213,14 @@ IComponent *CObjectManager::CreateComponent(CObjectIdHash oId, tinyxml2::XMLNode
     pCmp->SetObjectId(oId);
     pCmp->Init(oId, *node);
     //give any callbacks it needs to it, based on what it implements
-   /* std::set<EComponentTypeId>
+    /* std::set<EComponentTypeId>
     for(int i = 0; i < NUM_INTERFACE_IDS; i++)
-    
-     std::set<EComponentTypeId> &cmpTypeSet = mDB->mSet_InterfaceType_to_CmpType[i];
-     
-     if(mDB->mSet_InterfaceType_to_CmpType-> == cTypeId)
+
+    std::set<EComponentTypeId> &cmpTypeSet = mDB->mSet_InterfaceType_to_CmpType[i];
+
+    if(mDB->mSet_InterfaceType_to_CmpType-> == cTypeId)
     pCmp->addExternalCallback(mDB->mMapCallbackToObjectWithCmp[][oId]);
-  */
+    */
   }
   return pCmp;
 }
@@ -356,22 +358,22 @@ void CObjectManager::BroadcastMessage(CComponentMessage &msg)
 
 /*
 bool
-  CObjectManager::addCallbackForCmpInterface(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func)
+CObjectManager::addCallbackForCmpInterface(CObjectIdHash oId, EInterfaceId cmpInterface, ComponentCallbackToExternal func)
 {
-  //readability
-  std::pair<CObjectIdHash, ComponentCallbackToExternal> map = std::pair<CObjectIdHash, ComponentCallbackToExternal>(oId, func);
+//readability
+std::pair<CObjectIdHash, ComponentCallbackToExternal> map = std::pair<CObjectIdHash, ComponentCallbackToExternal>(oId, func);
 
-  //add to DB
-  mDB->mMapCallbackToObjectWithCmp[cmpInterface].insert(map);
-  //check for problems, only on a very basic level
-  //TODO - better error reporting on callback registry
-  if( mDB->mMapCallbackToObjectWithCmp[cmpInterface][oId] == NULL) 
-  {
-    CLog::Get()->Write( LOG_ERROR, "Error registering callback in database for component"); 
-    return false;
-  }
+//add to DB
+mDB->mMapCallbackToObjectWithCmp[cmpInterface].insert(map);
+//check for problems, only on a very basic level
+//TODO - better error reporting on callback registry
+if( mDB->mMapCallbackToObjectWithCmp[cmpInterface][oId] == NULL) 
+{
+CLog::Get()->Write( LOG_ERROR, "Error registering callback in database for component"); 
+return false;
+}
 
-  return true;
+return true;
 
 }
 */

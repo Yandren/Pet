@@ -25,19 +25,22 @@ class IGameState
 public:
   //constructors/destructors
   IGameState(){}
-  virtual ~IGameState(){}
+  virtual ~IGameState();
 
   //methods
-  std::vector<IInputContext *> flattenContexts();
+  std::vector<IInputContext *>   flattenContexts();
+  bool                           inputContextExists(std::string name);
+  void                           addGenericInputContext(std::string name);
   //members
   std::string name;
+
+  std::map<std::string, IInputContext *> mInputContexts;
 
   protected:
 
   //methods
 
   //members
-  std::map<std::string, IInputContext *> mInputContexts;
 };
 
 #endif

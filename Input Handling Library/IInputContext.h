@@ -1,7 +1,7 @@
 #ifndef __IINPUTCONTEXT_H
 #define __IINPUTCONTEXT_H
 
-#include "IInputMapping.h"
+#include "IInputIntent.h"
 #include "SInput_t.h"
 #include <string>
 #include <map>
@@ -25,13 +25,13 @@ class IInputContext
 public:
   //constructors/destructors
   IInputContext(){}
-  ~IInputContext(){}
+  virtual ~IInputContext();
 
   //methods
-  bool containsKey(SInput_t * in) { if( mInputMappings.find(in) != mInputMappings.end()) return true; else return false;}
+  bool containsKey(SInput_t * in) { if( mInputIntents.find(in) != mInputIntents.end()) return true; else return false;}
   //members
   std::string name;
-  std::map< SInput_t *, IInputMapping *> mInputMappings;
+  std::map< SInput_t *, IInputIntent *> mInputIntents;
 private:
 
   //methods

@@ -10,15 +10,18 @@
     <ClInclude Include="IInputHandler.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="IInputMapping.h">
-      <Filter>Interface</Filter>
-    </ClInclude>
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="SInput_t.h">
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerInputMapping.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerInput_types.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputIntent.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -31,15 +34,15 @@
     <ClCompile Include="IInputHandler.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
-    <ClCompile Include="IInputMapping.cpp">
-      <Filter>Interface</Filter>
-    </ClCompile>
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="SInput_t.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerInputMapping.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IInputIntent.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

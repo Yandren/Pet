@@ -14,6 +14,8 @@
 *
 *************************************/
 struct GLFWwindow;
+namespace tinyxml2 { class XMLNode; }
+class CGameStateManager;
 
 /************************************
 *
@@ -53,6 +55,7 @@ public:
   virtual ~IInputHandler();
   //methods
   virtual bool processInput(GLFWwindow* window, SInput_t * input, std::vector<IInputContext *> contexts) = 0;
+  virtual bool init(tinyxml2::XMLNode * node, CGameStateManager * man) = 0;
   //bool registerCallback(SInput_t *input, int action, const SCallbackSignature func);
   //virtual bool pollInputList(GLFWwindow* window, CTimer * time) = 0;
   virtual bool addActiveInput(SInput_t *input);

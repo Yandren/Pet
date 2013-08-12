@@ -44,7 +44,12 @@ bool CCmpEntity::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
   try
   {
     tinyxml2::XMLElement * element = NULL;
-    for(element = node.FirstChild()->ToElement(); element; element = element->NextSiblingElement())
+    if(!node.FirstChildElement())
+    {
+      CLog::Get()->Write(LOG_ERROR, "No child element to this node");
+      return false;
+    }
+    for(element = node.FirstChildElement(); element != NULL; element = element->NextSiblingElement())
     {
       std::string name = element->Name();
       if(name == "bool")
@@ -56,7 +61,12 @@ bool CCmpEntity::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
       if(name == "position")
       { 
         mPosition.w = 1.0f;//a point in space
-        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot; posRoot = posRoot->NextSiblingElement())
+        if(!element->FirstChildElement("float"))
+        {
+          CLog::Get()->Write(LOG_ERROR, "No child FLOAT element to this node - incorrect node parsing?");
+          continue;
+        }
+        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot != NULL; posRoot = posRoot->NextSiblingElement())
         {
           std::string nameAttr = posRoot->Attribute("name");
 
@@ -74,7 +84,12 @@ bool CCmpEntity::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
       if(name == "orientation")
       { 
         mOrientation.w = 0.0f; //not a point in space
-        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot; posRoot = posRoot->NextSiblingElement())
+        if(!element->FirstChildElement("float"))
+        {
+          CLog::Get()->Write(LOG_ERROR, "No child FLOAT element to this node - incorrect node parsing?");
+          continue;
+        }
+        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot != NULL; posRoot = posRoot->NextSiblingElement())
         {
           std::string nameAttr = posRoot->Attribute("name");
 
@@ -92,7 +107,12 @@ bool CCmpEntity::Init(CObjectIdHash oid, tinyxml2::XMLNode &node)
       if(name == "direction")
       { 
         mDirection.w = 0.0f; //not a point in space
-        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot; posRoot = posRoot->NextSiblingElement())
+        if(!element->FirstChildElement("float"))
+        {
+          CLog::Get()->Write(LOG_ERROR, "No child FLOAT element to this node - incorrect node parsing?");
+          continue;
+        }
+        for(tinyxml2::XMLElement *posRoot = element->FirstChildElement("float"); posRoot != NULL; posRoot = posRoot->NextSiblingElement())
         {
           std::string nameAttr = posRoot->Attribute("name");
 
@@ -152,10 +172,10 @@ EMessageResult CCmpEntity::HandleMessage(const CComponentMessage &msg)
       SetInteract(true);
       return MR_TRUE;
     }
-    case MT_CALLBACK_INFO:
+  case MT_CALLBACK_INFO:
     {
       //something outside wants to know positional information
-      
+
       SSpacialInfo sinfo(mPosition, mDirection, mOrientation);
       //we are passed a callback
       SSpacialCallbackInfo callback =  *(static_cast<SSpacialCallbackInfo*>(msg.mpData));

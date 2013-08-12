@@ -20,36 +20,11 @@ struct GLFWwindow;
 *
 *************************************/
 
-
 /************************************
 *
 * Structs
 *
-* Our internal representation of a key, 
-* including how we map it to an int value.
-*
 *************************************/
-struct SKeyboardKey_t : public SInput_t
-{  //expanding on SInput_t from IInputHandler interface
-   SKeyboardKey_t(){type = INPUT_PLAYER_KEY;}
-   SKeyboardKey_t(std::string k) : SInput_t(k){type = INPUT_PLAYER_KEY;}
-   SKeyboardKey_t(const char * c) : SInput_t(c){type = INPUT_PLAYER_KEY;}
-   SKeyboardKey_t(int v) { identifier.assign(valuesToCharacters.at(v)); }
-   //we have a specific mapping for values to return, overriding SInput_t
-   virtual int getValue(){return charactersToValues.at(identifier.c_str());}
-
-   //a static mapping of chars to int values, to match GLFW
-   //TODO - get a better data structure in here, eliminate boost
-   const static std::map< const char *, int> charactersToValues;
-   const static std::map< int, const char *> valuesToCharacters;
-};
-
-struct SMouse_t : public SInput_t
-{
-  float * getPosition(){ return pos;}  
-  float pos[2];
-};
-
 
 /************************************
 *
@@ -66,16 +41,14 @@ public:
   virtual ~CPlayerInputHandler(){};
 
   //methods
+  bool init(tinyxml2::XMLNode * node, CGameStateManager * man);
   bool processInput(GLFWwindow* window, SInput_t * input, std::vector<IInputContext *> contexts);
   static void keyboardKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods);
-  
-  //members
-
+  static void mousePressed(GLFWwindow* window, int button, int action, int mods); 
+   //members
   protected:
-
   private:
   //methods
- 
   //members
   GLFWwindow* mWindow; 
 

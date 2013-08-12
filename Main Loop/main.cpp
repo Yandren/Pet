@@ -20,7 +20,7 @@ bool
       if(Globals::GetVideoManager()->Init(Globals::GetObjectManager()))
         if(Globals::GetGameStateManager()->Init())
           if(Globals::GetPhysicsManager()->Init())
-            if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mWindow))
+            if(Globals::GetInputManager()->Init(Globals::GetVideoManager()->mWindow, Globals::INPUT_CONFIG_XML_FILE))
               if(Globals::GetScriptLocator()->Init())
                 return true;
               else

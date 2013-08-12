@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<inputconfig>
+	<playerInput>
+		<context name="menu" gamestate="menu">
+		</context>
+		<context name="game" gamestate="main">
+			<key intent="CameraUpMovement">W</key>
+			<key intent="CameraLeftMovement">A</key>
+			<key intent="CameraDownMovement">S</key>
+			<key intent="CameraRightMovement">D</key>
+		</context>
+	</playerInput>
+	<networkInput>
+	</networkInput>
+</inputconfig>
